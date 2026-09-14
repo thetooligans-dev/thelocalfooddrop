@@ -55,7 +55,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
   const [addressOpen, setAddressOpen] = useState(false);
   const [deliveryError, setDeliveryError] = useState<string | null>(null);
 
-  const eligibility: "disabled" | "unconfigured" | "available" = chef.homeDeliveryEnabled === false ? "disabled" : "available";
+  const eligibility = chef.homeDeliveryEnabled === false ? "disabled" : "available";
   const defaultPincodeHint = chef.pickupAddress?.match(/\b(403\d{3})\b/)?.[1] || "403716";
   const maxPortions = chef.maxPortions ?? parseInt(chef.portions.match(/\d+/)?.[0] || "20", 10);
 
@@ -285,18 +285,18 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                     deliveryMethod === "pickup" ? "blanked" : ""
                   }`}
                   aria-pressed={deliveryMethod === "delivery"}
-                  disabled={eligibility === "disabled" || eligibility === "unconfigured"}
+                  disabled={eligibility === "disabled"}
                   onClick={handleSelectDelivery}
                 >
                   <span className="fulfillment-btn-title"><span className="delivery-label-desktop">Doorstep Delivery</span><span className="delivery-label-mobile">Delivery</span></span>
                   <span className="fulfillment-btn-note">
-                    {eligibility === "disabled" || eligibility === "unconfigured"
+                    {eligibility === "disabled"
                       ? "(not available)"
                       : "(Rs 50 extra per order)"}
                   </span>
                 </button>
               </div>
-              {eligibility !== "disabled" && eligibility !== "unconfigured" && (
+              {eligibility !== "disabled" && (
                 <p className="mobile-delivery-fee">Delivery + ₹50 per order</p>
               )}
             </div>
