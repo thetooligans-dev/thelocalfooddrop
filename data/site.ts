@@ -5,7 +5,7 @@ export type DropStatus = "between" | "live";
 export const siteConfig = {
   deliveryLocationsAreDemo: true,
   dropStatus: "between" as DropStatus,
-  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "",
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919270730491",
   whatsappMessage:
     "Hey! 👋 I’d love a heads-up when the next Local Food Drop opens.",
   chefWhatsappMessage:
