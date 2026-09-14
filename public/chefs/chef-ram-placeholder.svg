@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <rect width="120" height="120" fill="#faf5e7"/>
+  <rect x="3" y="3" width="114" height="114" fill="none" stroke="#ebd487" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <g fill="none" stroke="#624b2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" transform="translate(10, 4)">
+    <path d="M38 42 C24 42 22 28 32 20 C30 10 45 6 50 14 C55 6 70 10 68 20 C78 28 76 42 62 42 Z" fill="#ffffff" fill-opacity="0.95"/>
+    <path d="M36 42 L64 42 L63 48 L37 48 Z" fill="#ffffff"/>
+    <line x1="39" y1="45" x2="61" y2="45" stroke-width="1.5" stroke="#624b2f"/>
+    <circle cx="50" cy="56" r="9" fill="#faf5e7"/>
+    <path d="M46 65 L44 71 L26 84 C26 84 32 94 50 94 C68 94 74 84 74 84 L56 71 L54 65"/>
+    <path d="M47 71 L50 78 L53 71"/>
+    <circle cx="50" cy="84" r="1.5" fill="#624b2f"/>
+    <circle cx="50" cy="89" r="1.5" fill="#624b2f"/>
+  </g>
+  <text x="60" y="111" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8.5" font-weight="800" letter-spacing="0.12em" fill="#624b2f">RAM</text>
+</svg>
