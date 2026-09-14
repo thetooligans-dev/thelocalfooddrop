@@ -55,7 +55,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
   const [addressOpen, setAddressOpen] = useState(false);
   const [deliveryError, setDeliveryError] = useState<string | null>(null);
 
-  const eligibility = chef.homeDeliveryEnabled === false ? "disabled" : "available";
+  const eligibility: "disabled" | "unconfigured" | "available" = chef.homeDeliveryEnabled === false ? "disabled" : "available";
   const defaultPincodeHint = chef.pickupAddress?.match(/\b(403\d{3})\b/)?.[1] || "403716";
   const maxPortions = chef.maxPortions ?? parseInt(chef.portions.match(/\d+/)?.[0] || "20", 10);
 
