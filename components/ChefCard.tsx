@@ -541,7 +541,6 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                     onClick={handleBlockedOrderClick}
                   >
                     <span>Pay on WhatsApp · ₹{totalAmount}</span>
-                    <span aria-hidden="true">↗</span>
                   </button>
                 ) : (
                   <a
@@ -551,7 +550,6 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                     className="clean-whatsapp-pay-btn"
                   >
                     <span>Pay on WhatsApp · ₹{totalAmount}</span>
-                    <span aria-hidden="true">↗</span>
                   </a>
                 )}
 
