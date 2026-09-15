@@ -1458,7 +1458,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--lemon); out
   background: transparent;
   color: var(--ink);
   font: inherit;
-  font-size: 13px;
+  font-size: 16px;
   border-radius: 0;
   outline: none;
 }
@@ -1609,7 +1609,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--lemon); out
   .delivery-guide, .delivery-address-form, .delivery-pincode-form { gap: 8px; width: 100%; }
   .delivery-address-form, .delivery-pincode-form { width: 100%; }
   .pincode-input-row { width: 100%; }
-  .pincode-input-row .delivery-pincode-input { font-size: 13px; padding: 8px 12px; }
+  .pincode-input-row .delivery-pincode-input { font-size: 16px; padding: 8px 12px; }
   .delivery-guide .delivery-action, .delivery-guide .clean-pincode-btn { width: 100% !important; min-height: 44px; padding: 10px 14px; font-size: 13px; }
   .clean-whatsapp-pay-btn { min-height: 48px; padding: 10px 14px; font-size: 12px; }
 }
