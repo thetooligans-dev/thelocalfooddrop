@@ -88,6 +88,9 @@ export function ChefCard({ chef, index }: ChefCardProps) {
 
   const handleSelectDelivery = () => {
     setDeliveryMethod("delivery");
+    if (!savedPincode) {
+      setPincodeOpen(true);
+    }
     setDeliveryError(null);
   };
 
@@ -118,6 +121,9 @@ export function ChefCard({ chef, index }: ChefCardProps) {
     setSavedPincode(cleanPincode);
     setPincode(cleanPincode);
     setPincodeOpen(false);
+    if (!savedAddress) {
+      setAddressOpen(true);
+    }
     setDeliveryError(null);
   };
 
@@ -462,43 +468,45 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                             </button>
                           )}
 
-                          <form className="delivery-address-form" onSubmit={handleSetAddress}>
-                            {addressOpen && (
-                              <textarea
-                                aria-label="Full delivery address"
-                                className="delivery-address-input"
-                                rows={2}
-                                autoFocus
-                                autoComplete="street-address"
-                                placeholder="House / flat, street & landmark"
-                                value={address}
-                                onChange={(e) => {
-                                  setAddress(e.target.value);
-                                  setDeliveryError(null);
-                                }}
-                              />
-                            )}
-                            {addressOpen ? (
-                              <button type="submit" className="clean-loc-set-btn delivery-action">
-                                Save full address
-                              </button>
-                            ) : (
-                              <button
-                                type="button"
-                                className={`clean-loc-set-btn delivery-action ${savedAddress ? "is-set" : ""}`}
-                                onClick={() => setAddressOpen(true)}
-                              >
-                                {savedAddress ? (
-                                  <>
-                                    <span>✓ Address saved</span>
-                                    <small>Edit</small>
-                                  </>
-                                ) : (
-                                  "Add full address"
-                                )}
-                              </button>
-                            )}
-                          </form>
+                          {Boolean(savedPincode) && (
+                            <form className="delivery-address-form" onSubmit={handleSetAddress}>
+                              {addressOpen && (
+                                <textarea
+                                  aria-label="Full delivery address"
+                                  className="delivery-address-input"
+                                  rows={2}
+                                  autoFocus
+                                  autoComplete="street-address"
+                                  placeholder="House / flat, street & landmark"
+                                  value={address}
+                                  onChange={(e) => {
+                                    setAddress(e.target.value);
+                                    setDeliveryError(null);
+                                  }}
+                                />
+                              )}
+                              {addressOpen ? (
+                                <button type="submit" className="clean-loc-set-btn delivery-action">
+                                  Save full address
+                                </button>
+                              ) : (
+                                <button
+                                  type="button"
+                                  className={`clean-loc-set-btn delivery-action ${savedAddress ? "is-set" : ""}`}
+                                  onClick={() => setAddressOpen(true)}
+                                >
+                                  {savedAddress ? (
+                                    <>
+                                      <span>✓ Address saved</span>
+                                      <small>Edit</small>
+                                    </>
+                                  ) : (
+                                    "Add full address"
+                                  )}
+                                </button>
+                              )}
+                            </form>
+                          )}
 
                           {deliveryError && (
                             <p className="clean-loc-error" role="alert">
