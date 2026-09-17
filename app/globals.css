@@ -1157,14 +1157,14 @@ a:focus-visible { outline: 3px solid var(--watermelon); outline-offset: 5px; }
   .hero-hand { font-size: .58em; line-height: 1.15; margin: 8px 0 0; transform: none; }
   .hero-hand .hero-segment { display: inline; }
   .hero-lede { font-size: 16px; line-height: 1.6; margin-top: 18px; max-width: 48ch; }
-  .hero-whatsapp-cta, .hero-actions { margin-top: 20px; }
+  .hero-whatsapp-cta, .hero-actions { margin-top: 18px; }
   .hero-whatsapp-button, .primary-button, .whatsapp-button, .join-button {
-    width: 100%; min-height: 56px; padding: 16px 20px; line-height: 1.4;
-    justify-content: center; text-align: center; gap: 10px; font-size: 15px;
+    width: 100%; min-height: 48px; padding: 12px 18px; line-height: 1.35;
+    justify-content: center; text-align: center; gap: 8px; font-size: 13.5px;
   }
-  .hero-whatsapp-button span, .primary-button span, .whatsapp-button span, .join-button span { flex-shrink: 0; }
+  .hero-whatsapp-button span, .primary-button span, .whatsapp-button span, .join-button span { flex-shrink: 0; font-size: 16px; }
   .hero-rhythm {
-    margin-top: 10px;
+    margin-top: 12px;
     width: auto;
     justify-content: flex-start;
     gap: 6px;
@@ -1172,12 +1172,12 @@ a:focus-visible { outline: 3px solid var(--watermelon); outline-offset: 5px; }
     border-block: none;
     font-size: 12px;
   }
-  .hero-art { width: min(100%, 280px); height: clamp(160px, 44vw, 220px); margin-top: 4px; justify-self: center; }
+  .hero-art { width: min(100%, 340px); height: clamp(210px, 54vw, 275px); margin-top: 6px; justify-self: center; }
   .hero-doodle-wrap { width: 100%; height: 100%; left: 0; top: 0; }
-  .drop-stamp { width: 58px; height: 66px; right: 4px; bottom: 6px; box-shadow: 2px 2px 0 var(--ink); }
-  .drop-stamp strong { font-size: 22px; }
-  .drop-stamp span { font-size: 8px; }
-  .drop-stamp small { font-size: 10px; }
+  .drop-stamp { width: 66px; height: 76px; right: 6px; bottom: 8px; box-shadow: 2.5px 2.5px 0 var(--ink); }
+  .drop-stamp strong { font-size: 25px; }
+  .drop-stamp span { font-size: 9px; }
+  .drop-stamp small { font-size: 11px; }
 
   .ticker-track { flex-wrap: wrap; gap: 8px 18px; padding: 16px 18px; }
   .ticker-divider { display: none; }
