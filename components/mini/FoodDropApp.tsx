@@ -89,6 +89,30 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
   const [activeDropdown, setActiveDropdown] = useState<"diet" | "spice" | "price" | "date" | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Rotating intro phrases
+  const INTRO_PHRASES = [
+    "available in limited portions",
+    "not available on zomato/swiggy",
+    "self pick up available",
+    "home delivery in select locations",
+    "made with honest ingredients",
+    "cooked with care & love",
+    "once it's gone, it's gone"
+  ];
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsFading(true);
+      setTimeout(() => {
+        setPhraseIndex(prev => (prev + 1) % INTRO_PHRASES.length);
+        setIsFading(false);
+      }, 400); // fade out duration before swapping
+    }, 2800); // time each phrase stays visible
+    return () => clearInterval(interval);
+  }, [INTRO_PHRASES.length]);
+
   // Close dropdown on outside click
   useEffect(() => {
     if (!activeDropdown) return;
@@ -137,11 +161,13 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
     <main id="drop" className="fd-main">
       <section className="fd-intro">
         <div className="fd-intro-logo">
-          <Image src="/branding/logo.png" alt="The Local Food Drop logo" width={100} height={100} priority />
+          <Image src="/branding/logo.png" alt="The Local Food Drop logo" width={110} height={110} priority />
         </div>
-        <h1 className="fd-intro-heading">A chef's prized dish.<br />You won't find on any regular menu - available if you're nearby.</h1>
-        <div className="fd-intro-foot">
-          <a href={whatsapp(siteConfig.whatsappMessage)} target="_blank" rel="noreferrer" className="fd-btn-full">Get notified before anyone else ↗</a>
+        <h1 className="fd-intro-heading">A chef's prized dish</h1>
+        <div className="fd-rotating-wrap">
+          <p className={`fd-rotating-phrase ${isFading ? "fd-phrase-hidden" : ""}`}>
+            {INTRO_PHRASES[phraseIndex]}
+          </p>
         </div>
       </section>
 
