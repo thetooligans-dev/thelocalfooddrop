@@ -242,7 +242,7 @@ export default function ProjectInfo() {
           {[
             { name: "Aaron", role: "May-err", image: "aaron" },
             { name: "Nigel", role: "Tick Talker", image: "nigel" },
-            { name: "Zara", role: "Stalker", image: "zara" },
+            { name: "Zara", role: "Silent Knight", image: "zara" },
           ].map((contributor) => (
             <article className="contributor" key={contributor.name}>
               <Image src={`/contributors/${contributor.image}.webp`} alt={`Line drawing representing ${contributor.name}`} width={480} height={480} sizes="(max-width: 480px) 160px, 220px" className="contributor-portrait" />
