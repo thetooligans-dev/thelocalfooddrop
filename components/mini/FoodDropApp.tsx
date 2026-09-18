@@ -136,18 +136,13 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
     <header className="fd-topbar"><a className="fd-brand" href="#drop" aria-label="The Local Food Drop"><span aria-hidden="true">✳</span></a><button className="fd-story-link" onClick={() => open({ type: "about" })}>Our story ↗</button></header>
     <main id="drop" className="fd-main">
       <section className="fd-intro">
-        <div className="fd-intro-left">
-          <div className="fd-intro-logo">
-            <Image src="/branding/logo.png" alt="The Local Food Drop logo" width={110} height={110} priority />
-          </div>
-          <ul className="fd-promises" aria-label="What makes a food drop different">
-            <li>Limited portions per batch</li>
-            <li>Zero ingredient shortcuts</li>
-            <li>Not on Zomato/Swiggy</li>
-          </ul>
+        <div className="fd-intro-logo">
+          <Image src="/branding/logo.png" alt="The Local Food Drop logo" width={100} height={100} priority />
         </div>
         <h1 className="fd-intro-heading">A chef's prized dish.<br />You won't find on any regular menu - available if you're nearby.</h1>
-        <div className="fd-intro-foot"><a href={whatsapp(siteConfig.whatsappMessage)} target="_blank" rel="noreferrer">Get notified before anyone else ↗</a></div>
+        <div className="fd-intro-foot">
+          <a href={whatsapp(siteConfig.whatsappMessage)} target="_blank" rel="noreferrer" className="fd-btn-full">Get notified before anyone else ↗</a>
+        </div>
       </section>
 
       {/* ── Browse-by filter bar ── */}
