@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Caveat, DM_Sans } from "next/font/google";
+import { Caveat, DM_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
+import "./mini-app.css";
+
+const editorial = Newsreader({ subsets: ["latin"], variable: "--font-editorial", display: "swap" });
 
 const sans = DM_Sans({
   subsets: ["latin"],
@@ -29,7 +32,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${sans.variable} ${hand.variable}`}>{children}</body>
+      <body className={`${sans.variable} ${hand.variable} ${editorial.variable}`}>{children}</body>
     </html>
   );
 }

@@ -46,6 +46,9 @@ export const siteConfig = {
   ],
 };
 
+export type SpiceLevel = "Not spicy" | "Mildly spicy" | "Very spicy";
+
+// Ingredient lists, allergens and heat assignments below are temporary preview content; confirm with each chef before launch.
 export const chefs = [
   {
     name: "Chef Anne",
@@ -55,11 +58,21 @@ export const chefs = [
     chefImage: "/chefs/chef-anne.jpg",
     price: 450,
     tone: "watermelon" as const,
+    specialty: "Seasonal cooking and comforting neighborhood favorites",
+    whatILoveToCook:
+      "Slow-cooked, seasonal food made for sharing around a busy neighborhood table.",
+    whatKeepsMeCurious:
+      "Local markets, long walks, and the everyday stories behind familiar ingredients.",
+    tonightDishQuote:
+      "This comforting dish brings together familiar flavors and a little something unexpected.",
     line:
       "A dish tied to home, memory and the way food gets passed from one person to another.",
-    ingredients: "Ingredient list coming soon",
+    ingredients: "Pork, garlic, ginger, dried red chillies, vinegar, cumin & cloves",
+    ingredientsArePlaceholder: true,
+    spice: "Very spicy" as SpiceLevel,
     dietary: "Non-Vegetarian Dish",
-    allergens: "Allergen details soon",
+    allergens: "Mustard; wheat (if served with bread)",
+    allergensArePlaceholder: true,
     portions: "20 portions only being cooked",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.256, longitude: 73.926 } as Coordinates | null,
@@ -68,6 +81,7 @@ export const chefs = [
     pickupMapsUrl: "https://www.google.com/maps/search/?api=1&query=Mazilvaddo+Benaulim+Goa",
     pickupDay: "Saturday",
     pickupDate: "26 Sep",
+    preorderDate: "25 Sep",
     closeDay: "Friday",
     closeTime: "8 PM",
   },
@@ -79,11 +93,21 @@ export const chefs = [
     chefImage: "/chefs/chef-vasant.jpg",
     price: 550,
     tone: "kiwi" as const,
+    specialty: "Coastal seafood and fresh Goan-Portuguese flavors",
+    whatILoveToCook:
+      "Fresh seafood cooked simply, letting the morning catch and traditional coastal masalas speak for themselves.",
+    whatKeepsMeCurious:
+      "Early morning harbor visits, discovering coastal herbs, and balancing timeless local recipes with clean modern techniques.",
+    tonightDishQuote:
+      "One plate, one point of view — the kind of thing a chef makes because they really want you to taste it.",
     line:
       "One plate, one point of view — the kind of thing a chef makes because they really want you to taste it.",
-    ingredients: "Ingredient list coming soon",
+    ingredients: "Prawns, arborio rice, tomatoes, onion, garlic, butter & parmesan",
+    ingredientsArePlaceholder: true,
+    spice: "Mildly spicy" as SpiceLevel,
     dietary: "Non-Vegetarian Dish",
-    allergens: "Allergen details soon",
+    allergens: "Crustaceans (prawns), milk",
+    allergensArePlaceholder: true,
     portions: "20 portions only being cooked",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.279, longitude: 73.932 } as Coordinates | null,
@@ -92,6 +116,7 @@ export const chefs = [
     pickupMapsUrl: "https://www.google.com/maps/search/?api=1&query=Colva+Beach+Road+Colva+Goa",
     pickupDay: "Sunday",
     pickupDate: "27 Sep",
+    preorderDate: "26 Sep",
     closeDay: "Saturday",
     closeTime: "8 PM",
   },
@@ -103,11 +128,21 @@ export const chefs = [
     chefImage: "/chefs/chef-vivek.jpg",
     price: 480,
     tone: "olive" as const,
+    specialty: "Artisanal smokehouse barbecue and wood-fired coastal grills",
+    whatILoveToCook:
+      "Low and slow smoking paired with tangy Goan kokum, balancing rich meats with bright coastal acid.",
+    whatKeepsMeCurious:
+      "Regional firewoods, fermenting wild chilies, and the rich tradition of community backyard smoking.",
+    tonightDishQuote:
+      "A small story told through technique, place and the flavours the chef keeps coming back to.",
     line:
       "A small story told through technique, place and the flavours the chef keeps coming back to.",
-    ingredients: "Ingredient list coming soon",
+    ingredients: "Ribs, kokum, garlic, ginger, jaggery & smoked paprika",
+    ingredientsArePlaceholder: true,
+    spice: "Mildly spicy" as SpiceLevel,
     dietary: "Vegan Dish",
-    allergens: "Allergen details soon",
+    allergens: "Soy, wheat (in the glaze)",
+    allergensArePlaceholder: true,
     portions: "10 portions only being cooked",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.299, longitude: 73.967 } as Coordinates | null,
@@ -116,6 +151,7 @@ export const chefs = [
     pickupMapsUrl: "https://www.google.com/maps/search/?api=1&query=Fatorda+Margao+Goa",
     pickupDay: "Friday",
     pickupDate: "25 Sep",
+    preorderDate: "24 Sep",
     closeDay: "Thursday",
     closeTime: "8 PM",
   },
@@ -127,11 +163,21 @@ export const chefs = [
     chefImage: "/chefs/chef-ram.jpg",
     price: 350,
     tone: "lemon" as const,
+    specialty: "Heritage confectionery and delicate Goan-French patisserie",
+    whatILoveToCook:
+      "Reinventing time-honored desserts through classical technique while preserving their nostalgic warmth.",
+    whatKeepsMeCurious:
+      "Artisanal jaggery varieties, heirloom spices, and old Portuguese bakeries tucked away in South Goa.",
+    tonightDishQuote:
+      "Something personal enough to cook in a small batch, and special enough to share with the neighbourhood.",
     line:
       "Something personal enough to cook in a small batch, and special enough to share with the neighbourhood.",
-    ingredients: "Ingredient list coming soon",
+    ingredients: "Coconut milk, eggs, flour, sugar, cream & nutmeg",
+    ingredientsArePlaceholder: true,
+    spice: "Not spicy" as SpiceLevel,
     dietary: "Vegetarian Dish",
-    allergens: "Allergen details soon",
+    allergens: "Eggs, milk, wheat",
+    allergensArePlaceholder: true,
     portions: "25 portions only being cooked",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.274, longitude: 73.957 } as Coordinates | null,
@@ -140,6 +186,7 @@ export const chefs = [
     pickupMapsUrl: "https://www.google.com/maps/search/?api=1&query=Comba+Margao+Goa",
     pickupDay: "Sunday",
     pickupDate: "27 Sep",
+    preorderDate: "26 Sep",
     closeDay: "Saturday",
     closeTime: "8 PM",
   },
