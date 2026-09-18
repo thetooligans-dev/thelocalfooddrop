@@ -163,11 +163,13 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
         <div className="fd-intro-logo">
           <Image src="/branding/logo.png" alt="The Local Food Drop logo" width={110} height={110} priority />
         </div>
-        <h1 className="fd-intro-heading">A chef's prized dish</h1>
-        <div className="fd-rotating-wrap">
-          <p className={`fd-rotating-phrase ${isFading ? "fd-phrase-hidden" : ""}`}>
-            {INTRO_PHRASES[phraseIndex]}
-          </p>
+        <div className="fd-intro-text">
+          <h1 className="fd-intro-heading">A chef's prized dish</h1>
+          <div className="fd-rotating-wrap">
+            <p className={`fd-rotating-phrase ${isFading ? "fd-phrase-hidden" : ""}`}>
+              {INTRO_PHRASES[phraseIndex]}
+            </p>
+          </div>
         </div>
       </section>
 
@@ -240,7 +242,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
               <div className="fd-tags"><span>{item.dietary}</span><span>{profile.spice || "Spice level soon"}</span></div>
               <p className="fd-portions">{item.portions} · Serves 1 per portion</p>
               <dl className="fd-ingredients"><div><dt>Ingredients</dt><dd>{item.ingredients}</dd></div><div><dt>Allergens</dt><dd>{item.allergens}</dd></div></dl>
-              <div className="fd-card-actions"><button className="fd-chef-button" onClick={() => open({ type: "chef", index: i })}><Image src={item.chefImage} alt="" width={48} height={48} /><span><strong>{item.name}</strong><u>Meet the chef</u></span></button><button className="fd-order-button" onClick={() => open({ type: "order", index: i })}>Order dish <span aria-hidden="true">↗</span></button></div>
+              <div className="fd-card-actions"><button className="fd-chef-button" onClick={() => open({ type: "chef", index: i })}><Image src={item.chefImage} alt="" width={48} height={48} /><span><strong>{item.name}</strong><u>Meet the chef</u></span></button><button className="fd-order-button" onClick={() => open({ type: "order", index: i })}>Order dish</button></div>
             </div>
           </article>;
         }) : filtered.map(({ chef: item, index: i }) => {
@@ -268,7 +270,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                 <p style={{ fontStyle: "italic", fontSize: "16px", lineHeight: 1.3, margin: 0, fontFamily: "var(--font-editorial)" }}>“{item.tonightDishQuote || item.line}”</p>
               </div>
               <div className="fd-card-actions" style={{ marginTop: "auto" }}>
-                <button className="fd-order-button" style={{ width: "100%", textAlign: "center" }} onClick={() => open({ type: "chef", index: i })}>View full profile & order <span aria-hidden="true">↗</span></button>
+                <button className="fd-order-button" style={{ width: "100%", textAlign: "center" }} onClick={() => open({ type: "chef", index: i })}>View full profile & order</button>
               </div>
             </div>
           </article>;
