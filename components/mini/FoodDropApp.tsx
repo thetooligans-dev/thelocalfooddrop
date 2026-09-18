@@ -117,14 +117,16 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
       if (sortMode.type === "price") {
         return sortMode.dir === "asc" ? a.chef.price - b.chef.price : b.chef.price - a.chef.price;
       }
-      if (sortMode.type === "delivery") {
-        const da = new Date(a.chef.pickupDate).getTime();
-        const db = new Date(b.chef.pickupDate).getTime();
-        return sortMode.dir === "asc" ? da - db : db - da;
-      }
-      if (sortMode.type === "preorder") {
-        const da = new Date(a.chef.preorderDate).getTime();
-        const db = new Date(b.chef.preorderDate).getTime();
+      if (sortMode.type === "delivery" || sortMode.type === "preorder") {
+        const parseD = (s: string) => {
+          if (!s) return 0;
+          const [d, m] = s.split(" ");
+          const ms = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
+          return new Date(2024, ms[m as keyof typeof ms] || 0, parseInt(d, 10)).getTime();
+        };
+        const prop = sortMode.type === "delivery" ? "pickupDate" : "preorderDate";
+        const da = parseD(a.chef[prop] || "");
+        const db = parseD(b.chef[prop] || "");
         return sortMode.dir === "asc" ? da - db : db - da;
       }
       return 0;
@@ -141,7 +143,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
           <ul className="fd-promises" aria-label="What makes a food drop different">
             <li>Limited portions per batch</li>
             <li>Zero ingredient shortcuts</li>
-            <li>Not available on Zomato or Swiggy</li>
+            <li>Not on Zomato/Swiggy</li>
           </ul>
         </div>
         <h1 className="fd-intro-heading">A chef's prized dish.<br />You won't find on any regular menu - available if you're nearby.</h1>
