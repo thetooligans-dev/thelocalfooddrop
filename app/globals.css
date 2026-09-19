@@ -2584,7 +2584,10 @@ button.chef-service-icon:disabled small { color: inherit; }
 
 @media (max-width: 600px) {
   .fd-about .footer-project {
-    align-items: flex-start !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
   }
 }
 
