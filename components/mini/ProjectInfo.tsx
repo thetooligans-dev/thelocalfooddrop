@@ -159,8 +159,8 @@ export default function ProjectInfo() {
         <h2 id="contributors-title" className="contributors-heading">Contributors building the local food drop</h2>
         <div className="contributors-grid">
           {[
-            { name: "Aaron", role: "May-err", image: "nigel" },
-            { name: "Nigel", role: "Tick Talker", image: "aaron" },
+            { name: "Aaron", role: "May-err", image: "aaron" },
+            { name: "Nigel", role: "Tick Talker", image: "nigel" },
             { name: "Zara", role: "Silent Knight", image: "zara" },
           ].map((contributor) => (
             <article className="contributor" key={contributor.name}>
