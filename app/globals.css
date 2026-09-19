@@ -2662,4 +2662,33 @@ button.chef-service-icon:disabled small { color: inherit; }
     flex-shrink: 1 !important;
     white-space: nowrap !important;
   }
+
+  /* Dish card text readability on iOS Safari (mobile) */
+  .fd-card .fd-price span {
+    font-size: 13px !important;
+  }
+  .fd-card .fd-tags > span {
+    font-size: 11.5px !important;
+    padding: 7px 11px !important;
+    letter-spacing: 0.04em !important;
+  }
+  .fd-card .fd-portions {
+    font-size: 14.5px !important;
+    line-height: 1.5 !important;
+  }
+  .fd-card .fd-ingredients dt {
+    font-size: 12.5px !important;
+    letter-spacing: 0.08em !important;
+  }
+  .fd-card .fd-ingredients dd {
+    font-size: 14.5px !important;
+    line-height: 1.55 !important;
+  }
+  .fd-card .fd-chef-button strong {
+    font-size: 14.5px !important;
+  }
+  .fd-card .fd-chef-button u {
+    font-size: 13px !important;
+  }
 }
+
