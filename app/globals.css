@@ -2627,7 +2627,7 @@ button.chef-service-icon:disabled small { color: inherit; }
 }
 
 /* ─────────────────────────────────────────────────────────────
-   MOBILE INTRO TOPBAR: Early access (left) & Our story (right) in one row
+   MOBILE INTRO TOPBAR: Our story (left) & Early access (right) in one row
    ───────────────────────────────────────────────────────────── */
 @media (max-width: 700px) {
   .fd-topbar-actions {
@@ -2640,21 +2640,21 @@ button.chef-service-icon:disabled small { color: inherit; }
     gap: 10px !important;
   }
 
-  .fd-topbar-actions .fd-topbar-cta {
+  .fd-topbar-actions .fd-story-link {
     order: 1 !important;
     font-size: clamp(10px, 2.8vw, 11px) !important;
     padding: 7px 13px !important;
     min-height: 34px !important;
-    flex-shrink: 1 !important;
+    flex-shrink: 0 !important;
     white-space: nowrap !important;
   }
 
-  .fd-topbar-actions .fd-story-link {
+  .fd-topbar-actions .fd-topbar-cta {
     order: 2 !important;
     font-size: clamp(10px, 2.8vw, 11px) !important;
     padding: 7px 13px !important;
     min-height: 34px !important;
-    flex-shrink: 0 !important;
+    flex-shrink: 1 !important;
     white-space: nowrap !important;
   }
 }
