@@ -1,4 +1,6 @@
 import Image from "next/image";
+import aaronPortrait from "@/public/contributors/aaron.webp";
+import nigelPortrait from "@/public/contributors/nigel.webp";
 import { DeliveryLocationProvider } from "@/components/DeliveryLocation";
 import { siteConfig } from "@/data/site";
 
@@ -159,12 +161,12 @@ export default function ProjectInfo() {
         <h2 id="contributors-title" className="contributors-heading">Contributors building the local food drop</h2>
         <div className="contributors-grid">
           {[
-            { name: "Aaron", role: "May-err", image: "aaron" },
-            { name: "Nigel", role: "Tick Talker", image: "nigel" },
-            { name: "Zara", role: "Silent Knight", image: "zara" },
+            { name: "Aaron", role: "May-err", image: aaronPortrait },
+            { name: "Nigel", role: "Tick Talker", image: nigelPortrait },
+            { name: "Zara", role: "Silent Knight", image: "/contributors/zara.webp" },
           ].map((contributor) => (
             <article className="contributor" key={contributor.name}>
-              <Image src={`/contributors/${contributor.image}.webp`} alt={`Line drawing representing ${contributor.name}`} width={480} height={480} sizes="(max-width: 480px) 160px, 220px" className="contributor-portrait" />
+              <Image src={contributor.image} alt={`Line drawing representing ${contributor.name}`} width={480} height={480} sizes="(max-width: 480px) 160px, 220px" className="contributor-portrait" />
               <h3>{contributor.name}</h3>
               <p className="contributor-role">{contributor.role}</p>
               <p className="contributor-handle">@thetownsquare.xyz</p>
