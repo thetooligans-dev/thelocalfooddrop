@@ -282,7 +282,6 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
         }) : filtered.map(({ chef: item, index: i }) => {
           return <article className="fd-card" key={item.name}>
             <div className="fd-photo" style={{ height: "340px" }}><Image src={item.chefImage} alt={item.name} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
-              <span className="fd-status">The chef</span>
             </div>
             <div className="fd-card-body" style={{ display: "flex", flexDirection: "column", height: "calc(100% - 340px)" }}>
               <p className="fd-kicker">Meet the chef</p>
