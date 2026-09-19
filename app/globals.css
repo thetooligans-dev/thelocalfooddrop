@@ -2625,3 +2625,36 @@ button.chef-service-icon:disabled small { color: inherit; }
 .fd-about .footer-project-pill:active {
   transform: translateY(0) !important;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   MOBILE INTRO TOPBAR: Early access (left) & Our story (right) in one row
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .fd-topbar-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-bottom: 4px !important;
+    gap: 10px !important;
+  }
+
+  .fd-topbar-actions .fd-topbar-cta {
+    order: 1 !important;
+    font-size: clamp(10px, 2.8vw, 11px) !important;
+    padding: 7px 13px !important;
+    min-height: 34px !important;
+    flex-shrink: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  .fd-topbar-actions .fd-story-link {
+    order: 2 !important;
+    font-size: clamp(10px, 2.8vw, 11px) !important;
+    padding: 7px 13px !important;
+    min-height: 34px !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+}
