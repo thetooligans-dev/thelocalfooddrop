@@ -2122,7 +2122,7 @@ button.chef-service-icon:disabled small { color: inherit; }
     padding-block: 36px !important;
   }
   .fd-about .locality-inner {
-    padding-inline: 20px !important;
+    padding-inline: 24px !important;
     gap: 18px !important;
   }
 }
