@@ -140,7 +140,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
       if (diet !== "all") {
         if (diet === "Veg" && c.dietary !== "Vegetarian" && c.dietary !== "Veg" && c.dietary !== "Vegetarian Dish") return false;
         if (diet === "Vegan" && c.dietary !== "Vegan" && c.dietary !== "Vegan Dish") return false;
-        if ((diet === "Non-Veg" || diet === "Non veg") && c.dietary !== "Non-Veg" && c.dietary !== "Non veg" && c.dietary !== "Non-Vegetarian" && c.dietary !== "Non-Vegetarian Dish") return false;
+        if (diet === "Non-Veg" && c.dietary !== "Non-Veg" && c.dietary !== "Non veg" && c.dietary !== "Non-Vegetarian" && c.dietary !== "Non-Vegetarian Dish") return false;
         if (["Eggetarian", "Dairy-Free / Lactose-Free", "Gluten Free"].includes(diet)) return false;
       }
       if (spice !== "all" && c.spice !== spice) return false;
