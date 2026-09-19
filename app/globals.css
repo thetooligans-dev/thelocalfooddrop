@@ -2119,10 +2119,11 @@ button.chef-service-icon:disabled small { color: inherit; }
   }
   .fd-about .locality {
     margin-inline: 0 !important;
-    padding-block: 50px !important;
+    padding-block: 36px !important;
   }
   .fd-about .locality-inner {
-    padding-inline: 24px !important;
+    padding-inline: 20px !important;
+    gap: 18px !important;
   }
 }
 
