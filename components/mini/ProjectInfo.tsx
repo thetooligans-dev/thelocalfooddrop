@@ -21,15 +21,15 @@ export default function ProjectInfo() {
       {/* §1 — THE PROBLEM */}
       <section className="why page-shell section-space">
         <div className="why-graphic" aria-hidden="true">
-          <Image src="/plate-licking-bob-v4.jpg" alt="" width={1254} height={1254} sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1050px) 650px, 480px" className="why-editorial-art" />
-          <span className="hand-note why-note">less squeezing. more cooking.</span>
+          <Image src="/plate-licking-bob-v5.png" alt="" width={639} height={637} sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1050px) 650px, 480px" className="why-editorial-art" />
+          <span className="why-note">LESS SQUEEZING. MORE COOKING.</span>
         </div>
         <div className="why-copy">
           <h2 className="why-title-main">Did you know?</h2>
           <div className="why-card">
-            <p className="why-stat-line">Delivery apps, platform ads, and commissions can eat up 28% to 70% of what you pay for a dish.</p>
-            <p>When chefs are forced to absorb these massive commissions, the only way to make the math work is by compromising on ingredients and simplifying what they can cook. Instead of perfecting their culinary craft, chefs are trapped performing for algorithms — twerking, dancing, entertaining, and pulling stunts on camera chasing views, likes, and shares just to sell a plate. Somewhere in all this madness, cooking genuinely wholesome food stopped being what mattered.</p>
-            <p>The Local Food Drop aims to flip that math, putting chefs back in control with complete honesty and transparency. Food should be about feeding your body and nourishing your soul — energizing you to do what you love with the people who matter most.</p>
+            <p className="why-stat-line">Delivery apps, platform ads and commissions can eat up 28% to 70% of what you pay for a dish.</p>
+            <p>When chefs are forced to absorb these massive commissions, the only way to make the math work is by compromising on quality &amp; ingredients and simplifying what they can cook. Instead of perfecting their culinary craft, chefs are trapped performing for algorithms — <strong>twerking, dancing, entertaining, and pulling stunts on camera chasing views, likes, shares &amp; virality — just to sell a plate.</strong> Somewhere in all this madness, cooking genuinely wholesome food stopped being what mattered.</p>
+            <p>The Local Food Drop aims to flip that math, putting chefs back in control with complete honesty and transparency. <strong>Food should be about feeding your body and nourishing your soul — energizing you to do what you love with the people who matter most.</strong></p>
             <p>We hope that through the local food drop, you get to taste what that actually feels like.</p>
           </div>
         </div>
@@ -72,7 +72,7 @@ export default function ProjectInfo() {
         <div className="page-shell locality-inner">
           <div className="locality-copy">
             <div className="section-kicker">STARTING SMALL</div>
-            <h2>A neighbourhood-sized beginning.</h2>
+            <h2>A <em>town</em>-sized beginning.</h2>
             <p>We&apos;re starting around Margao and nearby villages. As the drop grows, more localities get their own — and eventually, a different chef for every day of the week.</p>
           </div>
           <div className="locality-cloud" aria-label="Current and upcoming localities">
@@ -102,59 +102,61 @@ export default function ProjectInfo() {
               );
             })}
           </div>
+
+          <div className="locality-project">
+            <span className="locality-project-text">Learn more about The Town Square Project</span>
+            <a href="https://www.thetownsquare.xyz" target="_blank" rel="noreferrer" className="locality-project-pill">
+              www.thetownsquare.xyz
+            </a>
+          </div>
         </div>
       </section>
 
       {/* §4 — COME BUILD THIS */}
       <section className="whatsapp-cta page-shell section-space">
-        <div className="whatsapp-card">
-          <div className="whatsapp-copy">
-            <span className="hand-note">THESE GO FAST</span>
-            <h2>Never miss a batch.</h2>
-            <p>Drops open Tuesday and close when portions run out. Get on the WhatsApp list for early access before the public link goes out.</p>
-            <a href={whatsapp} target="_blank" rel="noreferrer" className="whatsapp-button">
-              Get early access on WhatsApp <span>↗</span>
-            </a>
-          </div>
-        </div>
-
         <div className="join-us">
           <div className="join-us-intro">
-            <h3>There&apos;s room at the table</h3>
-            <span className="hand-note">Come cook this with us!</span>
+            <h3>Psst Psst.. there&apos;s room at the table</h3>
+            <span className="hand-note">COME COOK THIS WITH US!</span>
           </div>
 
           <div className="join-compact">
-            <a href={chefWhatsapp} target="_blank" rel="noreferrer" className="join-compact-row">
+            <div className="join-compact-row">
               <div className="join-compact-info">
-                <p className="join-label">CHEFS</p>
+                <p className="join-label">RESTAURANT &amp; HOME CHEFS</p>
                 <p>Have a prized dish that doesn&apos;t fit a regular menu? We handle the pre-orders so you can just cook.</p>
               </div>
-              <span className="join-compact-arrow">↗</span>
-            </a>
+              <a href={chefWhatsapp} target="_blank" rel="noreferrer" className="join-compact-btn">
+                Tell us more
+              </a>
+            </div>
 
-            <a href={collaboratorWhatsapp} target="_blank" rel="noreferrer" className="join-compact-row">
+            <div className="join-compact-row">
               <div className="join-compact-info">
-                <p className="join-label">NEIGHBOURS</p>
+                <p className="join-label">CREATORS &amp; ENTREPRENEURS</p>
                 <p>Shoot video, run delivery, host a pickup spot — there&apos;s a seat at the table.</p>
               </div>
-              <span className="join-compact-arrow">↗</span>
-            </a>
+              <a href={collaboratorWhatsapp} target="_blank" rel="noreferrer" className="join-compact-btn">
+                Get involved
+              </a>
+            </div>
 
-            <a href={hostWhatsapp} target="_blank" rel="noreferrer" className="join-compact-row">
+            <div className="join-compact-row">
               <div className="join-compact-info">
-                <p className="join-label">OPERATORS</p>
+                <p className="join-label">FOOD INFLUENCERS &amp; CURATORS</p>
                 <p>Want to bring food drops to your town? We&apos;ll share the playbook.</p>
               </div>
-              <span className="join-compact-arrow">↗</span>
-            </a>
+              <a href={hostWhatsapp} target="_blank" rel="noreferrer" className="join-compact-btn">
+                Start a drop
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* §5 — CONTRIBUTORS */}
       <section className="contributors page-shell" aria-labelledby="contributors-title">
-        <h2 id="contributors-title" className="section-kicker">Contributors building the local food drop</h2>
+        <h2 id="contributors-title" className="contributors-heading">Contributors building the local food drop</h2>
         <div className="contributors-grid">
           {[
             { name: "Aaron", role: "May-err", image: "nigel" },
@@ -168,6 +170,24 @@ export default function ProjectInfo() {
               <p className="contributor-handle">@thetownsquare.xyz</p>
             </article>
           ))}
+
+          <article className="contributor contributor-join-card">
+            <div className="contributor-join-body">
+              <p className="contributor-role">NEXT CONTRIBUTOR</p>
+              <h3>You?</h3>
+              <p className="contributor-join-copy">
+                Guided by open-source values &amp; decentralization, we believe communities are most resilient when built together. Have an idea or want to build with us?
+              </p>
+            </div>
+            <a
+              href={whatsappHref("Hey! 👋 I’d love to get in touch about The Local Food Drop / share some ideas. Can we chat?")}
+              target="_blank"
+              rel="noreferrer"
+              className="contributor-join-btn"
+            >
+              GET IN TOUCH
+            </a>
+          </article>
         </div>
       </section>
 
@@ -175,11 +195,11 @@ export default function ProjectInfo() {
       <footer className="footer page-shell">
         <div>
           <p className="footer-title">The Local Food Drop</p>
-          <p>Small-batch food, stories and people from around the neighbourhood.</p>
+          <p>Small-batch food, stories and people from around the Town Square.</p>
         </div>
         <div className="footer-project">
           <span>An experiment by</span>
-          <a href="https://thetownsquare.xyz" target="_blank" rel="noreferrer">The Town Square Project ↗</a>
+          <a href="https://thetownsquare.xyz" target="_blank" rel="noreferrer" className="footer-project-pill">thetownsquare.xyz</a>
         </div>
       </footer>
     </main></DeliveryLocationProvider>

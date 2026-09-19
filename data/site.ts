@@ -123,7 +123,7 @@ export const chefs = [
   {
     name: "Chef Vasant",
     homeDeliveryEnabled: false, // Temporary demo availability.
-    dish: "Prawn Balchão Risotto",
+    dish: "Prawn Balchão\nRisotto",
     image: "/dishes/prawn-risotto.jpg",
     chefImage: "/chefs/chef-vasant.jpg",
     price: 550,
@@ -158,7 +158,7 @@ export const chefs = [
   {
     name: "Chef Ram",
     homeDeliveryEnabled: false, // Temporary demo availability.
-    dish: "Bebinca Crème Brûlée",
+    dish: "Bebinca Crème\nBrûlée",
     image: "/dishes/bebinca-creme-brulee.jpg",
     chefImage: "/chefs/chef-ram.jpg",
     price: 350,

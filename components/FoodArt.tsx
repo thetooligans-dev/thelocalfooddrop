@@ -86,7 +86,7 @@ export function FoodArt({
       {image ? (
         <img
           src={image}
-          alt={dish || "Dish photograph"}
+          alt={dish ? dish.replace(/\n/g, " ") : "Dish photograph"}
           className="food-art-image"
           loading="lazy"
         />

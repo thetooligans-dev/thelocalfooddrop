@@ -151,7 +151,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
 
   // WhatsApp order link
   const orderLines = [
-    `Hey! 👋 I’d like to order *${chef.dish}* by ${chef.name}:`,
+    `Hey! 👋 I’d like to order *${chef.dish.replace(/\n/g, " ")}* by ${chef.name}:`,
     `• Portions: *${portionCount}* (₹${subtotal})`,
     `• Method: *${deliveryMethod === "delivery" ? "Doorstep Delivery (Rs 50 extra per order)" : "Self Pickup"}*`,
     deliveryMethod === "pickup" && (chef.pickupAddress || chef.pickupLocation)
@@ -214,13 +214,13 @@ export function ChefCard({ chef, index }: ChefCardProps) {
               <span className="portion-serving"><span className="desktop-serving">each portion serves one adult</span><span className="mobile-serving">Serves 1 per portion</span></span>
             </div>
 
-            <div className="portion-stepper" aria-label={`Select portions for ${chef.dish}`}>
+            <div className="portion-stepper" aria-label={`Select portions for ${chef.dish.replace(/\n/g, " ")}`}>
               <button
                 type="button"
                 className="portion-step-btn"
                 onClick={decrement}
                 disabled={portionCount === 0}
-                aria-label={`Decrease portions for ${chef.dish}`}
+                aria-label={`Decrease portions for ${chef.dish.replace(/\n/g, " ")}`}
               >
                 −
               </button>
@@ -232,7 +232,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                 className="portion-step-btn"
                 onClick={increment}
                 disabled={portionCount >= maxPortions}
-                aria-label={`Increase portions for ${chef.dish}`}
+                aria-label={`Increase portions for ${chef.dish.replace(/\n/g, " ")}`}
               >
                 +
               </button>

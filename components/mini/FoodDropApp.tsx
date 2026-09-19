@@ -74,7 +74,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
   const max = Number(chef.portions.match(/\d+/)?.[0] || 20);
   const validDelivery = Boolean(order.savedPin && order.savedAddress && !order.editingPin && !order.editingAddress);
   const orderMessage = [
-    `Hey! 👋 I'd like to order *${chef.dish}* by ${chef.name}:`,
+    `Hey! 👋 I'd like to order *${chef.dish.replace(/\n/g, " ")}* by ${chef.name}:`,
     `• Portions: *${order.quantity}* (₹${order.quantity * chef.price})`,
     `• Method: *${order.method === "delivery" ? "Doorstep Delivery (Rs 50 extra per order)" : "Self Pickup"}*`,
     order.method === "pickup" ? `• Pickup Location: ${chef.pickupLocation} - ${chef.pickupAddress} (${chef.pickupMapsUrl})` : `• Delivery Pincode: ${order.savedPin}\n• Delivery Address: ${order.savedAddress}`,
@@ -100,6 +100,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
   // Rotating intro phrases
   const INTRO_PHRASES = [
     "available in limited portions",
+    "pre-orders close when portions run out",
     "not available on zomato/swiggy",
     "not available on their regular menu",
     "self pick up available",
@@ -166,19 +167,26 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
     });
 
   return <div className="fd-app">
-    <header className="fd-topbar"><button className="fd-story-link" onClick={() => open({ type: "about" })}>Our story</button></header>
     <main id="drop" className="fd-main">
       <section className="fd-intro">
-        <div className="fd-intro-logo">
-          <Image src="/branding/logo.png" alt="The Local Food Drop logo" width={110} height={110} priority />
-        </div>
-        <div className="fd-intro-text">
-          <h1 className="fd-intro-heading">A chef's prized dish</h1>
-          <div className="fd-rotating-wrap">
-            <p className={`fd-rotating-phrase ${isFading ? "fd-phrase-hidden" : ""}`}>
-              {INTRO_PHRASES[phraseIndex]}
-            </p>
+        <div className="fd-intro-left">
+          <div className="fd-intro-logo">
+            <Image src="/branding/logo.png" alt="The Local Food Drop logo" width={110} height={110} priority />
           </div>
+          <div className="fd-intro-text">
+            <h1 className="fd-intro-heading">A chef's prized dish</h1>
+            <div className="fd-rotating-wrap">
+              <p className={`fd-rotating-phrase ${isFading ? "fd-phrase-hidden" : ""}`}>
+                {INTRO_PHRASES[phraseIndex]}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="fd-topbar-actions">
+          <button className="fd-story-link" onClick={() => open({ type: "about" })}>Our story</button>
+          <a href={whatsapp(siteConfig.whatsappMessage)} target="_blank" rel="noreferrer" className="fd-topbar-cta">
+            Get early access on WhatsApp
+          </a>
         </div>
       </section>
 
@@ -260,7 +268,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
         {viewMode === "dishes" ? filtered.map(({ chef: item, index: i }) => {
           const profile: Chef = item;
           return <article className="fd-card" key={item.name}>
-            <div className="fd-photo"><Image src={item.image} alt={item.dish} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
+            <div className="fd-photo"><Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
               <span className="fd-status">{siteConfig.dropStatus === "live" ? "This week's drop" : "Coming soon"}</span>
               <div className="fd-schedule" aria-label="Pre-order deadline and delivery date"><div><span>Pre-orders close</span><strong>{item.preorderDate} · {item.closeTime}</strong></div><div><span>Delivery</span><strong>{item.pickupDate}</strong></div></div>
             </div>
@@ -283,11 +291,11 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
               
               <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "16px", paddingBottom: "16px", borderBottom: "1px solid var(--fd-line)" }}>
                 <div style={{ position: "relative", width: "60px", height: "60px", borderRadius: "10px", overflow: "hidden", flexShrink: 0, border: "1px solid var(--fd-ink)" }}>
-                  <Image src={item.image} alt={item.dish} fill style={{ objectFit: "cover" }} sizes="60px" />
+                  <Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill style={{ objectFit: "cover" }} sizes="60px" />
                 </div>
                 <div>
                   <p className="fd-kicker" style={{ margin: "0 0 4px", fontSize: "10px", color: "var(--fd-muted)" }}>This week's dish</p>
-                  <p style={{ fontSize: "16px", fontWeight: 600, margin: 0, lineHeight: 1.2, fontFamily: "var(--font-editorial)" }}>{item.dish}</p>
+                  <p style={{ fontSize: "16px", fontWeight: 600, margin: 0, lineHeight: 1.2, fontFamily: "var(--font-editorial)" }}>{item.dish.replace(/\n/g, " ")}</p>
                 </div>
               </div>
 
