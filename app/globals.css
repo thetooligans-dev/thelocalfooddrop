@@ -1986,15 +1986,6 @@ button.chef-service-icon:disabled small { color: inherit; }
   display: block;
 }
 
-@media (max-width: 680px) {
-  .fd-about .how-compact,
-  .fd-about .join-compact,
-  .fd-about .contributors-grid {
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-  }
-}
-
 /* ─────────────────────────────────────────────────────────────
    JOIN-US 3 CARDS (CHEFS, NEIGHBOURS, OPERATORS)
    ───────────────────────────────────────────────────────────── */
@@ -2003,6 +1994,15 @@ button.chef-service-icon:disabled small { color: inherit; }
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 18px !important;
   margin-top: 24px !important;
+}
+
+@media (max-width: 860px) {
+  .fd-about .how-compact,
+  .fd-about .join-compact,
+  .fd-about .contributors-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
 }
 
 .fd-about .join-compact-row {
