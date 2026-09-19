@@ -299,7 +299,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                 </div>
               </div>
 
-              <div style={{ background: "var(--fd-yellow)", padding: "16px", borderRadius: "14px", border: "1px solid var(--fd-ink)", marginBottom: "20px" }}>
+              <div style={{ background: "#dce7d6", padding: "16px", borderRadius: "14px", border: "1px solid var(--fd-ink)", marginBottom: "20px" }}>
                 <p className="fd-kicker" style={{ marginBottom: "6px" }}>Chef notes</p>
                 <p style={{ fontStyle: "italic", fontSize: "16px", lineHeight: 1.3, margin: 0, fontFamily: "var(--font-editorial)" }}>“{item.tonightDishQuote || item.line}”</p>
               </div>
