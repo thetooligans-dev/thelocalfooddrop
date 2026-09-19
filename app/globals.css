@@ -932,7 +932,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .future-link small { color: var(--watermelon); font-size: 8px; display: inline-block; transform: translateY(-7px); margin-left: 4px; }
 
 .how-wrap { background: #d8d6a6; border-block: 1.5px solid var(--ink); }
-.how-heading { display: grid; grid-template-columns: 1fr 380px; gap: 80px; align-items: end; }
+.how-heading { display: block; }
 .how-heading h2 { max-width: 760px; }
 .how-heading h2 .hand-note { color: var(--ink); }
 .how-heading > p { margin: 0 0 8px; color: var(--ink-soft); font-size: 16px; line-height: 1.65; }
@@ -947,13 +947,40 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .calendar-arrow { display: grid; place-items: center; font-family: var(--font-hand); font-size: 38px; opacity: .65; }
 
 .why { display: grid; grid-template-columns: .8fr 1.2fr; gap: 92px; align-items: center; }
-.why-graphic { height: 610px; border: 1.5px solid var(--ink); overflow: hidden; position: relative; transform: rotate(-2deg); box-shadow: 8px 8px 0 rgba(29,36,27,.12); }
-.why-note { position: absolute; bottom: 30px; left: 30px; right: 30px; background: var(--paper); border: 1.5px solid var(--ink); padding: 14px 18px; font-size: 28px; transform: rotate(2deg); }
-.why-copy { max-width: 650px; }
-.why h2 { font-size: clamp(34px, 3.6vw, 52px); }
-.why-copy p { color: var(--ink-soft); font-size: 18px; line-height: 1.7; margin: 24px 0 0; }
+.why-graphic { border: none; overflow: visible; position: relative; transform: none; border-radius: 0; box-shadow: none; background: transparent; display: flex; flex-direction: column; align-items: flex-start; max-width: 380px; }
+.why-editorial-art { width: 100%; max-width: 320px; height: auto; object-fit: contain; mix-blend-mode: multiply; margin-left: 0; }
+.why-note { position: relative; bottom: auto; left: auto; right: auto; margin-top: 12px; background: transparent; border: none; border-radius: 0; padding: 0; font-size: 26px; transform: none; box-shadow: none; text-align: left; }
+.why-copy {
+  max-width: 650px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.why h2, .why-title-main {
+  font-family: var(--font-editorial), Georgia, serif !important;
+  font-size: clamp(28px, 3.4vw, 42px) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -.03em !important;
+  font-weight: 500 !important;
+  margin: 0 0 20px !important;
+}
+.why-card {
+  padding: 32px 30px;
+  background: var(--fd-paper, #fffdf5) !important;
+  border: 1px solid var(--fd-line, #b6b0a0) !important;
+  border-radius: 25px !important;
+  box-shadow: 0 2px 12px rgba(29, 36, 27, 0.05);
+}
+.why-stat-line {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: clamp(16px, 1.8vw, 20px) !important;
+  line-height: 1.45 !important;
+  font-weight: 700 !important;
+  color: var(--ink) !important;
+  margin: 0 0 20px !important;
+  letter-spacing: -.01em !important;
+}
+.why-card p:not(.why-stat-line) { color: var(--ink); font-size: 14.5px; line-height: 1.7; margin: 18px 0 0; letter-spacing: -0.01em; }
 .why-copy p strong { color: var(--ink); font-weight: 700; }
-.why-copy .why-big { color: var(--ink); font-size: 20px; line-height: 1.45; font-weight: 700; letter-spacing: -.015em; }
+.why-copy .why-big { color: var(--ink); font-size: 17px; line-height: 1.5; font-weight: 700; letter-spacing: -.01em; }
 
 .locality { background: var(--watermelon); color: #faeedc; border-block: 1.5px solid var(--ink); }
 .locality-inner { display: grid; grid-template-columns: .75fr 1.25fr; gap: 70px; align-items: center; }
@@ -1112,8 +1139,6 @@ a:focus-visible { outline: 3px solid var(--watermelon); outline-offset: 5px; }
 .food-art-label { color: currentColor; font-size: 32px; }
 .chef-photo-note { border: 0; background: rgba(248, 243, 229, 0.88); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 2px 10px 4px; border-radius: 4px; font-family: var(--font-hand); text-transform: none; font-size: 20px; font-weight: 500; letter-spacing: 0; left: 16px; bottom: 12px; color: var(--ink); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); z-index: 2; }
 .story-intro-grid { grid-template-columns: 1.3fr .7fr; gap: 45px; align-items: start; }
-.why-graphic { height: 490px; background: var(--cream); }
-.why-editorial-art { width: 100%; height: calc(100% - 95px); object-fit: contain; mix-blend-mode: multiply; }
 .status-dot { border-radius: 50%; }
 
 
@@ -1132,7 +1157,7 @@ a:focus-visible { outline: 3px solid var(--watermelon); outline-offset: 5px; }
   .story-intro-grid { grid-template-columns: 1fr; gap: 28px; }
   .how-heading { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .why { grid-template-columns: 1fr; gap: 48px; }
-  .why-graphic { order: 2; height: 420px; }
+  .why-graphic { order: 2; height: auto; align-items: flex-start; }
   .why-copy { order: 1; }
   .locality-inner { grid-template-columns: 1fr; gap: 40px; }
   .join-us-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -1258,10 +1283,11 @@ a:focus-visible { outline: 3px solid var(--watermelon); outline-offset: 5px; }
   .calendar-card p { font-size: 15px; }
   .calendar-arrow { display: none; }
   .why { gap: 28px; }
-  .why-copy p { font-size: 16px; margin-top: 18px; line-height: 1.65; }
-  .why-graphic { height: auto; aspect-ratio: 1.1; transform: none; box-shadow: 4px 4px 0 rgba(29,36,27,.10); }
-  .why-editorial-art { height: calc(100% - 64px); }
-  .why-note { left: 12px; right: 12px; bottom: 12px; padding: 10px; font-size: clamp(17px, 4.5vw, 25px); text-align: center; transform: none; }
+  .why-stat-line { font-size: 15px !important; margin: 12px 0 18px !important; line-height: 1.4 !important; }
+  .why-copy p:not(.why-stat-line) { font-size: 13.5px; margin-top: 14px; line-height: 1.65; }
+  .why-graphic { height: auto; aspect-ratio: auto; transform: none; box-shadow: none; border-radius: 0; align-items: flex-start; }
+  .why-editorial-art { max-width: 240px; height: auto; }
+  .why-note { margin-top: 8px; padding: 0; font-size: 22px; text-align: left; }
   .locality-inner { gap: 28px; }
   .locality-copy p { font-size: 16px; margin-top: 18px; }
   .locality-cloud { justify-content: flex-start; gap: 8px; }
@@ -1730,4 +1756,576 @@ button.chef-service-icon:disabled small { color: inherit; }
   .contributors { padding-block: 36px 56px; }
   .contributors-grid { grid-template-columns: 1fr; gap: 36px; }
   .contributor-portrait { width: 160px; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   COMPRESSED HOW-IT-WORKS LIST
+   ───────────────────────────────────────────────────────────── */
+.how-compact {
+  list-style: none;
+  counter-reset: how-step;
+  padding: 0;
+  margin: 40px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.how-compact li {
+  counter-increment: how-step;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 0 0;
+  border-top: 1.5px solid rgba(29, 36, 27, 0.22);
+  border-bottom: none;
+  position: relative;
+}
+.how-compact li:first-child {
+  border-top: 1.5px solid rgba(29, 36, 27, 0.22);
+}
+.how-compact li::before {
+  content: counter(how-step, decimal-leading-zero);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: var(--watermelon);
+  margin-bottom: 12px;
+  display: inline-block;
+}
+.how-compact strong {
+  font-size: 19px;
+  letter-spacing: -.02em;
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-weight: 700;
+}
+.how-compact span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink);
+  display: block;
+}
+.how-step-content {
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 768px) {
+  .how-compact {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .how-compact li {
+    padding-top: 18px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   COMPACT JOIN-US ROWS
+   ───────────────────────────────────────────────────────────── */
+.join-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.join-compact-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: background .15s ease;
+}
+.join-compact-row:first-child {
+  border-top: 1px solid var(--line);
+}
+.join-compact-row:hover {
+  background: rgba(29, 36, 27, 0.03);
+  padding-inline: 12px;
+  margin-inline: -12px;
+  border-radius: 4px;
+}
+.join-compact-info {
+  flex: 1;
+  min-width: 0;
+}
+.join-compact-info .join-label {
+  margin: 0 0 6px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .13em;
+  color: var(--watermelon);
+}
+.join-compact-info > p:last-child {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.join-compact-arrow {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+  transition: transform .15s ease;
+}
+.join-compact-row:hover .join-compact-arrow {
+  transform: translateX(3px);
+  color: var(--watermelon);
+}
+@media (max-width: 768px) {
+  .join-compact-row { padding: 18px 0; gap: 12px; }
+  .join-compact-info > p:last-child { font-size: 14px; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   ABOUT SHEET SPACING & BREATHING ROOM
+   ───────────────────────────────────────────────────────────── */
+.fd-about .why,
+.fd-about .how-wrap .page-shell,
+.fd-about .whatsapp-cta,
+.fd-about .contributors,
+.fd-about .footer {
+  padding-inline: 28px;
+}
+
+.fd-about .how-wrap {
+  background: transparent !important;
+  border-block: none !important;
+}
+
+.fd-about .how-heading h2 {
+  font-family: var(--font-editorial), Georgia, serif !important;
+  font-size: clamp(28px, 3.4vw, 42px) !important;
+  letter-spacing: -.03em !important;
+  font-weight: 500 !important;
+}
+
+.fd-about .how-compact {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 18px !important;
+  margin-top: 32px !important;
+}
+
+.how-compact li {
+  counter-increment: how-step;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 20px;
+  background: var(--fd-paper, #fffdf5) !important;
+  border: 1px solid var(--fd-line, #b6b0a0) !important;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(29, 36, 27, 0.04);
+}
+
+.how-compact li:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.how-compact li::before {
+  content: counter(how-step, decimal-leading-zero);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--watermelon);
+  background: rgba(164, 62, 49, 0.08);
+  border: 1px solid rgba(164, 62, 49, 0.22);
+  border-radius: 30px;
+  padding: 4px 10px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.how-compact strong {
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.how-compact span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink);
+  display: block;
+}
+
+@media (max-width: 680px) {
+  .fd-about .how-compact,
+  .fd-about .join-compact,
+  .fd-about .contributors-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   JOIN-US 3 CARDS (CHEFS, NEIGHBOURS, OPERATORS)
+   ───────────────────────────────────────────────────────────── */
+.fd-about .join-compact {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 18px !important;
+  margin-top: 24px !important;
+}
+
+.fd-about .join-compact-row {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  padding: 24px 20px !important;
+  background: var(--fd-paper, #fffdf5) !important;
+  border: 1px solid var(--fd-line, #b6b0a0) !important;
+  border-radius: 20px !important;
+  position: relative !important;
+  box-shadow: 0 2px 10px rgba(29, 36, 27, 0.04) !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  margin: 0 !important;
+  border-bottom: 1px solid var(--fd-line, #b6b0a0) !important;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease !important;
+}
+
+.fd-about .join-compact-row:first-child {
+  border-top: 1px solid var(--fd-line, #b6b0a0) !important;
+}
+
+.fd-about .join-compact-row:hover {
+  background: var(--fd-paper, #fffdf5) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 36, 27, 0.08) !important;
+  border-color: var(--fd-ink, #24251d) !important;
+  padding-inline: 20px !important;
+  margin-inline: 0 !important;
+}
+
+.fd-about .join-compact-info .join-label {
+  display: inline-block !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  color: var(--watermelon) !important;
+  background: rgba(164, 62, 49, 0.08) !important;
+  border: 1px solid rgba(164, 62, 49, 0.22) !important;
+  border-radius: 30px !important;
+  padding: 4px 10px !important;
+  margin: 0 0 14px !important;
+}
+
+.fd-about .join-compact-arrow {
+  position: absolute !important;
+  top: 22px !important;
+  right: 20px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--ink-soft) !important;
+  transition: transform .15s ease, color .15s ease !important;
+}
+
+.fd-about .join-compact-row:hover .join-compact-arrow {
+  transform: translate(2px, -2px) !important;
+  color: var(--watermelon) !important;
+}
+
+.fd-about .join-compact-info > p:last-child {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 12.5px !important;
+  line-height: 1.6 !important;
+  color: var(--ink) !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 600px) {
+  .why-card {
+    padding: 22px 18px !important;
+  }
+  .fd-about .why,
+  .fd-about .how-wrap .page-shell,
+  .fd-about .whatsapp-cta,
+  .fd-about .contributors,
+  .fd-about .footer {
+    padding-inline: 16px;
+  }
+  .fd-about .locality {
+    margin-inline: 16px !important;
+    padding-block: 50px !important;
+  }
+  .fd-about .locality-inner {
+    padding-inline: 32px !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TYPOGRAPHY RULES FOR ABOUT SHEET (.fd-about)
+   Editorial font for main headings; monospace for everything else
+   ───────────────────────────────────────────────────────────── */
+.fd-about h2,
+.fd-about .locality h2,
+.fd-about .whatsapp-card h2,
+.fd-about .join-us-intro h3,
+.fd-about .contributor h3,
+.fd-about .footer-title {
+  font-family: var(--font-editorial), Georgia, serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -.03em !important;
+}
+
+.fd-about .locality {
+  margin-inline: 28px !important;
+  border: 1.5px solid var(--ink) !important;
+  padding-block: 70px !important;
+}
+
+.fd-about .locality-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  gap: 24px !important;
+  padding-inline: 56px !important;
+}
+
+.fd-about .locality-copy {
+  width: 100% !important;
+  max-width: 100% !important;
+  text-align: left !important;
+  margin: 0 !important;
+}
+
+.fd-about .locality h2 {
+  font-size: clamp(28px, 3.4vw, 42px) !important;
+  line-height: 1.15 !important;
+  color: #faeedc !important;
+  margin: 0 0 16px !important;
+  max-width: 100% !important;
+  text-align: left !important;
+}
+
+.fd-about .locality-cloud {
+  justify-content: flex-start !important;
+  width: 100% !important;
+}
+
+.fd-about .whatsapp-card {
+  box-shadow: none !important;
+}
+
+.fd-about .whatsapp-card h2 {
+  font-size: clamp(28px, 3.2vw, 40px) !important;
+  line-height: 1.12 !important;
+  margin: 0 0 14px !important;
+}
+
+.fd-about .join-us-intro h3 {
+  font-size: clamp(24px, 2.8vw, 34px) !important;
+  line-height: 1.15 !important;
+  margin: 0 0 8px !important;
+  color: var(--ink) !important;
+}
+
+.fd-about .contributor h3 {
+  font-size: 21px !important;
+  letter-spacing: -.02em !important;
+  line-height: 1.2 !important;
+  color: var(--ink) !important;
+}
+
+.fd-about .footer-title {
+  font-size: 22px !important;
+  letter-spacing: -.02em !important;
+  margin: 0 0 6px !important;
+  color: var(--ink) !important;
+}
+
+/* Monospace font for everything else */
+.fd-about .section-kicker,
+.fd-about .locality-copy p,
+.fd-about .locality-tag,
+.fd-about .locality-face,
+.fd-about .locality-front,
+.fd-about .locality-back,
+.fd-about .whatsapp-copy .hand-note,
+.fd-about .whatsapp-card p,
+.fd-about .whatsapp-button,
+.fd-about .join-us-intro .hand-note,
+.fd-about .join-compact-info p,
+.fd-about .join-label,
+.fd-about .contributor-role,
+.fd-about .contributor-handle,
+.fd-about .footer p,
+.fd-about .footer-project,
+.fd-about .footer-project a {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
+
+.fd-about .locality .section-kicker {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  color: rgba(250, 238, 220, 0.72) !important;
+  margin-bottom: 12px !important;
+}
+
+.fd-about .locality-copy p {
+  font-size: 14.5px !important;
+  line-height: 1.65 !important;
+  letter-spacing: -0.01em !important;
+  color: rgba(250, 238, 220, 0.92) !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+  text-align: left !important;
+}
+
+.fd-about .locality-face {
+  min-height: 42px !important;
+  padding: 0 14px !important;
+  background: var(--fd-paper, #fffdf5) !important;
+  color: var(--fd-ink, #24251d) !important;
+  border: 1px solid var(--fd-ink, #24251d) !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: 2px 2px 0 rgba(29, 36, 27, 0.12) !important;
+}
+
+.fd-about .locality-back {
+  background: #faeedc !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+}
+
+.fd-about .locality-tag.future {
+  min-height: 42px !important;
+  padding: 0 14px !important;
+  border-radius: 8px !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+  color: rgba(250, 238, 220, 0.65) !important;
+  border: 1px dashed rgba(250, 238, 220, 0.45) !important;
+  background: transparent !important;
+}
+
+.fd-about .whatsapp-copy .hand-note {
+  display: block;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  color: rgba(241, 234, 213, 0.72) !important;
+  margin-bottom: 10px !important;
+}
+
+.fd-about .whatsapp-card p {
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  opacity: .9 !important;
+  margin: 0 0 22px !important;
+}
+
+.fd-about .whatsapp-button {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.fd-about .join-us-intro .hand-note {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  color: var(--watermelon) !important;
+}
+
+.fd-about .join-compact-info > p:last-child {
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   CONTRIBUTORS 3 ROUNDED CARDS
+   ───────────────────────────────────────────────────────────── */
+.fd-about .contributors-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 18px !important;
+  margin-top: 24px !important;
+}
+
+.fd-about .contributor {
+  background: var(--fd-paper, #fffdf5) !important;
+  border: 1px solid var(--fd-line, #b6b0a0) !important;
+  border-radius: 20px !important;
+  padding: 24px 20px !important;
+  box-shadow: 0 2px 10px rgba(29, 36, 27, 0.04) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  transition: transform .15s ease, box-shadow .15s ease !important;
+}
+
+.fd-about .contributor:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 36, 27, 0.08) !important;
+}
+
+.fd-about .contributor-portrait {
+  width: 100% !important;
+  max-width: 170px !important;
+  height: auto !important;
+  margin: 0 auto 18px !important;
+  display: block !important;
+  mix-blend-mode: multiply !important;
+}
+
+.fd-about .contributor h3 {
+  font-family: var(--font-editorial), Georgia, serif !important;
+  font-size: 22px !important;
+  letter-spacing: -.02em !important;
+  line-height: 1.2 !important;
+  color: var(--ink) !important;
+  margin: 0 0 6px !important;
+}
+
+.fd-about .contributor-role {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--watermelon) !important;
+  margin-bottom: 4px !important;
+}
+
+.fd-about .contributor-handle {
+  font-size: 12px !important;
+  color: var(--ink-soft) !important;
+}
+
+.fd-about .footer p {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+
+.fd-about .footer-project {
+  font-size: 12px !important;
 }

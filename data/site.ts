@@ -46,10 +46,45 @@ export const siteConfig = {
   ],
 };
 
-export type SpiceLevel = "Not spicy" | "Mildly spicy" | "Very spicy";
+export type SpiceLevel = "Not spicy" | "Mildly spicy" | "Kinda spicy" | "Very spicy";
 
 // Ingredient lists, allergens and heat assignments below are temporary preview content; confirm with each chef before launch.
 export const chefs = [
+  {
+    name: "Chef Vivek",
+    homeDeliveryEnabled: true, // Temporary demo availability.
+    dish: "Kokum-Glazed BBQ Ribs",
+    image: "/dishes/bbq-ribs.jpg",
+    chefImage: "/chefs/chef-vivek.jpg",
+    price: 480,
+    tone: "olive" as const,
+    specialty: "Artisanal smokehouse barbecue and wood-fired coastal grills",
+    whatILoveToCook:
+      "Low and slow smoking paired with tangy Goan kokum, balancing rich meats with bright coastal acid.",
+    whatKeepsMeCurious:
+      "Regional firewoods, fermenting wild chillies, and the rich tradition of community backyard smoking.",
+    tonightDishQuote:
+      "A small story told through technique, place and the flavours the chef keeps coming back to.",
+    line:
+      "A small story told through technique, place and the flavours the chef keeps coming back to.",
+    ingredients: "Ribs, kokum, garlic, ginger, jaggery & smoked paprika",
+    ingredientsArePlaceholder: true,
+    spice: "Mildly spicy" as SpiceLevel,
+    dietary: "Vegan",
+    allergens: "Soy, wheat (in the glaze)",
+    allergensArePlaceholder: true,
+    portions: "10 portions only being cooked",
+    // DEMO ONLY: replace with the verified pickup pin before launch.
+    pickupCoordinates: { latitude: 15.299, longitude: 73.967 } as Coordinates | null,
+    pickupLocation: "Vivek’s Smokehouse",
+    pickupAddress: "Plot 24, Stadium Cross Road, Near Jawaharlal Nehru Stadium, Fatorda, Margao, South Goa 403602",
+    pickupMapsUrl: "https://www.google.com/maps/search/?api=1&query=Fatorda+Margao+Goa",
+    pickupDay: "Friday",
+    pickupDate: "25 Sep",
+    preorderDate: "24 Sep",
+    closeDay: "Thursday",
+    closeTime: "8 PM",
+  },
   {
     name: "Chef Anne",
     homeDeliveryEnabled: true, // Temporary demo availability.
@@ -70,7 +105,7 @@ export const chefs = [
     ingredients: "Pork, garlic, ginger, dried red chillies, vinegar, cumin & cloves",
     ingredientsArePlaceholder: true,
     spice: "Very spicy" as SpiceLevel,
-    dietary: "Non-Vegetarian Dish",
+    dietary: "Non-Veg",
     allergens: "Mustard; wheat (if served with bread)",
     allergensArePlaceholder: true,
     portions: "20 portions only being cooked",
@@ -105,7 +140,7 @@ export const chefs = [
     ingredients: "Prawns, arborio rice, tomatoes, onion, garlic, butter & parmesan",
     ingredientsArePlaceholder: true,
     spice: "Mildly spicy" as SpiceLevel,
-    dietary: "Non-Vegetarian Dish",
+    dietary: "Non-Veg",
     allergens: "Crustaceans (prawns), milk",
     allergensArePlaceholder: true,
     portions: "20 portions only being cooked",
@@ -118,41 +153,6 @@ export const chefs = [
     pickupDate: "27 Sep",
     preorderDate: "26 Sep",
     closeDay: "Saturday",
-    closeTime: "8 PM",
-  },
-  {
-    name: "Chef Vivek",
-    homeDeliveryEnabled: true, // Temporary demo availability.
-    dish: "Kokum-Glazed BBQ Ribs",
-    image: "/dishes/bbq-ribs.jpg",
-    chefImage: "/chefs/chef-vivek.jpg",
-    price: 480,
-    tone: "olive" as const,
-    specialty: "Artisanal smokehouse barbecue and wood-fired coastal grills",
-    whatILoveToCook:
-      "Low and slow smoking paired with tangy Goan kokum, balancing rich meats with bright coastal acid.",
-    whatKeepsMeCurious:
-      "Regional firewoods, fermenting wild chilies, and the rich tradition of community backyard smoking.",
-    tonightDishQuote:
-      "A small story told through technique, place and the flavours the chef keeps coming back to.",
-    line:
-      "A small story told through technique, place and the flavours the chef keeps coming back to.",
-    ingredients: "Ribs, kokum, garlic, ginger, jaggery & smoked paprika",
-    ingredientsArePlaceholder: true,
-    spice: "Mildly spicy" as SpiceLevel,
-    dietary: "Vegan Dish",
-    allergens: "Soy, wheat (in the glaze)",
-    allergensArePlaceholder: true,
-    portions: "10 portions only being cooked",
-    // DEMO ONLY: replace with the verified pickup pin before launch.
-    pickupCoordinates: { latitude: 15.299, longitude: 73.967 } as Coordinates | null,
-    pickupLocation: "Vivek’s Smokehouse",
-    pickupAddress: "Plot 24, Stadium Cross Road, Near Jawaharlal Nehru Stadium, Fatorda, Margao, South Goa 403602",
-    pickupMapsUrl: "https://www.google.com/maps/search/?api=1&query=Fatorda+Margao+Goa",
-    pickupDay: "Friday",
-    pickupDate: "25 Sep",
-    preorderDate: "24 Sep",
-    closeDay: "Thursday",
     closeTime: "8 PM",
   },
   {
@@ -175,7 +175,7 @@ export const chefs = [
     ingredients: "Coconut milk, eggs, flour, sugar, cream & nutmeg",
     ingredientsArePlaceholder: true,
     spice: "Not spicy" as SpiceLevel,
-    dietary: "Vegetarian Dish",
+    dietary: "Veg",
     allergens: "Eggs, milk, wheat",
     allergensArePlaceholder: true,
     portions: "25 portions only being cooked",
