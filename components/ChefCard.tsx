@@ -146,14 +146,14 @@ export function ChefCard({ chef, index }: ChefCardProps) {
   // Price calculations
   const dishPrice = chef.price || 450;
   const subtotal = portionCount * dishPrice;
-  const deliveryFee = deliveryMethod === "delivery" ? 50 : 0;
+  const deliveryFee = deliveryMethod === "delivery" ? 60 : 0;
   const totalAmount = subtotal + deliveryFee;
 
   // WhatsApp order link
   const orderLines = [
     `Hey! 👋 I’d like to order *${chef.dish.replace(/\n/g, " ")}* by ${chef.name}:`,
     `• Portions: *${portionCount}* (₹${subtotal})`,
-    `• Method: *${deliveryMethod === "delivery" ? "Doorstep Delivery (Rs 50 extra per order)" : "Self Pickup"}*`,
+    `• Method: *${deliveryMethod === "delivery" ? "Doorstep Delivery (Rs 60 extra per order)" : "Self Pickup"}*`,
     deliveryMethod === "pickup" && (chef.pickupAddress || chef.pickupLocation)
       ? `• Pickup Location: ${chef.pickupLocation ? `${chef.pickupLocation} - ` : ""}${chef.pickupAddress || ""}${chef.pickupMapsUrl ? ` (${chef.pickupMapsUrl})` : ""}\n• Pickup Date & Slot: ${chef.pickupDay ? `${chef.pickupDay}, ${chef.pickupDate}` : "Saturday, 26 Sep"} • Between ${pickupSlot} only`
       : null,
@@ -298,12 +298,12 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                   <span className="fulfillment-btn-note">
                     {eligibility === "disabled"
                       ? "(not available)"
-                      : "(Rs 50 extra per order)"}
+                      : "(Rs 60 extra per order)"}
                   </span>
                 </button>
               </div>
               {eligibility !== "disabled" && (
-                <p className="mobile-delivery-fee">Delivery + ₹50 per order</p>
+                <p className="mobile-delivery-fee">Delivery + ₹60 per order</p>
               )}
             </div>
 
@@ -527,7 +527,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                 <div className="clean-pay-meta">
                   <span className="clean-pay-breakdown">
                     {portionCount} × ₹{dishPrice}
-                    {deliveryMethod === "delivery" ? " + ₹50 delivery" : " (self pickup)"}
+                    {deliveryMethod === "delivery" ? " + ₹60 delivery" : " (self pickup)"}
                   </span>
                   <span className="clean-pay-total">
                     Total: <strong>₹{totalAmount}</strong>

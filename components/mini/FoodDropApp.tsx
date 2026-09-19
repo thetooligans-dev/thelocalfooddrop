@@ -69,14 +69,14 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
   const chef: Chef = chefs[index];
   const order = orders[index];
   const patch = (change: Partial<Order>) => setOrders(current => current.map((value, i) => i === index ? { ...value, ...change } : value));
-  const fee = order.method === "delivery" ? 50 : 0;
+  const fee = order.method === "delivery" ? 60 : 0;
   const total = order.quantity * chef.price + fee;
   const max = Number(chef.portions.match(/\d+/)?.[0] || 20);
   const validDelivery = Boolean(order.savedPin && order.savedAddress && !order.editingPin && !order.editingAddress);
   const orderMessage = [
     `Hey! 👋 I'd like to order *${chef.dish.replace(/\n/g, " ")}* by ${chef.name}:`,
     `• Portions: *${order.quantity}* (₹${order.quantity * chef.price})`,
-    `• Method: *${order.method === "delivery" ? "Doorstep Delivery (Rs 50 extra per order)" : "Self Pickup"}*`,
+    `• Method: *${order.method === "delivery" ? "Doorstep Delivery (Rs 60 extra per order)" : "Self Pickup"}*`,
     order.method === "pickup" ? `• Pickup Location: ${chef.pickupLocation} - ${chef.pickupAddress} (${chef.pickupMapsUrl})` : `• Delivery Pincode: ${order.savedPin}\n• Delivery Address: ${order.savedAddress}`,
     `• ${order.method === "pickup" ? "Pickup" : "Delivery"} Date & Slot: ${chef.pickupDay}, ${chef.pickupDate} • ${order.slot}`,
     `• *Total to Pay: ₹${total}*`, "• Note: Pre-orders once placed cannot be cancelled", "", "Please share the payment details to confirm my order!",
@@ -321,7 +321,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
           <div className="fd-tags"><span>{formatDietaryTag(chef.dietary)}</span><span>{chef.spice || "Spice level soon"}</span></div>
           <div className="fd-chef-note"><span className="fd-kicker">From the chef</span><p>“{chef.line}”</p></div>
           <section className="fd-order-section"><h3 className="fd-kicker">01 · Quantity</h3><div className="fd-quantity-row"><div><p className="fd-section-title">How many portions?</p><p className="fd-muted">{chef.portions}<br />Each portion serves one adult</p></div><div className="fd-stepper"><button aria-label="Decrease quantity" disabled={order.quantity <= 1} onClick={() => patch({ quantity: order.quantity - 1 })}>−</button><output aria-live="polite">{order.quantity}</output><button aria-label="Increase quantity" disabled={order.quantity >= max} onClick={() => patch({ quantity: order.quantity + 1 })}>+</button></div></div></section>
-          <section className="fd-order-section"><h3 className="fd-kicker">02 · Get your order</h3><div className="fd-methods"><button aria-pressed={order.method === "pickup"} onClick={() => patch({ method: "pickup", error: "" })}><strong>Self pickup</strong><span>Choose a time</span></button><button disabled={!chef.homeDeliveryEnabled} aria-pressed={order.method === "delivery"} onClick={() => patch({ method: "delivery", editingPin: !order.savedPin, error: "" })}><strong>Home delivery</strong><span>{chef.homeDeliveryEnabled ? "+ ₹50 per order" : "Not available"}</span></button></div>
+          <section className="fd-order-section"><h3 className="fd-kicker">02 · Get your order</h3><div className="fd-methods"><button aria-pressed={order.method === "pickup"} onClick={() => patch({ method: "pickup", error: "" })}><strong>Self pickup</strong><span>Choose a time</span></button><button disabled={!chef.homeDeliveryEnabled} aria-pressed={order.method === "delivery"} onClick={() => patch({ method: "delivery", editingPin: !order.savedPin, error: "" })}><strong>Home delivery</strong><span>{chef.homeDeliveryEnabled ? "+ ₹60 per order" : "Not available"}</span></button></div>
           {order.method && <div className="fd-fulfilment">
             <p className="fd-kicker">{order.method === "pickup" ? "Pickup" : "Delivery"} · {chef.pickupDay}, {chef.pickupDate}</p>
             <fieldset className="fd-slot-field"><legend>Choose a {order.method === "pickup" ? "pickup" : "delivery"} time</legend><div className="fd-slots">{slots.map(slot => <button key={slot} aria-pressed={order.slot === slot} onClick={() => patch({ slot })}>{slot.replace(" to ", " – ")}</button>)}</div></fieldset>
@@ -332,7 +332,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
             </div>}
           </div>}
           </section>
-          {order.method && <div className="fd-confirm"><div className="fd-total"><span>{order.quantity} × ₹{chef.price}{fee > 0 ? " + ₹50 delivery" : " · Self pickup"}</span><strong>₹{total}</strong></div>{order.method === "pickup" || validDelivery ? <a className="fd-whatsapp" href={whatsapp(orderMessage)} target="_blank" rel="noreferrer">Pay on WhatsApp <span>↗</span></a> : <><button className="fd-whatsapp" disabled>Complete delivery details</button><p className="fd-muted">Save your pincode and full address to continue.</p></>}<p className="fd-policy">Pre-orders once placed cannot be cancelled</p><p className="fd-muted">Payment details and order confirmation follow on WhatsApp.</p></div>}
+          {order.method && <div className="fd-confirm"><div className="fd-total"><span>{order.quantity} × ₹{chef.price}{fee > 0 ? " + ₹60 delivery" : " · Self pickup"}</span><strong>₹{total}</strong></div>{order.method === "pickup" || validDelivery ? <a className="fd-whatsapp" href={whatsapp(orderMessage)} target="_blank" rel="noreferrer">Pay on WhatsApp <span>↗</span></a> : <><button className="fd-whatsapp" disabled>Complete delivery details</button><p className="fd-muted">Save your pincode and full address to continue.</p></>}<p className="fd-policy">Pre-orders once placed cannot be cancelled</p><p className="fd-muted">Payment details and order confirmation follow on WhatsApp.</p></div>}
         </div>}
         {sheet?.type === "chef" && <div className="fd-profile">
           <div className="fd-profile-avatar">
