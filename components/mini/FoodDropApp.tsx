@@ -166,7 +166,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
     });
 
   return <div className="fd-app">
-    <header className="fd-topbar"><button className="fd-story-link" onClick={() => open({ type: "about" })}>Our story ↗</button></header>
+    <header className="fd-topbar"><button className="fd-story-link" onClick={() => open({ type: "about" })}>Our story</button></header>
     <main id="drop" className="fd-main">
       <section className="fd-intro">
         <div className="fd-intro-logo">
