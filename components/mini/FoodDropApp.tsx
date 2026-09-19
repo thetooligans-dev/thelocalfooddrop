@@ -331,7 +331,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
             </div>}
           </div>}
           </section>
-          {order.method && <div className="fd-confirm"><div className="fd-total"><span>{order.quantity} × ₹{chef.price}{fee > 0 ? " + ₹60 delivery" : " · Self pickup"}</span><strong>₹{total}</strong></div>{order.method === "pickup" || validDelivery ? <a className="fd-whatsapp" href={whatsapp(orderMessage)} target="_blank" rel="noreferrer">Pay on WhatsApp <span>↗</span></a> : <><button className="fd-whatsapp" disabled>Complete delivery details</button><p className="fd-muted">Save your pincode and full address to continue.</p></>}<p className="fd-policy">Pre-orders once placed cannot be cancelled</p><p className="fd-muted">Payment details and order confirmation follow on WhatsApp.</p></div>}
+          {order.method && <div className="fd-confirm"><div className="fd-total"><span>{order.quantity} × ₹{chef.price}{fee > 0 ? " + ₹60 delivery" : " · Self pickup"}</span><strong>₹{total}</strong></div>{order.method === "pickup" || validDelivery ? <a className="fd-whatsapp" href={whatsapp(orderMessage)} target="_blank" rel="noreferrer">Pay on WhatsApp</a> : <><button className="fd-whatsapp" disabled>Complete delivery details</button><p className="fd-muted">Save your pincode and full address to continue.</p></>}<p className="fd-policy">Pre-orders once placed cannot be cancelled</p><p className="fd-muted">Payment details and order confirmation follow on WhatsApp.</p></div>}
         </div>}
         {sheet?.type === "chef" && <div className="fd-profile">
           <div className="fd-profile-avatar">
