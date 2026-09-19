@@ -2106,6 +2106,29 @@ button.chef-service-icon:disabled small { color: inherit; }
   margin-top: 10px !important;
 }
 
+.fd-about .locality {
+  margin-inline: 0 !important;
+  width: 100% !important;
+  border-inline: none !important;
+  border-top: 1.5px solid var(--ink) !important;
+  border-bottom: 1.5px solid var(--ink) !important;
+  border-radius: 0 !important;
+  padding-block: 70px !important;
+}
+
+.fd-about .locality-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  gap: 24px !important;
+  padding-inline: 52px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
 @media (max-width: 600px) {
   .why-card {
     padding: 22px 18px !important;
@@ -2142,28 +2165,6 @@ button.chef-service-icon:disabled small { color: inherit; }
   letter-spacing: -.03em !important;
 }
 
-.fd-about .locality {
-  margin-inline: 0 !important;
-  width: 100% !important;
-  border-inline: none !important;
-  border-top: 1.5px solid var(--ink) !important;
-  border-bottom: 1.5px solid var(--ink) !important;
-  border-radius: 0 !important;
-  padding-block: 70px !important;
-}
-
-.fd-about .locality-inner {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: flex-start !important;
-  text-align: left !important;
-  gap: 24px !important;
-  padding-inline: 52px !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  box-sizing: border-box !important;
-}
 
 .fd-about .locality-copy {
   width: 100% !important;
