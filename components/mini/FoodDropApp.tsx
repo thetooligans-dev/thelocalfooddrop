@@ -87,14 +87,14 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
   const [viewMode, setViewMode] = useState<ViewMode>("dishes");
   
   type Diet = "all" | "Veg" | "Non-Veg" | "Eggetarian" | "Vegan" | "Dairy-Free" | "Gluten Free";
-  type Spice = "all" | "Not spicy" | "Mildly spicy" | "Kinda spicy" | "Very spicy";
+  type Spice = "all" | "Not spicy" | "Mildly spicy" | "Very spicy";
   const [diet, setDiet] = useState<Diet>("all");
   const [spice, setSpice] = useState<Spice>("all");
   
-  const [sortMode, setSortMode] = useState<{ type: "price" | "delivery" | "preorder", dir: "asc" | "desc" } | null>(null);
+  const [sortMode, setSortMode] = useState<"date" | "price">("date");
   const [showMore, setShowMore] = useState(false);
 
-  const [activeDropdown, setActiveDropdown] = useState<"diet" | "spice" | "price" | "date" | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState<"diet" | "spice" | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Rotating intro phrases
@@ -131,8 +131,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
     return () => document.removeEventListener("mousedown", handler);
   }, [activeDropdown]);
 
-  const anyActive = diet !== "all" || spice !== "all" || sortMode !== null;
-  const clearAll = () => { setDiet("all"); setSpice("all"); setSortMode(null); setViewMode("dishes"); setActiveDropdown(null); };
+  const clearAll = () => { setDiet("all"); setSpice("all"); setSortMode("date"); setViewMode("dishes"); setActiveDropdown(null); };
 
   const filtered = chefs
     .map((c, i) => ({ chef: c, index: i }))
@@ -148,20 +147,23 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
     })
     .sort((a, b) => {
       if (!sortMode) return 0;
-      if (sortMode.type === "price") {
-        return sortMode.dir === "asc" ? a.chef.price - b.chef.price : b.chef.price - a.chef.price;
+      if (sortMode === "price") {
+        if (a.chef.price !== b.chef.price) {
+          return a.chef.price - b.chef.price;
+        }
+        return a.index - b.index;
       }
-      if (sortMode.type === "delivery" || sortMode.type === "preorder") {
+      if (sortMode === "date") {
         const parseD = (s: string) => {
           if (!s) return 0;
-          const [d, m] = s.split(" ");
-          const ms = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
-          return new Date(2024, ms[m as keyof typeof ms] || 0, parseInt(d, 10)).getTime();
+          const [d, m] = s.trim().split(" ");
+          const ms: Record<string, number> = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
+          return new Date(2026, ms[m] ?? 0, parseInt(d, 10)).getTime();
         };
-        const prop = sortMode.type === "delivery" ? "pickupDate" : "preorderDate";
-        const da = parseD(a.chef[prop] || "");
-        const db = parseD(b.chef[prop] || "");
-        return sortMode.dir === "asc" ? da - db : db - da;
+        const da = parseD(a.chef.pickupDate || "");
+        const db = parseD(b.chef.pickupDate || "");
+        if (da !== db) return da - db;
+        return a.index - b.index;
       }
       return 0;
     });
@@ -194,31 +196,81 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
       <nav className="fd-filters" aria-label="Browse dishes by" ref={dropdownRef}>
         <div className="fd-filter-row">
           <div className="fd-filter-group">
-            <button className={`fd-filter-chip ${viewMode === "dishes" && !anyActive ? "fd-filter-active" : ""}`} onClick={clearAll}>All</button>
-            <button className={`fd-filter-chip ${viewMode === "chefs" ? "fd-filter-active" : ""}`} onClick={() => { setViewMode("chefs"); setActiveDropdown(null); }}>By Chef</button>
-            <div className="fd-filter-more-wrap">
-              <button className={`fd-filter-chip fd-filter-more ${["delivery", "preorder"].includes(sortMode?.type || "") ? "fd-filter-active" : ""}`} onClick={() => setActiveDropdown(activeDropdown === "date" ? null : "date")}>Date {activeDropdown === "date" ? "↑" : "↓"}</button>
-              {activeDropdown === "date" && <div className="fd-filter-dropdown">
-                <div className="fd-filter-section">
-                  <div className="fd-filter-options" style={{ flexDirection: "column", alignItems: "flex-start" }}>
-                    <button className={`fd-filter-option ${sortMode?.type === "delivery" ? "fd-filter-active" : ""}`} onClick={() => { const isAsc = sortMode?.type === "delivery" && sortMode.dir === "asc"; setSortMode({ type: "delivery", dir: isAsc ? "desc" : "asc" }); setViewMode("dishes"); setActiveDropdown(null); }}>Delivery Date {sortMode?.type === "delivery" ? (sortMode.dir === "asc" ? "↓" : "↑") : ""}</button>
-                    <button className={`fd-filter-option ${sortMode?.type === "preorder" ? "fd-filter-active" : ""}`} onClick={() => { const isAsc = sortMode?.type === "preorder" && sortMode.dir === "asc"; setSortMode({ type: "preorder", dir: isAsc ? "desc" : "asc" }); setViewMode("dishes"); setActiveDropdown(null); }}>Pre-order Deadline {sortMode?.type === "preorder" ? (sortMode.dir === "asc" ? "↓" : "↑") : ""}</button>
-                  </div>
-                </div>
-              </div>}
+            <div
+              className={`fd-slider-pill fd-slider-view ${viewMode === "chefs" ? "fd-slider-right" : "fd-slider-left"}`}
+              role="group"
+              aria-label="View mode"
+            >
+              <div className="fd-slider-track">
+                <span className="fd-slider-indicator" aria-hidden="true" />
+                <button
+                  type="button"
+                  className={`fd-slider-btn ${viewMode === "dishes" ? "fd-btn-active" : ""}`}
+                  onClick={() => {
+                    setViewMode("dishes");
+                    setActiveDropdown(null);
+                  }}
+                  aria-pressed={viewMode === "dishes"}
+                >
+                  By Dish
+                </button>
+                <button
+                  type="button"
+                  className={`fd-slider-btn ${viewMode === "chefs" ? "fd-btn-active" : ""}`}
+                  onClick={() => {
+                    setViewMode("chefs");
+                    setActiveDropdown(null);
+                  }}
+                  aria-pressed={viewMode === "chefs"}
+                >
+                  By Chef
+                </button>
+              </div>
+            </div>
+            <div
+              className={`fd-slider-pill fd-slider-sort ${sortMode === "price" ? "fd-slider-right" : "fd-slider-left"}`}
+              role="group"
+              aria-label="Sort order"
+            >
+              <div className="fd-slider-track">
+                <span className="fd-slider-indicator" aria-hidden="true" />
+                <button
+                  type="button"
+                  className={`fd-slider-btn ${sortMode !== "price" ? "fd-btn-active" : ""}`}
+                  onClick={() => {
+                    setSortMode("date");
+                    setActiveDropdown(null);
+                  }}
+                  aria-pressed={sortMode !== "price"}
+                >
+                  Date
+                </button>
+                <button
+                  type="button"
+                  className={`fd-slider-btn ${sortMode === "price" ? "fd-btn-active" : ""}`}
+                  onClick={() => {
+                    setSortMode("price");
+                    setActiveDropdown(null);
+                  }}
+                  aria-pressed={sortMode === "price"}
+                >
+                  Price
+                </button>
+              </div>
             </div>
           </div>
           <span className="fd-filter-sep" aria-hidden="true">·</span>
           <button
             type="button"
-            className={`fd-filter-chip fd-filter-toggle-more ${showMore ? "fd-filter-active" : ""}`}
+            className={`fd-filter-icon-btn ${showMore || diet !== "all" || spice !== "all" ? "fd-filter-active" : ""}`}
             onClick={() => setShowMore(prev => !prev)}
-            aria-label={showMore ? "Hide additional filters" : "Show diet, spice and price filters"}
+            aria-label={showMore ? "Hide filters" : "Show filters"}
             aria-expanded={showMore}
           >
-            {showMore ? "−" : "+"}
+            <svg width="15.5" height="15.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <polygon points="3 4, 21 4, 13.5 12, 13.5 20, 10.5 18, 10.5 12" />
+            </svg>
           </button>
-          {anyActive && !showMore && <button className="fd-filter-chip fd-filter-reset" onClick={clearAll} aria-label="Clear all filters">✕</button>}
         </div>
 
         {showMore && (
@@ -240,25 +292,13 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
               {activeDropdown === "spice" && <div className="fd-filter-dropdown">
                 <div className="fd-filter-section">
                   <div className="fd-filter-options">
-                    {(["all", "Not spicy", "Mildly spicy", "Kinda spicy", "Very spicy"] as Spice[]).map(s => 
+                    {(["all", "Not spicy", "Mildly spicy", "Very spicy"] as Spice[]).map(s => 
                       <button key={s} className={`fd-filter-option ${spice === s ? "fd-filter-active" : ""}`} onClick={() => { setSpice(s); setActiveDropdown(null); }}>{s === "all" ? "All" : s}</button>
                     )}
                   </div>
                 </div>
               </div>}
             </div>
-            <div className="fd-filter-more-wrap">
-              <button className={`fd-filter-chip fd-filter-more ${sortMode?.type === "price" ? "fd-filter-active" : ""}`} onClick={() => setActiveDropdown(activeDropdown === "price" ? null : "price")}>Price {activeDropdown === "price" ? "↑" : "↓"}</button>
-              {activeDropdown === "price" && <div className="fd-filter-dropdown fd-right-align">
-                <div className="fd-filter-section">
-                  <div className="fd-filter-options">
-                    <button className={`fd-filter-option ${sortMode?.type === "price" && sortMode.dir === "asc" ? "fd-filter-active" : ""}`} onClick={() => { setSortMode({ type: "price", dir: "asc" }); setActiveDropdown(null); }}>Low to High</button>
-                    <button className={`fd-filter-option ${sortMode?.type === "price" && sortMode.dir === "desc" ? "fd-filter-active" : ""}`} onClick={() => { setSortMode({ type: "price", dir: "desc" }); setActiveDropdown(null); }}>High to Low</button>
-                  </div>
-                </div>
-              </div>}
-            </div>
-            {anyActive && <button className="fd-filter-chip fd-filter-reset" onClick={clearAll} aria-label="Clear all filters">✕</button>}
           </div>
         )}
       </nav>
@@ -268,22 +308,43 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
         {viewMode === "dishes" ? filtered.map(({ chef: item, index: i }) => {
           const profile: Chef = item;
           return <article className="fd-card" key={item.name}>
+            <button className="fd-card-chef-header" onClick={() => open({ type: "chef", index: i })} aria-label={`Meet ${item.name}`}>
+              <div className="fd-card-chef-left">
+                <Image src={item.chefImage} alt="" width={40} height={40} className="fd-card-chef-avatar" />
+                <div className="fd-card-chef-info">
+                  <span className="fd-card-chef-kicker">From the kitchen of</span>
+                  <strong className="fd-card-chef-name">{item.name}</strong>
+                </div>
+              </div>
+              <span className="fd-card-chef-link">Meet the chef</span>
+            </button>
             <div className="fd-photo"><Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
-              <span className="fd-status">{siteConfig.dropStatus === "live" ? "This week's drop" : "Coming soon"}</span>
-              <div className="fd-schedule" aria-label="Pre-order deadline and delivery date"><div><span>Pre-orders close</span><strong>{item.preorderDate} · {item.closeTime}</strong></div><div><span>Delivery</span><strong>{item.pickupDate}</strong></div></div>
+              <div className="fd-schedule" aria-label="Pre-order deadline and drop date"><div><span>Pre-orders close</span><strong>{item.preorderDate} · {item.closeTime}</strong></div><div><span>Drop</span><strong>{item.pickupDate}</strong></div></div>
             </div>
-            <div className="fd-card-body"><h2>{item.dish}</h2><p className="fd-price">₹{item.price} <span>/ portion</span></p>
-              <div className="fd-tags"><span>{formatDietaryTag(item.dietary)}</span><span>{profile.spice || "Spice level soon"}</span></div>
-              <p className="fd-portions">{item.portions} · Serves 1 per portion</p>
-              <dl className="fd-ingredients"><div><dt>Ingredients</dt><dd>{item.ingredients}</dd></div><div><dt>Allergens</dt><dd>{item.allergens}</dd></div></dl>
-              <div className="fd-card-actions"><button className="fd-chef-button" onClick={() => open({ type: "chef", index: i })}><Image src={item.chefImage} alt="" width={48} height={48} /><span><strong>{item.name}</strong><u>Meet the chef</u></span></button><button className="fd-order-button" onClick={() => open({ type: "order", index: i })}>Order dish</button></div>
+            <div className="fd-card-body">
+              <h2>{item.dish}</h2>
+              <p className="fd-card-desc">{item.ingredients}</p>
+              <div className="fd-card-tags">
+                <span>{formatDietaryTag(item.dietary)}</span>
+                <span>{profile.spice || "Spice level soon"}</span>
+              </div>
+              {item.allergens && (
+                <p className="fd-card-allergens">Allergens: {item.allergens.toLowerCase()}</p>
+              )}
+              <div className="fd-card-footer">
+                <div className="fd-card-price-block">
+                  <p className="fd-price">₹{item.price}</p>
+                  <p className="fd-price-sub">per portion · serves one<br />{item.portions}</p>
+                </div>
+                <button className="fd-order-button" onClick={() => open({ type: "order", index: i })}>Order dish</button>
+              </div>
             </div>
           </article>;
         }) : filtered.map(({ chef: item, index: i }) => {
           return <article className="fd-card" key={item.name}>
             <div className="fd-photo" style={{ height: "340px" }}><Image src={item.chefImage} alt={item.name} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
             </div>
-            <div className="fd-card-body" style={{ display: "flex", flexDirection: "column", height: "calc(100% - 340px)" }}>
+            <div className="fd-card-body" style={{ display: "flex", flexDirection: "column", flex: 1 }}>
               <p className="fd-kicker">Meet the chef</p>
               <h2 style={{ fontSize: "32px", marginBottom: "8px" }}>{item.name}</h2>
               <p style={{ fontSize: "14px", color: "var(--fd-muted)", lineHeight: 1.4, marginBottom: "20px" }}>Specialty · {item.specialty || "Seasonal cooking"}</p>

@@ -23,3 +23,11 @@ Generate a single square contributor bust portrait. Zara: a smiling woman with s
 ## Follow-up edits
 
 Built-in imagegen prompts: Aaron — make the beard modestly fuller, denser and slightly longer around the jaw and chin, preserving all other details. Nigel — change only the crewneck T-shirt to textured black ink with minimal off-white neckline and fold strokes, preserving all other details. Saved over the existing 480 × 480 WebP assets.
+
+## Nose refinement — September 20, 2026
+
+Built-in imagegen prompt applied separately to Aaron and Nigel: Change only the oversized pointed nose to a small, softly rounded nose with about half the projection. Preserve the right-facing pose, hair, beard, clothing, expression, framing, off-white background and textured black ink style. Saved to the existing 480 × 480 WebP assets used by Our Story.
+
+## Zara nose reference
+
+Built-in imagegen, using each current portrait as edit target and Zara as a nose-only reference. Prompt: Replace the nose with Zara’s small angular right-facing wedge of two short ink strokes, matching its relative size and projection. Preserve all other features, clothing, framing, background and ink style. Applied separately to Aaron and Nigel and saved over their existing website assets.

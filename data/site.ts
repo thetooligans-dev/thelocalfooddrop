@@ -46,37 +46,38 @@ export const siteConfig = {
   ],
 };
 
-export type SpiceLevel = "Not spicy" | "Mildly spicy" | "Kinda spicy" | "Very spicy";
+export type SpiceLevel = "Not spicy" | "Mildly spicy" | "Very spicy";
 
 // Ingredient lists, allergens and heat assignments below are temporary preview content; confirm with each chef before launch.
 export const chefs = [
   {
-    name: "Chef Vivek",
+    name: "Cherry",
     homeDeliveryEnabled: true, // Temporary demo availability.
-    dish: "Kokum-Glazed BBQ Ribs",
-    image: "/dishes/bbq-ribs.jpg",
-    chefImage: "/chefs/chef-vivek.jpg",
+    dish: "Chili Con Carne",
+    image: "/dishes/cherry-chili-con-carne-toppings.png",
+    chefImage: "/chefs/chef-cherry.jpg",
     price: 480,
     tone: "olive" as const,
     specialty: "Artisanal smokehouse barbecue and wood-fired coastal grills",
     whatILoveToCook:
-      "Low and slow smoking paired with tangy Goan kokum, balancing rich meats with bright coastal acid.",
+      "Slow simmering rich hearty stews and smoked meats layered with deep aromatic spices.",
     whatKeepsMeCurious:
       "Regional firewoods, fermenting wild chillies, and the rich tradition of community backyard smoking.",
     tonightDishQuote:
-      "A small story told through technique, place and the flavours the chef keeps coming back to.",
+      "A hearty bowl of comfort layered with deep, smoky warmth and time-tested spices.",
     line:
-      "A small story told through technique, place and the flavours the chef keeps coming back to.",
-    ingredients: "Ribs, kokum, garlic, ginger, jaggery & smoked paprika",
-    ingredientsArePlaceholder: true,
+      "A hearty bowl of comfort layered with deep, smoky warmth and time-tested spices.",
+    ingredients:
+      "A slow cooked Tex Mex classic with tender minced meat and beans simmered in a rich sauce of tomatoes, smoky chilies and warm spices",
+    ingredientsArePlaceholder: false,
     spice: "Mildly spicy" as SpiceLevel,
-    dietary: "Vegan",
-    allergens: "Soy, wheat (in the glaze)",
-    allergensArePlaceholder: true,
-    portions: "10 portions only being cooked",
+    dietary: "Non-Veg",
+    allergens: "None",
+    allergensArePlaceholder: false,
+    portions: "10 portions only",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.299, longitude: 73.967 } as Coordinates | null,
-    pickupLocation: "Vivek’s Smokehouse",
+    pickupLocation: "Cherry’s Smokehouse",
     pickupAddress: "Plot 24, Stadium Cross Road, Near Jawaharlal Nehru Stadium, Fatorda, Margao, South Goa 403602",
     pickupMapsUrl: "https://www.google.com/maps/search/?api=1&query=Fatorda+Margao+Goa",
     pickupDay: "Friday",
@@ -86,12 +87,12 @@ export const chefs = [
     closeTime: "8 PM",
   },
   {
-    name: "Chef Anne",
+    name: "Anne",
     homeDeliveryEnabled: true, // Temporary demo availability.
-    dish: "Slow-Cooked Goan Pork Vindaloo",
-    image: "/dishes/pork-vindaloo.jpg",
+    dish: "Char Siu Pork Siopao",
+    image: "/dishes/anne-siopao-seated.png",
     chefImage: "/chefs/chef-anne.jpg",
-    price: 450,
+    price: 350,
     tone: "watermelon" as const,
     specialty: "Seasonal cooking and comforting neighborhood favorites",
     whatILoveToCook:
@@ -102,13 +103,14 @@ export const chefs = [
       "This comforting dish brings together familiar flavors and a little something unexpected.",
     line:
       "A dish tied to home, memory and the way food gets passed from one person to another.",
-    ingredients: "Pork, garlic, ginger, dried red chillies, vinegar, cumin & cloves",
-    ingredientsArePlaceholder: true,
-    spice: "Very spicy" as SpiceLevel,
+    ingredients:
+      "A Filipino street food classic with pillow soft steamed buns filled with tender, sweet and savory braised char siu pork",
+    ingredientsArePlaceholder: false,
+    spice: "Not spicy" as SpiceLevel,
     dietary: "Non-Veg",
-    allergens: "Mustard; wheat (if served with bread)",
-    allergensArePlaceholder: true,
-    portions: "20 portions only being cooked",
+    allergens: "Wheat, soy & oyster sauce",
+    allergensArePlaceholder: false,
+    portions: "30 portions only",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.256, longitude: 73.926 } as Coordinates | null,
     pickupLocation: "Anne’s Heritage Kitchen",
@@ -121,32 +123,33 @@ export const chefs = [
     closeTime: "8 PM",
   },
   {
-    name: "Chef Vasant",
+    name: "Ranjita",
     homeDeliveryEnabled: false, // Temporary demo availability.
-    dish: "Prawn Balchão\nRisotto",
-    image: "/dishes/prawn-risotto.jpg",
+    dish: "Slow Cooked Goan Mangane",
+    image: "/dishes/ranjita-mangane-seated.png",
     chefImage: "/chefs/chef-vasant.jpg",
-    price: 550,
+    price: 350,
     tone: "kiwi" as const,
-    specialty: "Coastal seafood and fresh Goan-Portuguese flavors",
+    specialty: "Traditional Goan festive sweets and heritage recipes",
     whatILoveToCook:
-      "Fresh seafood cooked simply, letting the morning catch and traditional coastal masalas speak for themselves.",
+      "Time-honored Goan sweets cooked slowly with fresh coconut milk and local jaggery.",
     whatKeepsMeCurious:
-      "Early morning harbor visits, discovering coastal herbs, and balancing timeless local recipes with clean modern techniques.",
+      "Heirloom recipes passed down through generations, festive traditions, and forgotten local flavors.",
     tonightDishQuote:
-      "One plate, one point of view — the kind of thing a chef makes because they really want you to taste it.",
+      "A comforting Goan celebration in a bowl, balancing nutty chana dal, soft sago and rich coconut jaggery.",
     line:
-      "One plate, one point of view — the kind of thing a chef makes because they really want you to taste it.",
-    ingredients: "Prawns, arborio rice, tomatoes, onion, garlic, butter & parmesan",
-    ingredientsArePlaceholder: true,
-    spice: "Mildly spicy" as SpiceLevel,
-    dietary: "Non-Veg",
-    allergens: "Crustaceans (prawns), milk",
-    allergensArePlaceholder: true,
-    portions: "20 portions only being cooked",
+      "A comforting Goan celebration in a bowl, balancing nutty chana dal, soft sago and rich coconut jaggery.",
+    ingredients:
+      "A traditional Goan festive sweet with nutty chana dal and soft sago simmered in rich coconut milk, cardamom and palm jaggery",
+    ingredientsArePlaceholder: false,
+    spice: "Not spicy" as SpiceLevel,
+    dietary: "Veg",
+    allergens: "Cashews (tree nuts)",
+    allergensArePlaceholder: false,
+    portions: "20 portions only",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.279, longitude: 73.932 } as Coordinates | null,
-    pickupLocation: "Vasant’s Kitchen Studio",
+    pickupLocation: "Ranjita’s Kitchen Studio",
     pickupAddress: "Villa 8, Colva Beach Road, Behind Old Colva Post Office, Colva, South Goa 403708",
     pickupMapsUrl: "https://www.google.com/maps/search/?api=1&query=Colva+Beach+Road+Colva+Goa",
     pickupDay: "Sunday",
@@ -156,7 +159,7 @@ export const chefs = [
     closeTime: "8 PM",
   },
   {
-    name: "Chef Ram",
+    name: "Ram",
     homeDeliveryEnabled: false, // Temporary demo availability.
     dish: "Bebinca Crème\nBrûlée",
     image: "/dishes/bebinca-creme-brulee.jpg",
@@ -178,7 +181,7 @@ export const chefs = [
     dietary: "Veg",
     allergens: "Eggs, milk, wheat",
     allergensArePlaceholder: true,
-    portions: "25 portions only being cooked",
+    portions: "25 portions only",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.274, longitude: 73.957 } as Coordinates | null,
     pickupLocation: "Ram’s Pastry Lab",
