@@ -101,8 +101,6 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
   const INTRO_PHRASES = [
     "available in limited portions",
     "pre-orders close when portions run out",
-    "not available on zomato/swiggy",
-    "not available on their regular menu",
     "self pick up available",
     "home delivery in select locations",
     "made with honest ingredients",
@@ -176,7 +174,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
             <Image src="/branding/logo.png" alt="The Local Food Drop logo" width={110} height={110} priority />
           </div>
           <div className="fd-intro-text">
-            <h1 className="fd-intro-heading">A chef's prized dish</h1>
+            <h1 className="fd-intro-heading">Home made dishes from the neighbourhood</h1>
             <div className="fd-rotating-wrap">
               <p className={`fd-rotating-phrase ${isFading ? "fd-phrase-hidden" : ""}`}>
                 {INTRO_PHRASES[phraseIndex]}
@@ -223,7 +221,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                   }}
                   aria-pressed={viewMode === "chefs"}
                 >
-                  By Chef
+                  By Cook
                 </button>
               </div>
             </div>
@@ -305,81 +303,152 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
 
       <section className="fd-lineup" aria-label={viewMode === "dishes" ? "Chef dish lineup" : "Chef profiles"}>
         {filtered.length === 0 && <p className="fd-empty">No matches found for your filters. <button onClick={clearAll}>Show all</button></p>}
-        {viewMode === "dishes" ? filtered.map(({ chef: item, index: i }) => {
-          const profile: Chef = item;
-          return <article className="fd-card" key={item.name}>
-            <button className="fd-card-chef-header" onClick={() => open({ type: "chef", index: i })} aria-label={`Meet ${item.name}`}>
-              <div className="fd-card-chef-left">
-                <Image src={item.chefImage} alt="" width={40} height={40} className="fd-card-chef-avatar" />
-                <div className="fd-card-chef-info">
-                  <span className="fd-card-chef-kicker">From the kitchen of</span>
-                  <strong className="fd-card-chef-name">{item.name}</strong>
+        {viewMode === "dishes" ? (
+          <>
+            {filtered.map(({ chef: item, index: i }) => {
+              const profile: Chef = item;
+              return <article className="fd-card" key={item.name}>
+                <button className="fd-card-chef-header" onClick={() => open({ type: "chef", index: i })} aria-label={`Meet ${item.name}`}>
+                  <div className="fd-card-chef-left">
+                    <Image src={item.chefImage} alt="" width={40} height={40} className="fd-card-chef-avatar" />
+                    <div className="fd-card-chef-info">
+                      <span className="fd-card-chef-kicker">From the kitchen of</span>
+                      <strong className="fd-card-chef-name">{item.name}</strong>
+                    </div>
+                  </div>
+                  <span className="fd-card-chef-link">Meet the cook</span>
+                </button>
+                <div className="fd-photo"><Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
+                  <div className="fd-schedule" aria-label="Pre-order deadline and drop date"><div><span>Pre-orders close</span><strong>{item.preorderDate}</strong></div><div><span>Drop</span><strong>{item.pickupDate}</strong></div></div>
+                </div>
+                <div className="fd-card-body">
+                  <h2>{item.dish}</h2>
+                  <p className="fd-card-desc">{item.ingredients}</p>
+                  <div className="fd-card-tags">
+                    <span>{formatDietaryTag(item.dietary)}</span>
+                    <span>{profile.spice || "Spice level soon"}</span>
+                  </div>
+                  {item.allergens && (
+                    <p className="fd-card-allergens">Allergens: {item.allergens.toLowerCase()}</p>
+                  )}
+                  <div className="fd-card-footer">
+                    <div className="fd-card-price-block">
+                      <p className="fd-price">₹{item.price}</p>
+                      <p className="fd-price-sub">per portion · serves one<br />{item.portions}</p>
+                    </div>
+                    <button className="fd-order-button" onClick={() => open({ type: "order", index: i })}>Order dish</button>
+                  </div>
+                </div>
+              </article>;
+            })}
+            <article className="fd-card fd-invite-card">
+              <div className="fd-invite-inner">
+                <p className="fd-invite-kicker">This could be you</p>
+                <h2 className="fd-invite-title">Are you a home cook that loves preparing good food?</h2>
+                <div className="fd-invite-body">
+                  <p>Home-cooked meals hit differently. They’re healthier, made with real care, and you can feel the love in every portion.</p>
+                  <p>We connect cooks who love to cook with neighbors who crave authentic, soulful food.</p>
+                </div>
+                <div className="fd-invite-footer">
+                  <a
+                    href={whatsapp(siteConfig.homeCookWhatsappMessage || siteConfig.chefWhatsappMessage)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="fd-invite-btn"
+                  >
+                    <span>Tell us your dish</span>
+                    <span aria-hidden="true">→</span>
+                  </a>
                 </div>
               </div>
-              <span className="fd-card-chef-link">Meet the chef</span>
-            </button>
-            <div className="fd-photo"><Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
-              <div className="fd-schedule" aria-label="Pre-order deadline and drop date"><div><span>Pre-orders close</span><strong>{item.preorderDate} · {item.closeTime}</strong></div><div><span>Drop</span><strong>{item.pickupDate}</strong></div></div>
-            </div>
-            <div className="fd-card-body">
-              <h2>{item.dish}</h2>
-              <p className="fd-card-desc">{item.ingredients}</p>
-              <div className="fd-card-tags">
-                <span>{formatDietaryTag(item.dietary)}</span>
-                <span>{profile.spice || "Spice level soon"}</span>
-              </div>
-              {item.allergens && (
-                <p className="fd-card-allergens">Allergens: {item.allergens.toLowerCase()}</p>
-              )}
-              <div className="fd-card-footer">
-                <div className="fd-card-price-block">
-                  <p className="fd-price">₹{item.price}</p>
-                  <p className="fd-price-sub">per portion · serves one<br />{item.portions}</p>
+            </article>
+          </>
+        ) : (
+          <>
+            {filtered.map(({ chef: item, index: i }) => {
+              return <article className="fd-card" key={item.name}>
+                <div className="fd-photo fd-chef-card-photo" style={{ height: "340px" }}>
+                  <Image
+                    src={item.chefImage}
+                    alt={item.name}
+                    fill
+                    priority={i === 0}
+                    sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                    style={{ objectPosition: "top center" }}
+                  />
                 </div>
-                <button className="fd-order-button" onClick={() => open({ type: "order", index: i })}>Order dish</button>
-              </div>
-            </div>
-          </article>;
-        }) : filtered.map(({ chef: item, index: i }) => {
-          return <article className="fd-card" key={item.name}>
-            <div className="fd-photo" style={{ height: "340px" }}><Image src={item.chefImage} alt={item.name} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
-            </div>
-            <div className="fd-card-body" style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-              <p className="fd-kicker">Meet the chef</p>
-              <h2 style={{ fontSize: "32px", marginBottom: "8px" }}>{item.name}</h2>
-              <p style={{ fontSize: "14px", color: "var(--fd-muted)", lineHeight: 1.4, marginBottom: "20px" }}>Specialty · {item.specialty || "Seasonal cooking"}</p>
-              
-              <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "16px", paddingBottom: "16px", borderBottom: "1px solid var(--fd-line)" }}>
-                <div style={{ position: "relative", width: "60px", height: "60px", borderRadius: "10px", overflow: "hidden", flexShrink: 0, border: "1px solid var(--fd-ink)" }}>
-                  <Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill style={{ objectFit: "cover" }} sizes="60px" />
-                </div>
-                <div>
-                  <p className="fd-kicker" style={{ margin: "0 0 4px", fontSize: "10px", color: "var(--fd-muted)" }}>This week's dish</p>
-                  <p style={{ fontSize: "16px", fontWeight: 600, margin: 0, lineHeight: 1.2, fontFamily: "var(--font-editorial)" }}>{item.dish.replace(/\n/g, " ")}</p>
-                </div>
-              </div>
+                <div className="fd-card-body" style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+                  <p className="fd-kicker">Meet the cook</p>
+                  <h2 style={{ fontSize: "32px", marginBottom: "8px" }}>{item.name}</h2>
+                  <p style={{ fontSize: "14px", color: "var(--fd-muted)", lineHeight: 1.5, margin: "0 0 18px" }}>
+                    {item.whatKeepsMeCurious || "Local markets, long walks, and the everyday stories behind familiar ingredients."}
+                  </p>
+                  
+                  <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "16px" }}>
+                    <div style={{ position: "relative", width: "60px", height: "60px", borderRadius: "10px", overflow: "hidden", flexShrink: 0 }}>
+                      <Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill style={{ objectFit: "cover" }} sizes="60px" />
+                    </div>
+                    <div>
+                      <p className="fd-kicker" style={{ margin: "0 0 4px", fontSize: "10px", color: "var(--fd-muted)" }}>This week's dish</p>
+                      <p style={{ fontSize: "16px", fontWeight: 600, margin: 0, lineHeight: 1.2, fontFamily: "var(--font-editorial)" }}>{item.dish.replace(/\n/g, " ")}</p>
+                    </div>
+                  </div>
 
-              <div style={{ background: "#dce7d6", padding: "16px", borderRadius: "14px", border: "1px solid var(--fd-ink)", marginBottom: "20px" }}>
-                <p className="fd-kicker" style={{ marginBottom: "6px" }}>Chef notes</p>
-                <p style={{ fontStyle: "italic", fontSize: "16px", lineHeight: 1.3, margin: 0, fontFamily: "var(--font-editorial)" }}>“{item.tonightDishQuote || item.line}”</p>
+                  <div style={{ background: "#dce7d6", padding: "16px", borderRadius: "14px", marginBottom: "20px" }}>
+                    <p className="fd-kicker" style={{ marginBottom: "6px" }}>Chef notes</p>
+                    <p style={{ fontSize: "14px", lineHeight: 1.5, margin: 0, color: "#403e37" }}>“{item.tonightDishQuote || item.line}”</p>
+                  </div>
+                  <div className="fd-card-actions" style={{ marginTop: "auto" }}>
+                    <button className="fd-order-button" style={{ width: "100%", textAlign: "center" }} onClick={() => open({ type: "order", index: i })}>Order dish</button>
+                  </div>
+                </div>
+              </article>;
+            })}
+            <article className="fd-card fd-invite-card">
+              <div className="fd-invite-inner">
+                <p className="fd-invite-kicker">This could be you</p>
+                <h2 className="fd-invite-title">Are you a home cook that loves preparing good food?</h2>
+                <div className="fd-invite-body">
+                  <p>Home-cooked meals hit differently. They’re healthier, made with real care, and you can feel the love in every portion.</p>
+                  <p>We connect cooks who love to cook with neighbors who crave authentic, soulful food.</p>
+                </div>
+                <div className="fd-invite-footer">
+                  <a
+                    href={whatsapp(siteConfig.homeCookWhatsappMessage || siteConfig.chefWhatsappMessage)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="fd-invite-btn"
+                  >
+                    <span>Tell us your dish</span>
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
               </div>
-              <div className="fd-card-actions" style={{ marginTop: "auto" }}>
-                <button className="fd-order-button" style={{ width: "100%", textAlign: "center" }} onClick={() => open({ type: "chef", index: i })}>View full profile & order</button>
-              </div>
-            </div>
-          </article>;
-        })}
+            </article>
+          </>
+        )}
       </section>
-      <footer className="fd-footer"><span>Small-batch food, stories and people<br />from around the town square.</span><button onClick={() => open({ type: "about" })}>There is room at the table ↗</button><a href="https://thetownsquare.xyz" target="_blank" rel="noreferrer">An experiment by The Town Square Project</a></footer>
+      <footer className="fd-footer"><span>Small-batch food, stories and people<br />from around the town square.</span><button onClick={() => open({ type: "about" })}>There is room at the table</button><a href="https://thetownsquare.xyz" target="_blank" rel="noreferrer">An experiment by The Town Square Project</a></footer>
     </main>
     <dialog ref={modal} className={`fd-sheet ${closing ? "fd-closing" : ""} ${sheet?.type === "about" ? "fd-about-sheet" : ""}`} aria-labelledby="fd-sheet-title" onCancel={event => { event.preventDefault(); close(); }} onClick={event => { if (event.target === event.currentTarget) close(); }}>
       <div className="fd-sheet-shell">
         <div className="fd-sheet-bar"><span className="fd-handle" aria-hidden="true" /><button autoFocus aria-label="Close and return to menu" onClick={close}>↓</button></div>
         <div className="fd-sheet-scroll">
         {sheet?.type === "order" && <div className="fd-order-content">
-          <p className="fd-kicker">Order from {chef.name}</p><h2 id="fd-sheet-title">{chef.dish}</h2><p className="fd-price">₹{chef.price} <span>/ portion</span></p>
-          <div className="fd-tags"><span>{formatDietaryTag(chef.dietary)}</span><span>{chef.spice || "Spice level soon"}</span></div>
-          <div className="fd-chef-note"><span className="fd-kicker">From the chef</span><p>“{chef.line}”</p></div>
+          <div className="fd-order-header-row">
+            <div className="fd-order-dish-thumb">
+              <Image src={chef.image} alt={chef.dish.replace(/\n/g, " ")} fill sizes="120px" priority />
+            </div>
+            <div className="fd-order-header-info">
+              <p className="fd-kicker">Order from {chef.name}</p>
+              <h2 id="fd-sheet-title">{chef.dish}</h2>
+              <p className="fd-price">₹{chef.price} <span>/ portion</span></p>
+              <div className="fd-card-tags">
+                <span>{formatDietaryTag(chef.dietary)}</span>
+                <span>{chef.spice || "Spice level soon"}</span>
+              </div>
+            </div>
+          </div>
           <section className="fd-order-section"><h3 className="fd-kicker">01 · Quantity</h3><div className="fd-quantity-row"><div><p className="fd-section-title">How many portions?</p><p className="fd-muted">{chef.portions}<br />Each portion serves one adult</p></div><div className="fd-stepper"><button aria-label="Decrease quantity" disabled={order.quantity <= 1} onClick={() => patch({ quantity: order.quantity - 1 })}>−</button><output aria-live="polite">{order.quantity}</output><button aria-label="Increase quantity" disabled={order.quantity >= max} onClick={() => patch({ quantity: order.quantity + 1 })}>+</button></div></div></section>
           <section className="fd-order-section"><h3 className="fd-kicker">02 · Get your order</h3><div className="fd-methods"><button aria-pressed={order.method === "pickup"} onClick={() => patch({ method: "pickup", error: "" })}><strong>Self pickup</strong><span>Choose a time</span></button><button disabled={!chef.homeDeliveryEnabled} aria-pressed={order.method === "delivery"} onClick={() => patch({ method: "delivery", editingPin: !order.savedPin, error: "" })}><strong>Home delivery</strong><span>{chef.homeDeliveryEnabled ? "+ ₹60 per order" : "Not available"}</span></button></div>
           {order.method && <div className="fd-fulfilment">
@@ -398,24 +467,26 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
           <div className="fd-profile-avatar">
             <Image src={chef.chefImage} alt={chef.name} width={180} height={180} />
           </div>
-          <p className="fd-kicker fd-profile-kicker">Meet the chef</p>
+          <p className="fd-kicker fd-profile-kicker">Meet the cook</p>
           <h2 id="fd-sheet-title" className="fd-profile-name">{chef.name}</h2>
-          <p className="fd-profile-sub">Specialty · {chef.specialty || "Seasonal cooking and comforting neighborhood favorites"}</p>
           <div className="fd-profile-cards">
             <div className="fd-profile-card">
-              <p className="fd-kicker">In the kitchen</p>
+              <h3>A bit more about me</h3>
+              <p>{chef.whatKeepsMeCurious || "Local markets, long walks, and the everyday stories behind familiar ingredients."}</p>
+            </div>
+            <div className="fd-profile-card">
               <h3>What I love to cook</h3>
               <p>{chef.whatILoveToCook || "Slow-cooked, seasonal food made for sharing around a busy neighborhood table."}</p>
             </div>
-            <div className="fd-profile-card">
-              <p className="fd-kicker">Away from the stove</p>
-              <h3>What keeps me curious</h3>
-              <p>{chef.whatKeepsMeCurious || "Local markets, long walks, and the everyday stories behind familiar ingredients."}</p>
-            </div>
             <div className="fd-profile-card fd-profile-card-dish">
-              <p className="fd-kicker">Chef notes</p>
-              <h3>{chef.dish}</h3>
-              <p>“{chef.tonightDishQuote || chef.line}”</p>
+              <div className="fd-profile-dish-thumb">
+                <Image src={chef.image} alt={chef.dish.replace(/\n/g, " ")} fill sizes="120px" />
+              </div>
+              <div className="fd-profile-dish-info">
+                <p className="fd-kicker">Chef notes</p>
+                <h3>{chef.dish}</h3>
+                <p>“{chef.tonightDishQuote || chef.line}”</p>
+              </div>
             </div>
           </div>
           <button type="button" className="fd-profile-order-btn" onClick={() => open({ type: "order", index })}>Order this dish</button>

@@ -10,6 +10,8 @@ export const siteConfig = {
     "Hey! 👋 I’d love a heads-up when the next Local Food Drop opens.",
   chefWhatsappMessage:
     "Hey! 👋 I’m a chef and I’d love to cook something for a Local Food Drop. Can we chat?",
+  homeCookWhatsappMessage:
+    "Hey! 👋 I’m a home cook and I’d love to cook something for The Local Food Drop. Can we chat?",
   collaboratorWhatsappMessage:
     "Hey! 👋 I’d love to team up with the Local Food Drop. I work in design / photo / video / delivery / something else local — can we chat?",
   hostWhatsappMessage:
@@ -116,10 +118,10 @@ export const chefs = [
     pickupLocation: "Anne’s Heritage Kitchen",
     pickupAddress: "House No. 142/A, Mazilvaddo, Near St. John the Baptist Church, Benaulim, South Goa 403716",
     pickupMapsUrl: "https://www.google.com/maps/search/?api=1&query=Mazilvaddo+Benaulim+Goa",
-    pickupDay: "Saturday",
-    pickupDate: "26 Sep",
-    preorderDate: "25 Sep",
-    closeDay: "Friday",
+    pickupDay: "Friday",
+    pickupDate: "9 Oct · 6:30–8 PM",
+    preorderDate: "8 Oct",
+    closeDay: "Thursday",
     closeTime: "8 PM",
   },
   {
@@ -127,7 +129,7 @@ export const chefs = [
     homeDeliveryEnabled: false, // Temporary demo availability.
     dish: "Slow Cooked Goan Mangane",
     image: "/dishes/ranjita-mangane-seated.png",
-    chefImage: "/chefs/chef-vasant.jpg",
+    chefImage: "/chefs/chef-ranjita.jpg",
     price: 350,
     tone: "kiwi" as const,
     specialty: "Traditional Goan festive sweets and heritage recipes",
@@ -140,7 +142,7 @@ export const chefs = [
     line:
       "A comforting Goan celebration in a bowl, balancing nutty chana dal, soft sago and rich coconut jaggery.",
     ingredients:
-      "A traditional Goan festive sweet with nutty chana dal and soft sago simmered in rich coconut milk, cardamom and palm jaggery",
+      "A cornerstone of Goan Gaud Saraswat Brahmin (GSB) festive feasts—nutty chana dal and soft sago gently simmered in rich coconut milk, infused with fragrant cardamom and deep Goan palm jaggery",
     ingredientsArePlaceholder: false,
     spice: "Not spicy" as SpiceLevel,
     dietary: "Veg",
@@ -152,10 +154,10 @@ export const chefs = [
     pickupLocation: "Ranjita’s Kitchen Studio",
     pickupAddress: "Villa 8, Colva Beach Road, Behind Old Colva Post Office, Colva, South Goa 403708",
     pickupMapsUrl: "https://www.google.com/maps/search/?api=1&query=Colva+Beach+Road+Colva+Goa",
-    pickupDay: "Sunday",
-    pickupDate: "27 Sep",
-    preorderDate: "26 Sep",
-    closeDay: "Saturday",
+    pickupDay: "Thursday",
+    pickupDate: "15 Oct · 6:30–8 PM",
+    preorderDate: "14 Oct",
+    closeDay: "Wednesday",
     closeTime: "8 PM",
   },
   {
