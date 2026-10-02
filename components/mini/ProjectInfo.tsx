@@ -12,10 +12,7 @@ function whatsappHref(message = siteConfig.whatsappMessage) {
 }
 
 export default function ProjectInfo() {
-  const whatsapp = whatsappHref();
-  const chefWhatsapp = whatsappHref(siteConfig.chefWhatsappMessage);
   const collaboratorWhatsapp = whatsappHref(siteConfig.collaboratorWhatsappMessage);
-  const hostWhatsapp = whatsappHref(siteConfig.hostWhatsappMessage);
 
   return (
     <DeliveryLocationProvider><main>
@@ -24,50 +21,38 @@ export default function ProjectInfo() {
       <section className="why page-shell section-space">
         <div className="why-graphic" aria-hidden="true">
           <Image src="/plate-licking-bob-v5.png" alt="" width={639} height={637} sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1050px) 650px, 480px" className="why-editorial-art" />
-          <span className="why-note">LESS SQUEEZING. MORE COOKING.</span>
+          <span className="why-note">WHOLESOME. HONEST. HOMEMADE.</span>
         </div>
         <div className="why-copy">
-          <h2 className="why-title-main">Did you know?</h2>
+          <h2 className="why-title-main">Food for what matters most.</h2>
           <div className="why-card">
-            <p className="why-stat-line">Delivery apps, platform ads and commissions can eat up 28% to 70% of what you pay for a dish.</p>
-            <p>When chefs are forced to absorb these massive commissions, the only way to make the math work is by compromising on quality &amp; ingredients and simplifying what they can cook. Instead of perfecting their culinary craft, chefs are trapped performing for algorithms — <strong>twerking, dancing, entertaining, and pulling stunts on camera chasing views, likes, shares &amp; virality — just to sell a plate.</strong> Somewhere in all this madness, cooking genuinely wholesome food stopped being what mattered.</p>
-            <p>The Local Food Drop aims to flip that math, putting chefs back in control with complete honesty and transparency. <strong>Food should be about feeding your body and nourishing your soul — energizing you to do what you love with the people who matter most.</strong></p>
-            <p>We hope that through the local food drop, you get to taste what that actually feels like.</p>
+            <p style={{ marginTop: 0 }}>
+              Food has become easy to get. But finding a meal that feels like homemade with honest ingredients, intention, and love—is still hard to find. Between endless menus, discounts, and free delivery, speed and convenience often come before nourishment.
+            </p>
+            <p>
+              <strong>Food was meant to nourish your body and feed your soul energizing you to do the things you love with the people who matter most.</strong>
+            </p>
+            <h3 style={{
+              fontFamily: "var(--font-editorial), Georgia, serif",
+              fontSize: "clamp(24px, 2.8vw, 30px)",
+              lineHeight: 1.15,
+              letterSpacing: "-0.025em",
+              fontWeight: 500,
+              color: "var(--ink)",
+              margin: "32px 0 12px",
+            }}>
+              Homecooked with ❤️
+            </h3>
+            <p>
+              The Local Food Drop connects you with home cooks in your town—their food, their culture, and the stories that simmer into every dish.
+            </p>
+            <p>
+              Limited preorders help homecooks make what&apos;s needed with less waste. Fairer economics give them more control and room for better ingredients, making home cooking work better for them and for you.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* §2 — HOW IT WORKS */}
-      <section id="how" className="how-wrap section-space">
-        <div className="page-shell">
-          <div className="how-heading">
-            <div>
-              <h2>How the local food drop works.</h2>
-            </div>
-          </div>
-
-          <ol className="how-compact">
-            <li>
-              <div className="how-step-content">
-                <strong>Pre-orders open</strong>
-                <span>Browse dishes and reserve your plate. Portions are capped.</span>
-              </div>
-            </li>
-            <li>
-              <div className="how-step-content">
-                <strong>Pre-orders close</strong>
-                <span>Orders close 24 hours prior so chefs can prep and cook fresh.</span>
-              </div>
-            </li>
-            <li>
-              <div className="how-step-content">
-                <strong>Drop day</strong>
-                <span>Delivered straight to your door or ready for self-pickup.</span>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
 
       {/* §3 — NEIGHBOURHOOD */}
       <section className="locality section-space">
@@ -125,31 +110,15 @@ export default function ProjectInfo() {
           <div className="join-compact">
             <div className="join-compact-row">
               <div className="join-compact-info">
-                <p className="join-label">RESTAURANT &amp; HOME CHEFS</p>
-                <p>Have a prized dish that doesn&apos;t fit a regular menu? We handle the pre-orders so you can just cook.</p>
+                <span className="join-label" style={{ marginBottom: "14px" }}>
+                  COOKS · CREATORS · PARTNERS
+                </span>
+                <p>
+                  We’re building a neighbourhood food collective. Whether you cook dishes, shoot content, or want to host local drops—reach out and tell us how you&apos;d like to collaborate.
+                </p>
               </div>
-              <a href={chefWhatsapp} target="_blank" rel="noreferrer" className="join-compact-btn">
-                Tell us more
-              </a>
-            </div>
-
-            <div className="join-compact-row">
-              <div className="join-compact-info">
-                <p className="join-label">CREATORS &amp; ENTREPRENEURS</p>
-                <p>Shoot video, run delivery, host a pickup spot — there&apos;s a seat at the table.</p>
-              </div>
-              <a href={collaboratorWhatsapp} target="_blank" rel="noreferrer" className="join-compact-btn">
-                Get involved
-              </a>
-            </div>
-
-            <div className="join-compact-row">
-              <div className="join-compact-info">
-                <p className="join-label">FOOD INFLUENCERS &amp; CURATORS</p>
-                <p>Want to bring food drops to your town? We&apos;ll share the playbook.</p>
-              </div>
-              <a href={hostWhatsapp} target="_blank" rel="noreferrer" className="join-compact-btn">
-                Start a drop
+              <a href={collaboratorWhatsapp} target="_blank" rel="noreferrer" className="join-compact-btn" style={{ marginTop: "20px" }}>
+                REACH OUT ON WHATSAPP
               </a>
             </div>
           </div>
@@ -158,7 +127,7 @@ export default function ProjectInfo() {
 
       {/* §5 — CONTRIBUTORS */}
       <section className="contributors page-shell" aria-labelledby="contributors-title">
-        <h2 id="contributors-title" className="contributors-heading">Contributors building the local food drop</h2>
+        <h2 id="contributors-title" className="contributors-heading">Contributors building The Local Food Drop</h2>
         <div className="contributors-grid">
           {[
             { name: "Aaron", role: "May-err", image: aaronPortrait },

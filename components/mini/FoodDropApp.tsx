@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { chefs, siteConfig } from "@/data/site";
 
-type Chef = (typeof chefs)[number] & { specialty?: string; background?: string; interests?: string };
+type Chef = (typeof chefs)[number] & { specialty?: string; background?: string; interests?: string; pickupTime?: string };
 type Sheet = { type: "order" | "chef"; index: number } | { type: "about" } | null;
 type Order = { quantity: number; method: "pickup" | "delivery" | null; slot: string; pin: string; savedPin: string; address: string; savedAddress: string; editingPin: boolean; editingAddress: boolean; error: string };
 const newOrder = (): Order => ({ quantity: 1, method: null, slot: "4pm to 6pm", pin: "", savedPin: "", address: "", savedAddress: "", editingPin: false, editingAddress: false, error: "" });
@@ -16,6 +16,13 @@ function formatDietaryTag(dietary?: string) {
   if (/^non-vegetarian$/i.test(cleaned)) return "Non-Veg";
   if (/^vegetarian$/i.test(cleaned)) return "Veg";
   return cleaned;
+}
+function getPickupTime(chef: Chef) {
+  if (chef.pickupTime) return chef.pickupTime;
+  if (chef.pickupDate && chef.pickupDate.includes("·")) {
+    return chef.pickupDate.split("·")[1].trim();
+  }
+  return "6:30–8 PM";
 }
 
 export function FoodDropApp({ children }: { children: ReactNode }) {
@@ -77,8 +84,9 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
     `Hey! 👋 I'd like to order *${chef.dish.replace(/\n/g, " ")}* by ${chef.name}:`,
     `• Portions: *${order.quantity}* (₹${order.quantity * chef.price})`,
     `• Method: *${order.method === "delivery" ? "Doorstep Delivery (Rs 60 extra per order)" : "Self Pickup"}*`,
-    order.method === "pickup" ? `• Pickup Location: ${chef.pickupLocation} - ${chef.pickupAddress} (${chef.pickupMapsUrl})` : `• Delivery Pincode: ${order.savedPin}\n• Delivery Address: ${order.savedAddress}`,
-    `• ${order.method === "pickup" ? "Pickup" : "Delivery"} Date & Slot: ${chef.pickupDay}, ${chef.pickupDate} • ${order.slot}`,
+    order.method === "pickup"
+      ? `• Pickup Date & Time: ${chef.pickupDay}, ${chef.pickupDate.includes("·") ? chef.pickupDate : `${chef.pickupDate} · ${getPickupTime(chef)}`}`
+      : `• Delivery Date & Time: ${chef.pickupDay}, ${chef.pickupDate.includes("·") ? chef.pickupDate : `${chef.pickupDate} · ${getPickupTime(chef)}`}`,
     `• *Total to Pay: ₹${total}*`, "• Note: Pre-orders once placed cannot be cancelled", "", "Please share the payment details to confirm my order!",
   ].join("\n");
 
@@ -174,7 +182,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
             <Image src="/branding/logo.png" alt="The Local Food Drop logo" width={110} height={110} priority />
           </div>
           <div className="fd-intro-text">
-            <h1 className="fd-intro-heading">Home made dishes from the neighbourhood</h1>
+            <h1 className="fd-intro-heading">Homemade dishes from around the town</h1>
             <div className="fd-rotating-wrap">
               <p className={`fd-rotating-phrase ${isFading ? "fd-phrase-hidden" : ""}`}>
                 {INTRO_PHRASES[phraseIndex]}
@@ -319,7 +327,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                   <span className="fd-card-chef-link">Meet the cook</span>
                 </button>
                 <div className="fd-photo"><Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
-                  <div className="fd-schedule" aria-label="Pre-order deadline and drop date"><div><span>Pre-orders close</span><strong>{item.preorderDate}</strong></div><div><span>Drop</span><strong>{item.pickupDate}</strong></div></div>
+                  <div className="fd-schedule" aria-label="Pre-order deadline and drop date"><div><span>Pre-orders close</span><strong>{item.preorderDate}</strong></div><div><span>Drops on</span><strong>{item.pickupDate}</strong></div></div>
                 </div>
                 <div className="fd-card-body">
                   <h2>{item.dish}</h2>
@@ -450,16 +458,36 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
             </div>
           </div>
           <section className="fd-order-section"><h3 className="fd-kicker">01 · Quantity</h3><div className="fd-quantity-row"><div><p className="fd-section-title">How many portions?</p><p className="fd-muted">{chef.portions}<br />Each portion serves one adult</p></div><div className="fd-stepper"><button aria-label="Decrease quantity" disabled={order.quantity <= 1} onClick={() => patch({ quantity: order.quantity - 1 })}>−</button><output aria-live="polite">{order.quantity}</output><button aria-label="Increase quantity" disabled={order.quantity >= max} onClick={() => patch({ quantity: order.quantity + 1 })}>+</button></div></div></section>
-          <section className="fd-order-section"><h3 className="fd-kicker">02 · Get your order</h3><div className="fd-methods"><button aria-pressed={order.method === "pickup"} onClick={() => patch({ method: "pickup", error: "" })}><strong>Self pickup</strong><span>Choose a time</span></button><button disabled={!chef.homeDeliveryEnabled} aria-pressed={order.method === "delivery"} onClick={() => patch({ method: "delivery", editingPin: !order.savedPin, error: "" })}><strong>Home delivery</strong><span>{chef.homeDeliveryEnabled ? "+ ₹60 per order" : "Not available"}</span></button></div>
-          {order.method && <div className="fd-fulfilment">
-            <p className="fd-kicker">{order.method === "pickup" ? "Pickup" : "Delivery"} · {chef.pickupDay}, {chef.pickupDate}</p>
-            <fieldset className="fd-slot-field"><legend>Choose a {order.method === "pickup" ? "pickup" : "delivery"} time</legend><div className="fd-slots">{slots.map(slot => <button key={slot} aria-pressed={order.slot === slot} onClick={() => patch({ slot })}>{slot.replace(" to ", " – ")}</button>)}</div></fieldset>
-            {order.method === "pickup" ? <div className="fd-address-card"><strong>{chef.pickupLocation}</strong><p>{chef.pickupAddress}</p><a href={chef.pickupMapsUrl} target="_blank" rel="noreferrer">Open in Google Maps ↗</a></div> : <div className="fd-delivery">
-              {order.editingPin || !order.savedPin ? <form onSubmit={event => { event.preventDefault(); if (!/^\d{6}$/.test(order.pin)) { patch({ error: "Please enter a valid 6-digit delivery pincode." }); return; } patch({ savedPin: order.pin, editingPin: false, editingAddress: !order.savedAddress, error: "" }); }}><label htmlFor="fd-pin">Delivery pincode</label><p className="fd-muted">Currently servicing only select pin codes. Availability confirmed on WhatsApp.</p><div className="fd-field-row"><input id="fd-pin" inputMode="numeric" autoComplete="postal-code" maxLength={6} placeholder="6-digit pincode" value={order.pin} onChange={e => patch({ pin: e.target.value.replace(/\D/g, ""), error: "" })} /><button type="submit">Save</button></div></form> : <div className="fd-saved"><span>✓ Pincode: {order.savedPin}</span><button onClick={() => patch({ editingPin: true })}>Edit</button></div>}
+          <section className="fd-order-section">
+            <h3 className="fd-kicker">02 · Get your order</h3>
+            <div className="fd-order-schedule" aria-label="Drop date and time">
+              <span>Drop day</span>
+              <strong>{chef.pickupDay}, {chef.pickupDate.split("·")[0].trim()} · {getPickupTime(chef)}</strong>
+            </div>
+            <div className="fd-methods">
+              <button aria-pressed={order.method === "pickup"} onClick={() => patch({ method: "pickup", error: "" })}>
+                <strong>Self pickup</strong>
+              </button>
+              <button disabled={!chef.homeDeliveryEnabled} aria-pressed={order.method === "delivery"} onClick={() => patch({ method: "delivery", editingPin: !order.savedPin, error: "" })}>
+                <strong>Home delivery</strong>
+                <span>{chef.homeDeliveryEnabled ? "+ ₹60 per order" : "Not available"}</span>
+              </button>
+            </div>
+            {order.method && <div className="fd-fulfilment">
+              {order.method === "pickup" ? (
+                <div className="fd-address-card">
+                  <strong>{chef.pickupLocation}</strong>
+                  <p>{chef.pickupAddress}</p>
+                  <a href={chef.pickupMapsUrl} target="_blank" rel="noreferrer">Open in Google Maps</a>
+                </div>
+              ) : (
+                <div className="fd-delivery">
+                  {order.editingPin || !order.savedPin ? <form onSubmit={event => { event.preventDefault(); if (!/^\d{6}$/.test(order.pin)) { patch({ error: "Please enter a valid 6-digit delivery pincode." }); return; } patch({ savedPin: order.pin, editingPin: false, editingAddress: !order.savedAddress, error: "" }); }}><label htmlFor="fd-pin">Delivery pincode</label><p className="fd-muted">Currently servicing only select pin codes. Availability confirmed on WhatsApp.</p><div className="fd-field-row"><input id="fd-pin" inputMode="numeric" autoComplete="postal-code" maxLength={6} placeholder="6-digit pincode" value={order.pin} onChange={e => patch({ pin: e.target.value.replace(/\D/g, ""), error: "" })} /><button type="submit">Save</button></div></form> : <div className="fd-saved"><span>✓ Pincode: {order.savedPin}</span><button onClick={() => patch({ editingPin: true })}>Edit</button></div>}
               {order.savedPin && (order.editingAddress || !order.savedAddress ? <form onSubmit={event => { event.preventDefault(); if (!order.address.trim()) { patch({ error: "Please enter your full delivery address." }); return; } patch({ savedAddress: order.address.trim(), editingAddress: false, error: "" }); }}><label htmlFor="fd-address">Full delivery address</label><textarea id="fd-address" autoComplete="street-address" rows={3} placeholder="House / flat, street & landmark" value={order.address} onChange={e => patch({ address: e.target.value, error: "" })} /><button type="submit" className="fd-save-address">Save full address</button></form> : <div className="fd-address-card"><div className="fd-saved"><strong>✓ Address saved</strong><button onClick={() => patch({ editingAddress: true })}>Edit</button></div><p>{order.savedAddress}</p></div>)}
               {order.error && <p className="fd-error" role="alert">{order.error}</p>}
-            </div>}
-          </div>}
+            </div>
+          )}
+        </div>}
           </section>
           {order.method && <div className="fd-confirm"><div className="fd-total"><span>{order.quantity} × ₹{chef.price}{fee > 0 ? " + ₹60 delivery" : " · Self pickup"}</span><strong>₹{total}</strong></div>{order.method === "pickup" || validDelivery ? <a className="fd-whatsapp" href={whatsapp(orderMessage)} target="_blank" rel="noreferrer">Pay on WhatsApp</a> : <><button className="fd-whatsapp" disabled>Complete delivery details</button><p className="fd-muted">Save your pincode and full address to continue.</p></>}<p className="fd-policy">Pre-orders once placed cannot be cancelled</p><p className="fd-muted">Payment details and order confirmation follow on WhatsApp.</p></div>}
         </div>}
