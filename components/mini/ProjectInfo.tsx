@@ -23,7 +23,7 @@ export default function ProjectInfo() {
           <span className="why-note">WHOLESOME. HONEST. HOMEMADE.</span>
           <div className="why-card">
             <p style={{ marginTop: 0 }}>
-              Food has become easy to get. But finding food that feels homemade with honest ingredients, intention, and love is still hard to find. Between endless menus, discounts, and free delivery, speed and convenience often come before nourishment.
+              Food has become easy to get. But finding food that feels homemade, cooked with honest ingredients, with intention, love and care is still hard to find. Between endless menus, discounts, and free delivery, speed and convenience often come before nourishment.
             </p>
             <p>
               <strong>Food was meant to nourish your body and feed your soul energizing you to do the things you love with the people who matter most.</strong>

@@ -85,16 +85,16 @@ export const chefs = [
     homeDeliveryEnabled: true, // Temporary demo availability.
     dish: "Char Siu Pork Siopao",
     image: "/dishes/anne-siopao-seated.png",
-    chefImage: "/chefs/chef-anne.jpg",
+    chefImage: "/chefs/anne-face.jpg",
     price: 350,
     tone: "watermelon" as const,
     specialty: "Seasonal cooking and comforting neighborhood favorites",
     whatILoveToCook:
-      "Slow-cooked, seasonal food made for sharing around a busy neighborhood table.",
+      "I love making dumplings, siopao, and the Filipino dishes I grew up with. I also love baking cakes and other sweet treats to share.",
     whatKeepsMeCurious:
-      "Local markets, long walks, and the everyday stories behind familiar ingredients.",
+      "From the Philippines to Goa, I’ve always felt at home discovering new places and sharing good food. I bake, sing, cook, and between it all I work as a freelance operations manager for a European recruitment company.",
     tonightDishQuote:
-      "This comforting dish brings together familiar flavors and a little something unexpected.",
+      "A little comfort from my roots in the Philippines—for busy afternoons, a late lunch, or that little hunger before dinner. Warm, satisfying, and just enough to keep you going.",
     line:
       "A dish tied to home, memory and the way food gets passed from one person to another.",
     ingredients:
@@ -122,16 +122,16 @@ export const chefs = [
     homeDeliveryEnabled: false, // Temporary demo availability.
     dish: "Slow Cooked Goan Mangane",
     image: "/dishes/ranjita-mangane-seated.png",
-    chefImage: "/chefs/chef-ranjita.jpg",
+    chefImage: "/chefs/ranjita-face.jpg",
     price: 350,
     tone: "kiwi" as const,
     specialty: "Traditional Goan festive sweets and heritage recipes",
     whatILoveToCook:
-      "Time-honored Goan sweets cooked slowly with fresh coconut milk and local jaggery.",
+      "I love hosting people and cooking Goan Hindu dishes that are part of my heritage. Each meal is a chance to celebrate the traditions behind them, preserve the recipes and cultural importance and share them with someone new.",
     whatKeepsMeCurious:
-      "Heirloom recipes passed down through generations, festive traditions, and forgotten local flavors.",
+      "My work with the Goa State Commission for Women keeps me close to the lives of people across the state. At home, that same sense of connection finds its way to the table.",
     tonightDishQuote:
-      "A comforting Goan celebration in a bowl, balancing nutty chana dal, soft sago and rich coconut jaggery.",
+      "Traditionally made for Goan Hindu festivals and pujas, mangane is shared as prasad or enjoyed after a meal. Have it warm or chilled when you want something sweet and satisfying, with a taste of Goa’s celebrations in every spoonful.",
     line:
       "A comforting Goan celebration in a bowl, balancing nutty chana dal, soft sago and rich coconut jaggery.",
     ingredients:

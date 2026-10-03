@@ -262,7 +262,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
               </div>
               {chef.line && (
                 <div>
-                  <dt>Chef Notes</dt>
+                  <dt>Cook’s notes</dt>
                   <dd>{chef.line}</dd>
                 </div>
               )}

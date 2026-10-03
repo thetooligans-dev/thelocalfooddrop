@@ -190,13 +190,12 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
             </div>
           </div>
         </div>
-        <div className="fd-topbar-actions">
-          <button className="fd-story-link" onClick={() => open({ type: "about" })}>Our story</button>
-          <a href={whatsapp(siteConfig.whatsappMessage)} target="_blank" rel="noreferrer" className="fd-topbar-cta">
-            Get early access on WhatsApp
-          </a>
-        </div>
       </section>
+      <div className="fd-early-access">
+        <a href={whatsapp(siteConfig.whatsappMessage)} target="_blank" rel="noreferrer" className="fd-topbar-cta">
+          Be the first to know on WhatsApp
+        </a>
+      </div>
 
       {/* ── Browse-by filter bar ── */}
       <nav className="fd-filters" aria-label="Browse dishes by" ref={dropdownRef}>
@@ -305,6 +304,16 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                 </div>
               </div>}
             </div>
+            {(diet !== "all" || spice !== "all") && (
+              <button
+                type="button"
+                className="fd-filter-clear-selected"
+                aria-label="Clear diet and spice filters"
+                onClick={() => { setDiet("all"); setSpice("all"); setActiveDropdown(null); }}
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            )}
           </div>
         )}
       </nav>
@@ -327,7 +336,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                   <span className="fd-card-chef-link">Meet the cook</span>
                 </button>
                 <div className="fd-photo"><Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
-                  <div className="fd-schedule" aria-label="Pre-order deadline and drop date"><div><span>Pre-orders close</span><strong>{item.preorderDate}</strong></div><div><span>Drops on</span><strong>{item.pickupDate}</strong></div></div>
+                  <div className="fd-schedule" aria-label="Pre-order deadline and drop date"><div><span>Pre-orders close</span><strong>{item.closeDay.slice(0, 3)}, {item.preorderDate}</strong></div><div><span>Drops on</span><strong>{item.pickupDate}</strong></div></div>
                 </div>
                 <div className="fd-card-body">
                   <h2>{item.dish}</h2>
@@ -364,8 +373,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                     rel="noreferrer"
                     className="fd-invite-btn"
                   >
-                    <span>Tell us your dish</span>
-                    <span aria-hidden="true">→</span>
+                    <span>What’s your dish?</span>
                   </a>
                 </div>
               </div>
@@ -392,19 +400,18 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                     {item.whatKeepsMeCurious || "Local markets, long walks, and the everyday stories behind familiar ingredients."}
                   </p>
                   
-                  <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "16px" }}>
-                    <div style={{ position: "relative", width: "60px", height: "60px", borderRadius: "10px", overflow: "hidden", flexShrink: 0 }}>
-                      <Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill style={{ objectFit: "cover" }} sizes="60px" />
+                  <div className="fd-card-chef-notes" style={{ background: "#f2eadb", padding: "16px", borderRadius: "14px", marginBottom: "20px" }}>
+                    <div className="fd-card-chef-notes-image">
+                      <Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill style={{ objectFit: "cover" }} sizes="112px" />
                     </div>
-                    <div>
-                      <p className="fd-kicker" style={{ margin: "0 0 4px", fontSize: "10px", color: "var(--fd-muted)" }}>This week's dish</p>
-                      <p style={{ fontSize: "16px", fontWeight: 600, margin: 0, lineHeight: 1.2, fontFamily: "var(--font-editorial)" }}>{item.dish.replace(/\n/g, " ")}</p>
+                    <p className="fd-kicker" style={{ marginBottom: "2px" }}>Cook’s notes</p>
+                    <h3 className="fd-card-chef-notes-title">{item.dish.replace(/\n/g, " ")}</h3>
+                    <p className="fd-card-chef-notes-price">₹{item.price} per portion</p>
+                    <div className="fd-card-tags fd-card-chef-notes-tags">
+                      <span>{formatDietaryTag(item.dietary)}</span>
+                      <span>{item.spice}</span>
                     </div>
-                  </div>
-
-                  <div style={{ background: "#dce7d6", padding: "16px", borderRadius: "14px", marginBottom: "20px" }}>
-                    <p className="fd-kicker" style={{ marginBottom: "6px" }}>Chef notes</p>
-                    <p style={{ fontSize: "14px", lineHeight: 1.5, margin: 0, color: "#403e37" }}>“{item.tonightDishQuote || item.line}”</p>
+                    <p className="fd-card-chef-notes-description" style={{ fontSize: "14px", lineHeight: 1.5, margin: 0, color: "#403e37" }}>“{item.tonightDishQuote || item.line}”</p>
                   </div>
                   <div className="fd-card-actions" style={{ marginTop: "auto" }}>
                     <button className="fd-order-button" style={{ width: "100%", textAlign: "center" }} onClick={() => open({ type: "order", index: i })}>Order dish</button>
@@ -427,8 +434,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                     rel="noreferrer"
                     className="fd-invite-btn"
                   >
-                    <span>Tell us your dish</span>
-                    <span aria-hidden="true">→</span>
+                    <span>What’s your dish?</span>
                   </a>
                 </div>
               </div>
@@ -436,7 +442,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
           </>
         )}
       </section>
-      <footer className="fd-footer"><span>Small-batch food, stories and people<br />from around the town square.</span><button onClick={() => open({ type: "about" })}>There is room at the table</button><a href="https://thetownsquare.xyz" target="_blank" rel="noreferrer">An experiment by The Town Square Project</a></footer>
+      <footer className="fd-footer"><div className="fd-footer-actions"><button onClick={() => open({ type: "about" })}>Learn about the Local Food Drop</button></div><span>Small-batch food, stories and people<br />from around the town square.</span><div className="fd-footer-project"><span>An experiment by</span><a href="https://thetownsquare.xyz" target="_blank" rel="noopener noreferrer">thetownsquare.xyz</a></div></footer>
     </main>
     <dialog ref={modal} className={`fd-sheet ${closing ? "fd-closing" : ""} ${sheet?.type === "about" ? "fd-about-sheet" : ""}`} aria-labelledby="fd-sheet-title" onCancel={event => { event.preventDefault(); close(); }} onClick={event => { if (event.target === event.currentTarget) close(); }}>
       <div className="fd-sheet-shell">
@@ -511,7 +517,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                 <Image src={chef.image} alt={chef.dish.replace(/\n/g, " ")} fill sizes="120px" />
               </div>
               <div className="fd-profile-dish-info">
-                <p className="fd-kicker">Chef notes</p>
+                <p className="fd-kicker">Cook’s notes</p>
                 <h3>{chef.dish}</h3>
                 <p>“{chef.tonightDishQuote || chef.line}”</p>
               </div>
