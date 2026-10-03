@@ -336,7 +336,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                   <span className="fd-card-chef-link">Meet the cook</span>
                 </button>
                 <div className="fd-photo"><Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
-                  <div className="fd-schedule" aria-label="Pre-order deadline and drop date"><div><span>Pre-orders close</span><strong>{item.closeDay.slice(0, 3)}, {item.preorderDate}</strong></div><div><span>Drops on</span><strong>{item.pickupDate}</strong></div></div>
+                  <div className="fd-schedule" aria-label="Pre-order deadline and drop date"><div><span>Pre-orders close</span><strong>{item.preorderDate}</strong></div><div><span>Drops on</span><strong>{item.pickupDay}, {item.pickupDate.split("·")[0].trim()}<br />{getPickupTime(item)}</strong></div></div>
                 </div>
                 <div className="fd-card-body">
                   <h2>{item.dish}</h2>
@@ -400,7 +400,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                     {item.whatKeepsMeCurious || "Local markets, long walks, and the everyday stories behind familiar ingredients."}
                   </p>
                   
-                  <div className="fd-card-chef-notes" style={{ background: "#f2eadb", padding: "16px", borderRadius: "14px", marginBottom: "20px" }}>
+                  <div className="fd-card-chef-notes" style={{ background: "var(--fd-cream)", padding: "16px", borderRadius: "14px", marginBottom: "20px" }}>
                     <div className="fd-card-chef-notes-image">
                       <Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill style={{ objectFit: "cover" }} sizes="112px" />
                     </div>

@@ -42,7 +42,7 @@
 
 /* One compact schedule panel sits inside the photograph. */
 .fd-photo>.fd-number{position:absolute;top:14px;right:14px;border:1px solid var(--fd-ink)}
-.fd-schedule{position:absolute;bottom:12px;left:12px;right:12px;display:grid;grid-template-columns:1.25fr 1.6fr;background:var(--fd-cream);border:none;border-radius:6px;padding:11px 0;box-shadow:0 2px 8px #24251d18}
+.fd-schedule{position:absolute;bottom:12px;left:12px;right:12px;display:grid;grid-template-columns:1.25fr 1.6fr;background:var(--fd-paper);border:none;border-radius:6px;padding:11px 0;box-shadow:0 2px 8px #24251d18}
 .fd-schedule>div{padding:0 13px;min-width:0}
 .fd-schedule>div+div{border-left:1px solid #c7c2b5}
 .fd-schedule span{display:block;font:500 9px/1.4 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.5px;color:#7a7869;margin-bottom:4px}
@@ -94,11 +94,11 @@
 .fd-card-chef-notes{display:flow-root}
 .fd-card-chef-notes-image{position:relative;float:left;width:112px;height:112px;margin:0 12px 0 0;border-radius:10px;overflow:hidden}
 .fd-card-chef-notes-title{font:500 18px/1.2 var(--font-editorial),Georgia,serif;margin:0 0 1px}
-.fd-card-chef-notes-price{font-size:13px;line-height:1.25;color:var(--fd-muted);margin:0 0 5px}
+.fd-card-chef-notes-price{font-size:15px;line-height:1.25;color:var(--fd-muted);margin:0 0 5px}
 .fd-card-chef-notes-description{clear:both;padding-top:10px}
 .fd-card-chef-notes-tags{gap:5px;margin:0}
-.fd-card-chef-notes-tags>span{font-size:10.5px;line-height:1.2;padding:3px 6px;background:#f6dfca;color:#493529}
-.fd-profile-card-dish{background:#f2eadb;border:1px solid #d7cbb6}
+.fd-card-chef-notes-tags>span{font-size:10.5px;line-height:1.2;padding:3px 6px;background:var(--fd-paper);color:var(--fd-ink)}
+.fd-profile-card-dish{background:var(--fd-cream);border:1px solid #d7cbb6}
 .fd-card-chef-notes .fd-kicker{font-weight:400}
 .fd-profile-card-dish .fd-kicker{font-weight:400}
 .fd-early-access{display:flex;justify-content:center;padding-bottom:16px;border-bottom:1px solid rgba(36,37,29,.12);margin:0 0 14px}
@@ -111,3 +111,6 @@
 .fd-footer-project>a{display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border-radius:30px;background:#fffef9;color:var(--fd-ink);font-weight:500;text-decoration:none;box-shadow:0 1px 4px rgba(29,36,27,.05)}
 .fd-footer-project>a:hover{background:#f4ebd8}
 .fd-card-body>.fd-card-tags>span{background:var(--fd-cream)}
+.fd-schedule>div:last-child strong{display:block;width:max-content;max-width:100%;background:linear-gradient(105deg,var(--fd-ink) 0%,var(--fd-ink) 36%,#675e50 46%,#a38c68 50%,#675e50 54%,var(--fd-ink) 64%,var(--fd-ink) 100%);background-size:250% 100%;background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:fd-drop-date-sheen 2.8s linear infinite}
+@keyframes fd-drop-date-sheen{from{background-position:100% 0}to{background-position:0 0}}
+@media(prefers-reduced-motion:reduce){.fd-schedule>div:last-child strong{animation:none;background:none;color:var(--fd-ink);-webkit-text-fill-color:currentColor}}
