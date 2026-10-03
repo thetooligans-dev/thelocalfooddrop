@@ -44,7 +44,7 @@ export default function ProjectInfo() {
               Homecooked with ❤️
             </h3>
             <p>
-              The Local Food Drop connects you with home cooks in your town—their food, their culture, and the stories that simmer into every dish.
+              The Local Food Drop connects you with home cooks in your town, their food, their culture, and the stories that simmer into every dish.
             </p>
             <p>
               Limited preorders help homecooks make what&apos;s needed with less waste. Fairer economics give them more control and room for better ingredients, making home cooking work better for them and for you.
