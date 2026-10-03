@@ -5,6 +5,7 @@ import type { Coordinates } from "@/lib/delivery";
 
 import { FoodArt } from "@/components/FoodArt";
 import { siteConfig } from "@/data/site";
+import { Rupee } from "@/components/Rupee";
 
 export interface Chef {
   name: string;
@@ -153,7 +154,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
   const orderLines = [
     `Hey! 👋 I’d like to order *${chef.dish.replace(/\n/g, " ")}* by ${chef.name}:`,
     `• Portions: *${portionCount}* (₹${subtotal})`,
-    `• Method: *${deliveryMethod === "delivery" ? "Doorstep Delivery (Rs 60 extra per order)" : "Self Pickup"}*`,
+    `• Method: *${deliveryMethod === "delivery" ? "Doorstep Delivery (Rs 60 extra per order)" : "Pick it up yourself"}*`,
     deliveryMethod === "pickup" && (chef.pickupAddress || chef.pickupLocation)
       ? `• Pickup Location: ${chef.pickupLocation ? `${chef.pickupLocation} - ` : ""}${chef.pickupAddress || ""}${chef.pickupMapsUrl ? ` (${chef.pickupMapsUrl})` : ""}\n• Pickup Date & Slot: ${chef.pickupDay ? `${chef.pickupDay}, ${chef.pickupDate}` : "Saturday, 26 Sep"} • Between ${pickupSlot} only`
       : null,
@@ -246,7 +247,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
             <dl className="dish-meta">
               <div>
                 <dt>Price</dt>
-                <dd>₹{dishPrice} per portion</dd>
+                <dd><Rupee />{dishPrice} per portion</dd>
               </div>
               <div>
                 <dt>Ingredients</dt>
@@ -283,7 +284,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                   aria-pressed={deliveryMethod === "pickup"}
                   onClick={handleSelectPickup}
                 >
-                  <span className="fulfillment-btn-title">Self Pickup</span>
+                  <span className="fulfillment-btn-title">Pick it up yourself</span>
                 </button>
                 <button
                   type="button"
@@ -303,7 +304,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                 </button>
               </div>
               {eligibility !== "disabled" && (
-                <p className="mobile-delivery-fee">Delivery + ₹60 per order</p>
+                <p className="mobile-delivery-fee">Delivery + <Rupee />60 per order</p>
               )}
             </div>
 
@@ -367,7 +368,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                         <div className="clean-pickup-timing">
                           <span className="clean-pickup-timing-bullet" aria-hidden="true">✦</span>
                           <span>
-                            Self pickup on <strong>{chef.pickupDay ? `${chef.pickupDay}, ${chef.pickupDate}` : "Saturday, 26 Sep"}</strong> • Between <strong>{pickupSlot}</strong> only
+                            Pick up on <strong>{chef.pickupDay ? `${chef.pickupDay}, ${chef.pickupDate}` : "Saturday, 26 Sep"}</strong> • Between <strong>{pickupSlot}</strong> only
                           </span>
                         </div>
                       </div>
@@ -526,11 +527,11 @@ export function ChefCard({ chef, index }: ChefCardProps) {
               <div className="in-place-pay-block">
                 <div className="clean-pay-meta">
                   <span className="clean-pay-breakdown">
-                    {portionCount} × ₹{dishPrice}
-                    {deliveryMethod === "delivery" ? " + ₹60 delivery" : " (self pickup)"}
+                    {portionCount} × <Rupee />{dishPrice}
+                    {deliveryMethod === "delivery" ? <> + <Rupee />60 delivery</> : " (self pickup)"}
                   </span>
                   <span className="clean-pay-total">
-                    Total: <strong>₹{totalAmount}</strong>
+                    Total: <strong><Rupee />{totalAmount}</strong>
                   </span>
                 </div>
 
@@ -540,7 +541,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                     className="clean-whatsapp-pay-btn"
                     onClick={handleBlockedOrderClick}
                   >
-                    <span>Pay on WhatsApp · ₹{totalAmount}</span>
+                    <span>Pay on WhatsApp · <Rupee />{totalAmount}</span>
                   </button>
                 ) : (
                   <a
@@ -549,7 +550,7 @@ export function ChefCard({ chef, index }: ChefCardProps) {
                     rel="noreferrer"
                     className="clean-whatsapp-pay-btn"
                   >
-                    <span>Pay on WhatsApp · ₹{totalAmount}</span>
+                    <span>Pay on WhatsApp · <Rupee />{totalAmount}</span>
                   </a>
                 )}
 

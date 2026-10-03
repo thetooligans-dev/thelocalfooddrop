@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { chefs, siteConfig } from "@/data/site";
+import { Rupee } from "@/components/Rupee";
 
-type Chef = (typeof chefs)[number] & { specialty?: string; background?: string; interests?: string; pickupTime?: string };
+type Chef = (typeof chefs)[number] & { specialty?: string; background?: string; interests?: string; pickupTime?: string; pickupMapsLabel?: string; pickupMapsNote?: string };
 type Sheet = { type: "order" | "chef"; index: number } | { type: "about" } | null;
 type Order = { quantity: number; method: "pickup" | "delivery" | null; slot: string; pin: string; savedPin: string; address: string; savedAddress: string; editingPin: boolean; editingAddress: boolean; error: string };
 const newOrder = (): Order => ({ quantity: 1, method: null, slot: "4pm to 6pm", pin: "", savedPin: "", address: "", savedAddress: "", editingPin: false, editingAddress: false, error: "" });
@@ -83,7 +84,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
   const orderMessage = [
     `Hey! 👋 I'd like to order *${chef.dish.replace(/\n/g, " ")}* by ${chef.name}:`,
     `• Portions: *${order.quantity}* (₹${order.quantity * chef.price})`,
-    `• Method: *${order.method === "delivery" ? "Doorstep Delivery (Rs 60 extra per order)" : "Self Pickup"}*`,
+    `• Method: *${order.method === "delivery" ? "Doorstep Delivery (Rs 60 extra per order)" : "Pick it up yourself"}*`,
     order.method === "pickup"
       ? `• Pickup Date & Time: ${chef.pickupDay}, ${chef.pickupDate.includes("·") ? chef.pickupDate : `${chef.pickupDate} · ${getPickupTime(chef)}`}`
       : `• Delivery Date & Time: ${chef.pickupDay}, ${chef.pickupDate.includes("·") ? chef.pickupDate : `${chef.pickupDate} · ${getPickupTime(chef)}`}`,
@@ -188,14 +189,14 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                 {INTRO_PHRASES[phraseIndex]}
               </p>
             </div>
+            <div className="fd-early-access">
+              <a href={whatsapp(siteConfig.whatsappMessage)} target="_blank" rel="noreferrer" className="fd-topbar-cta">
+                Be the first to know on WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </section>
-      <div className="fd-early-access">
-        <a href={whatsapp(siteConfig.whatsappMessage)} target="_blank" rel="noreferrer" className="fd-topbar-cta">
-          Be the first to know on WhatsApp
-        </a>
-      </div>
 
       {/* ── Browse-by filter bar ── */}
       <nav className="fd-filters" aria-label="Browse dishes by" ref={dropdownRef}>
@@ -327,7 +328,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
               return <article className="fd-card" key={item.name}>
                 <button className="fd-card-chef-header" onClick={() => open({ type: "chef", index: i })} aria-label={`Meet ${item.name}`}>
                   <div className="fd-card-chef-left">
-                    <Image src={item.chefImage} alt="" width={40} height={40} className="fd-card-chef-avatar" />
+                    <span className="fd-card-chef-avatar-frame"><Image src={item.chefImage} alt="" width={40} height={40} className="fd-card-chef-avatar" style={item.name === "Anne" ? { objectPosition: "right center", transform: "scale(1.2)", transformOrigin: "62% 48%" } : undefined} /></span>
                     <div className="fd-card-chef-info">
                       <span className="fd-card-chef-kicker">From the kitchen of</span>
                       <strong className="fd-card-chef-name">{item.name}</strong>
@@ -336,7 +337,10 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                   <span className="fd-card-chef-link">Meet the cook</span>
                 </button>
                 <div className="fd-photo"><Image src={item.image} alt={item.dish.replace(/\n/g, " ")} fill priority={i === 0} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
-                  <div className="fd-schedule" aria-label="Pre-order deadline and drop date"><div><span>Pre-orders close</span><strong>{item.preorderDate}</strong></div><div><span>Drops on</span><strong>{item.pickupDay}, {item.pickupDate.split("·")[0].trim()}<br />{getPickupTime(item)}</strong></div></div>
+                  <div className="fd-schedule" aria-label="Pre-order deadline and drop date">
+                    <div className="fd-schedule-row"><span>Pre-orders close</span><strong>{item.closeDay ? `${item.closeDay}, ${item.preorderDate}` : item.preorderDate}</strong></div>
+                    <div className="fd-schedule-row"><span>Drops on</span><strong>{item.pickupDay}, {item.pickupDate.split("·")[0].trim()} · {getPickupTime(item)}</strong></div>
+                  </div>
                 </div>
                 <div className="fd-card-body">
                   <h2>{item.dish}</h2>
@@ -350,7 +354,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                   )}
                   <div className="fd-card-footer">
                     <div className="fd-card-price-block">
-                      <p className="fd-price">₹{item.price}</p>
+                      <p className="fd-price"><Rupee />{item.price}</p>
                       <p className="fd-price-sub">{item.portions}</p>
                     </div>
                     <button className="fd-order-button" onClick={() => open({ type: "order", index: i })}>Order dish</button>
@@ -390,7 +394,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                     fill
                     priority={i === 0}
                     sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
-                    style={{ objectPosition: "top center" }}
+                    style={item.name === "Anne" ? { objectPosition: "right center", transform: "scale(1.2)", transformOrigin: "62% 48%" } : { objectPosition: "top center" }}
                   />
                 </div>
                 <div className="fd-card-body" style={{ display: "flex", flexDirection: "column", flex: 1 }}>
@@ -406,7 +410,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                     </div>
                     <p className="fd-kicker" style={{ marginBottom: "2px" }}>Cook’s notes</p>
                     <h3 className="fd-card-chef-notes-title">{item.dish.replace(/\n/g, " ")}</h3>
-                    <p className="fd-card-chef-notes-price">₹{item.price} per portion</p>
+                    <p className="fd-card-chef-notes-price"><Rupee />{item.price} per portion</p>
                     <div className="fd-card-tags fd-card-chef-notes-tags">
                       <span>{formatDietaryTag(item.dietary)}</span>
                       <span>{item.spice}</span>
@@ -451,12 +455,12 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
         {sheet?.type === "order" && <div className="fd-order-content">
           <div className="fd-order-header-row">
             <div className="fd-order-dish-thumb">
-              <Image src={chef.image} alt={chef.dish.replace(/\n/g, " ")} fill sizes="120px" priority />
+              <Image src={chef.image} alt={chef.dish.replace(/\n/g, " ")} fill sizes="140px" priority />
             </div>
             <div className="fd-order-header-info">
               <p className="fd-kicker">Order from {chef.name}</p>
               <h2 id="fd-sheet-title">{chef.dish}</h2>
-              <p className="fd-price">₹{chef.price} <span>/ portion</span></p>
+              <p className="fd-price"><Rupee />{chef.price} <span>/ portion</span></p>
               <div className="fd-card-tags">
                 <span>{formatDietaryTag(chef.dietary)}</span>
                 <span>{chef.spice || "Spice level soon"}</span>
@@ -466,17 +470,17 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
           <section className="fd-order-section"><h3 className="fd-kicker">01 · Quantity</h3><div className="fd-quantity-row"><div><p className="fd-section-title">How many portions?</p><p className="fd-muted">{chef.portions}<br />Each portion serves one adult</p></div><div className="fd-stepper"><button aria-label="Decrease quantity" disabled={order.quantity <= 1} onClick={() => patch({ quantity: order.quantity - 1 })}>−</button><output aria-live="polite">{order.quantity}</output><button aria-label="Increase quantity" disabled={order.quantity >= max} onClick={() => patch({ quantity: order.quantity + 1 })}>+</button></div></div></section>
           <section className="fd-order-section">
             <h3 className="fd-kicker">02 · Get your order</h3>
-            <div className="fd-order-schedule" aria-label="Drop date and time">
-              <span>Drop day</span>
-              <strong>{chef.pickupDay}, {chef.pickupDate.split("·")[0].trim()} · {getPickupTime(chef)}</strong>
+            <div className="fd-schedule fd-order-schedule" aria-label="Pre-order deadline and drop date">
+              <div className="fd-schedule-row"><span>Pre-orders close</span><strong>{chef.closeDay ? `${chef.closeDay}, ${chef.preorderDate}` : chef.preorderDate}</strong></div>
+              <div className="fd-schedule-row"><span>Drops on</span><strong>{chef.pickupDay}, {chef.pickupDate.split("·")[0].trim()} · {getPickupTime(chef)}</strong></div>
             </div>
             <div className="fd-methods">
               <button aria-pressed={order.method === "pickup"} onClick={() => patch({ method: "pickup", error: "" })}>
-                <strong>Self pickup</strong>
+                <strong>Pick it up yourself</strong>
               </button>
               <button disabled={!chef.homeDeliveryEnabled} aria-pressed={order.method === "delivery"} onClick={() => patch({ method: "delivery", editingPin: !order.savedPin, error: "" })}>
                 <strong>Home delivery</strong>
-                <span>{chef.homeDeliveryEnabled ? "+ ₹60 per order" : "Not available"}</span>
+                <span>{chef.homeDeliveryEnabled ? <>+ <Rupee />60 per order</> : "Not available"}</span>
               </button>
             </div>
             {order.method && <div className="fd-fulfilment">
@@ -484,22 +488,36 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                 <div className="fd-address-card">
                   <strong>{chef.pickupLocation}</strong>
                   <p>{chef.pickupAddress}</p>
-                  <a href={chef.pickupMapsUrl} target="_blank" rel="noreferrer">Open in Google Maps</a>
+                  <div className="fd-address-map-row">
+                    <a href={chef.pickupMapsUrl} target="_blank" rel="noreferrer">
+                      <span className="fd-maps-icon" aria-hidden="true">
+                        <svg width="12" height="12" viewBox="0 0 92.3 132.3" fill="none">
+                          <path fill="#1a73e8" d="M60.2 2.2C55.8.8 51 0 46.1 0 32 0 19.3 6.4 10.8 16.5l21.8 18.3L60.2 2.2z"/>
+                          <path fill="#ea4335" d="M10.8 16.5C4.1 24.5 0 34.9 0 46.1c0 8.7 1.7 15.7 4.6 22l28-32.4L10.8 16.5z"/>
+                          <path fill="#4285f4" d="M46.2 28.5c9.8 0 17.7 7.9 17.7 17.7 0 4.3-1.6 8.3-4.2 11.4 0 0 13.9-16.1 27.1-31.4C79.2 16.4 68.7 8.5 56.3 3.8L32.6 34.8c3.3-3.8 8.2-6.3 13.6-6.3"/>
+                          <path fill="#fbbc04" d="M46.2 63.8c-9.8 0-17.7-7.9-17.7-17.7 0-4.3 1.5-8.3 4.1-11.3l-28 32.4c4.8 11 12.5 19.9 22.1 31.1l35.4-41.1c-3.4 3.9-8.3 6.6-15.9 6.6"/>
+                          <path fill="#34a853" d="M59.1 109.2c15.4-24.1 33.3-35 33.3-63 0-7.7-1.9-14.9-5.2-21.3L24.6 98.3c3.7 4.5 7.1 8.8 10.1 13.1 7.6 10.9 11.4 20.8 11.4 20.8s3.8-9.8 13-23"/>
+                        </svg>
+                      </span>
+                      <span>{chef.pickupMapsLabel || "Open in Google Maps"}</span>
+                    </a>
+                    {chef.pickupMapsNote && <span className="fd-address-map-note">{chef.pickupMapsNote}</span>}
+                  </div>
                 </div>
               ) : (
                 <div className="fd-delivery">
-                  {order.editingPin || !order.savedPin ? <form onSubmit={event => { event.preventDefault(); if (!/^\d{6}$/.test(order.pin)) { patch({ error: "Please enter a valid 6-digit delivery pincode." }); return; } patch({ savedPin: order.pin, editingPin: false, editingAddress: !order.savedAddress, error: "" }); }}><label htmlFor="fd-pin">Delivery pincode</label><p className="fd-muted">Currently servicing only select pin codes. Availability confirmed on WhatsApp.</p><div className="fd-field-row"><input id="fd-pin" inputMode="numeric" autoComplete="postal-code" maxLength={6} placeholder="6-digit pincode" value={order.pin} onChange={e => patch({ pin: e.target.value.replace(/\D/g, ""), error: "" })} /><button type="submit">Save</button></div></form> : <div className="fd-saved"><span>✓ Pincode: {order.savedPin}</span><button onClick={() => patch({ editingPin: true })}>Edit</button></div>}
+                  <form onSubmit={event => { event.preventDefault(); if (order.savedPin && !order.editingPin) return; if (!/^\d{6}$/.test(order.pin)) { patch({ error: "Please enter a valid 6-digit delivery pincode." }); return; } patch({ savedPin: order.pin, editingPin: false, editingAddress: !order.savedAddress, error: "" }); }}><label htmlFor="fd-pin">Delivery pincode</label><p className="fd-muted">Currently servicing only select pin codes. Availability confirmed on WhatsApp.</p><div className="fd-field-row"><input id="fd-pin" inputMode="numeric" autoComplete="postal-code" maxLength={6} placeholder="6-digit pincode" value={order.savedPin && !order.editingPin ? order.savedPin : order.pin} readOnly={Boolean(order.savedPin && !order.editingPin)} className={`fd-pin-input ${order.savedPin && !order.editingPin ? "fd-pin-saved" : ""}`} onChange={e => patch({ pin: e.target.value.replace(/\D/g, ""), error: "" })} />{order.savedPin && !order.editingPin ? <button type="button" className="fd-pin-btn fd-pin-btn-saved" onClick={() => { patch({ editingPin: true, error: "" }); setTimeout(() => document.getElementById("fd-pin")?.focus(), 50); }}>Edit pincode</button> : <button type="submit" className="fd-pin-btn fd-pin-btn-save">Save</button>}</div></form>
               {order.savedPin && (order.editingAddress || !order.savedAddress ? <form onSubmit={event => { event.preventDefault(); if (!order.address.trim()) { patch({ error: "Please enter your full delivery address." }); return; } patch({ savedAddress: order.address.trim(), editingAddress: false, error: "" }); }}><label htmlFor="fd-address">Full delivery address</label><textarea id="fd-address" autoComplete="street-address" rows={3} placeholder="House / flat, street & landmark" value={order.address} onChange={e => patch({ address: e.target.value, error: "" })} /><button type="submit" className="fd-save-address">Save full address</button></form> : <div className="fd-address-card"><div className="fd-saved"><strong>✓ Address saved</strong><button onClick={() => patch({ editingAddress: true })}>Edit</button></div><p>{order.savedAddress}</p></div>)}
               {order.error && <p className="fd-error" role="alert">{order.error}</p>}
             </div>
           )}
         </div>}
           </section>
-          {order.method && <div className="fd-confirm"><div className="fd-total"><span>{order.quantity} × ₹{chef.price}{fee > 0 ? " + ₹60 delivery" : " · Self pickup"}</span><strong>₹{total}</strong></div>{order.method === "pickup" || validDelivery ? <a className="fd-whatsapp" href={whatsapp(orderMessage)} target="_blank" rel="noreferrer">Pay on WhatsApp</a> : <><button className="fd-whatsapp" disabled>Complete delivery details</button><p className="fd-muted">Save your pincode and full address to continue.</p></>}<p className="fd-policy">Pre-orders once placed cannot be cancelled</p><p className="fd-muted">Payment details and order confirmation follow on WhatsApp.</p></div>}
+          {order.method && <div className="fd-confirm"><div className="fd-total"><span>{order.quantity} × <Rupee />{chef.price}{fee > 0 ? <> + <Rupee />60 delivery</> : " · Pick it up yourself"}</span><strong><Rupee />{total}</strong></div>{order.method === "pickup" || validDelivery ? <a className="fd-whatsapp" href={whatsapp(orderMessage)} target="_blank" rel="noreferrer">Pay on WhatsApp</a> : <><button className="fd-whatsapp" disabled>Complete delivery details</button><p className="fd-muted">Save your pincode and full address to continue.</p></>}<p className="fd-policy">Pre-orders once placed cannot be cancelled</p><p className="fd-muted">Payment details and order confirmation follow on WhatsApp.</p></div>}
         </div>}
         {sheet?.type === "chef" && <div className="fd-profile">
           <div className="fd-profile-avatar">
-            <Image src={chef.chefImage} alt={chef.name} width={180} height={180} />
+            <Image src={chef.chefImage} alt={chef.name} width={180} height={180} style={chef.name === "Anne" ? { objectPosition: "right center", transform: "scale(1.2)", transformOrigin: "62% 48%" } : undefined} />
           </div>
           <p className="fd-kicker fd-profile-kicker">Meet the cook</p>
           <h2 id="fd-sheet-title" className="fd-profile-name">{chef.name}</h2>

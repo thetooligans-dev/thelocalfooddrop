@@ -1126,7 +1126,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .join-card { background: var(--paper); border: 1.5px solid var(--ink); padding: 28px; min-height: 320px; display: flex; flex-direction: column; box-shadow: 5px 5px 0 rgba(29,36,27,.08); }
 .join-card:nth-child(2) { transform: rotate(.45deg); }
 .join-card:nth-child(3) { transform: rotate(-.5deg); }
-.join-label { margin: 0 0 28px; font-size: 10px; font-weight: 900; letter-spacing: .13em; color: var(--watermelon); }
+.join-label { margin: 0 0 28px; font-size: 10px; font-weight: 500; letter-spacing: .13em; color: var(--watermelon); }
 .join-card h4 { margin: 0; max-width: 560px; font-size: clamp(27px, 3vw, 40px); line-height: 1.03; letter-spacing: -.045em; }
 .join-card > p:not(.join-label) { margin: 18px 0 28px; max-width: 560px; color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
 .join-button { margin-top: auto; width: fit-content; display: inline-flex; align-items: center; gap: 14px; min-height: 48px; padding: 0 18px; border: 1.5px solid var(--ink); border-radius: 0; font-size: 13px; font-weight: 800; transition: transform .18s ease, background .18s ease, color .18s ease; }
@@ -1876,7 +1876,7 @@ button.chef-service-icon:disabled small { color: inherit; }
 .join-compact-info .join-label {
   margin: 0 0 6px;
   font-size: 10px;
-  font-weight: 900;
+  font-weight: 500;
   letter-spacing: .13em;
   color: var(--watermelon);
 }
@@ -1991,20 +1991,21 @@ button.chef-service-icon:disabled small { color: inherit; }
    JOIN-US 3 CARDS (CHEFS, NEIGHBOURS, OPERATORS)
    ───────────────────────────────────────────────────────────── */
 .fd-about .join-compact {
-  display: flex !important;
-  justify-content: center !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 260px)) !important;
+  justify-content: flex-start !important;
+  gap: 16px !important;
   margin-top: 24px !important;
   width: 100% !important;
 }
 .fd-about .join-compact > .join-compact-row {
-  max-width: 560px !important;
+  grid-column: span 2 !important;
+  max-width: none !important;
   width: 100% !important;
 }
 
 @media (max-width: 860px) {
-  .fd-about .how-compact,
-  .fd-about .join-compact,
-  .fd-about .contributors-grid {
+  .fd-about .how-compact {
     grid-template-columns: 1fr !important;
     gap: 16px !important;
   }
@@ -2046,7 +2047,7 @@ button.chef-service-icon:disabled small { color: inherit; }
   display: inline-block !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
   font-size: 11px !important;
-  font-weight: 700 !important;
+  font-weight: 500 !important;
   letter-spacing: .08em !important;
   color: var(--watermelon) !important;
   background: rgba(164, 62, 49, 0.08) !important;
@@ -2426,7 +2427,7 @@ button.chef-service-icon:disabled small { color: inherit; }
 
 .fd-about .join-us-intro .hand-note {
   font-size: 14px !important;
-  font-weight: 700 !important;
+  font-weight: 500 !important;
   letter-spacing: 0.06em !important;
   color: var(--watermelon) !important;
   text-transform: uppercase !important;
@@ -2461,16 +2462,55 @@ button.chef-service-icon:disabled small { color: inherit; }
 }
 
 @media (max-width: 820px) {
-  .fd-about .contributors-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 260px)) !important;
+  .fd-about .contributors-grid,
+  .fd-about .join-compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
     justify-content: center !important;
   }
 }
 
 @media (max-width: 520px) {
-  .fd-about .contributors-grid {
-    grid-template-columns: 1fr !important;
-    justify-items: center !important;
+  .fd-about .contributors-grid,
+  .fd-about .join-compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    justify-items: stretch !important;
+  }
+  .fd-about .contributor {
+    max-width: none !important;
+    padding: 14px 10px !important;
+    border-radius: 16px !important;
+  }
+  .fd-about .contributor-portrait {
+    max-width: 105px !important;
+    margin: 0 auto 10px !important;
+  }
+  .fd-about .contributor h3 {
+    font-size: 16px !important;
+    margin: 0 0 2px !important;
+  }
+  .fd-about .contributor-role {
+    font-size: 9.5px !important;
+    margin-bottom: 2px !important;
+    letter-spacing: 0.05em !important;
+  }
+  .fd-about .contributor-handle {
+    font-size: 9.5px !important;
+    word-break: break-all !important;
+  }
+  .fd-about .contributor-join-copy {
+    font-size: 10.5px !important;
+    line-height: 1.4 !important;
+    margin: 6px 0 10px !important;
+  }
+  .fd-about .contributor-join-btn,
+  .fd-about .contributor-join-btn:link,
+  .fd-about .contributor-join-btn:visited {
+    font-size: 9.5px !important;
+    min-height: 34px !important;
+    padding: 6px 8px !important;
+    white-space: nowrap !important;
   }
 }
 
@@ -2516,7 +2556,7 @@ button.chef-service-icon:disabled small { color: inherit; }
 
 .fd-about .contributor-role {
   font-size: 11px !important;
-  font-weight: 700 !important;
+  font-weight: 500 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
   color: var(--watermelon) !important;
@@ -2690,7 +2730,7 @@ button.chef-service-icon:disabled small { color: inherit; }
   }
 
   /* Dish card text readability on iOS Safari (mobile) */
-  .fd-card .fd-price span {
+  .fd-card .fd-price span:not(.fd-rupee) {
     font-size: 13px !important;
   }
   .fd-card .fd-tags > span {
@@ -2716,5 +2756,20 @@ button.chef-service-icon:disabled small { color: inherit; }
   .fd-card .fd-chef-button u {
     font-size: 13px !important;
   }
+}
+
+.fd-rupee {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+  font-weight: inherit;
+  font-size: inherit !important;
+  line-height: inherit;
+}
+.fd-price .fd-rupee {
+  font-size: inherit !important;
+  color: inherit !important;
+  line-height: inherit;
+}
+.fd-total strong .fd-rupee {
+  font-weight: 400 !important;
 }
 

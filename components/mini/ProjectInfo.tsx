@@ -23,7 +23,7 @@ export default function ProjectInfo() {
           <span className="why-note">WHOLESOME. HONEST. HOMEMADE.</span>
           <div className="why-card">
             <p style={{ marginTop: 0 }}>
-              Food has become easy to get. But finding food that feels homemade, cooked with honest ingredients, with intention, love and care is still hard to find. Between endless menus, discounts, and free delivery, speed and convenience often come before nourishment.
+              Food has become easy to get. But food that feels truly homemade - cooked with honest ingredients, intention, and love is hard to find. Between endless menus, discounts &amp; free delivery, convenience often comes before nourishment.
             </p>
             <p>
               <strong>Food was meant to nourish your body and feed your soul energizing you to do the things you love with the people who matter most.</strong>
@@ -43,7 +43,7 @@ export default function ProjectInfo() {
               The Local Food Drop connects you with home cooks in your town, their food, their culture, and the stories that simmer into every dish.
             </p>
             <p>
-              Limited preorders help homecooks make what&apos;s needed with less waste. Fairer economics give them more control and room for better ingredients, making home cooking work better for them and for you.
+              Limited preorders help homecooks make what&apos;s needed with less waste. Transparent economics give them more control and room for better ingredients, making home cooking work better for them and for you.
             </p>
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function ProjectInfo() {
           </div>
 
           <div className="locality-project">
-            <span className="locality-project-text">Learn more about The Town Square Project</span>
+            <span className="locality-project-text">Learn more about The Town Square</span>
             <a href="https://www.thetownsquare.xyz" target="_blank" rel="noreferrer" className="locality-project-pill">
               www.thetownsquare.xyz
             </a>
@@ -110,7 +110,7 @@ export default function ProjectInfo() {
                   COOKS · CREATORS · PARTNERS
                 </span>
                 <p>
-                  We’re building a neighbourhood food collective. Whether you cook dishes, shoot content, or want to host local drops—reach out and tell us how you&apos;d like to collaborate.
+                  Whether you cook dishes, shoot content, open to offer local delivery or want to help build this in any other way —reach out. We&apos;d like to hear from you.
                 </p>
               </div>
               <a href={collaboratorWhatsapp} target="_blank" rel="noreferrer" className="join-compact-btn" style={{ marginTop: "20px" }}>
