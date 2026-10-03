@@ -67,7 +67,7 @@ export const chefs = [
     dietary: "Non-Veg",
     allergens: "None",
     allergensArePlaceholder: false,
-    portions: "10 portions only",
+    portions: "10 portions being cooked",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.299, longitude: 73.967 } as Coordinates | null,
     pickupLocation: "Cherry’s Smokehouse",
@@ -104,7 +104,7 @@ export const chefs = [
     dietary: "Non-Veg",
     allergens: "Wheat, soy & oyster sauce",
     allergensArePlaceholder: false,
-    portions: "30 portions only",
+    portions: "30 portions being cooked",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.256, longitude: 73.926 } as Coordinates | null,
     pickupLocation: "Anne’s Heritage Kitchen",
@@ -141,7 +141,7 @@ export const chefs = [
     dietary: "Veg",
     allergens: "Cashews (tree nuts)",
     allergensArePlaceholder: false,
-    portions: "20 portions only",
+    portions: "20 portions being cooked",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.279, longitude: 73.932 } as Coordinates | null,
     pickupLocation: "Ranjita’s Kitchen Studio",
@@ -177,7 +177,7 @@ export const chefs = [
     dietary: "Veg",
     allergens: "Eggs, milk, wheat",
     allergensArePlaceholder: true,
-    portions: "25 portions only",
+    portions: "25 portions being cooked",
     // DEMO ONLY: replace with the verified pickup pin before launch.
     pickupCoordinates: { latitude: 15.274, longitude: 73.957 } as Coordinates | null,
     pickupLocation: "Ram’s Pastry Lab",

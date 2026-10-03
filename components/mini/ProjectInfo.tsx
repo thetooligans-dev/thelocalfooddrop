@@ -19,15 +19,11 @@ export default function ProjectInfo() {
 
       {/* §1 — THE PROBLEM */}
       <section className="why page-shell section-space">
-        <div className="why-graphic" aria-hidden="true">
-          <Image src="/plate-licking-bob-v5.png" alt="" width={639} height={637} sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1050px) 650px, 480px" className="why-editorial-art" />
-          <span className="why-note">WHOLESOME. HONEST. HOMEMADE.</span>
-        </div>
         <div className="why-copy">
-          <h2 className="why-title-main">Food for what matters most.</h2>
+          <span className="why-note">WHOLESOME. HONEST. HOMEMADE.</span>
           <div className="why-card">
             <p style={{ marginTop: 0 }}>
-              Food has become easy to get. But finding a meal that feels like homemade with honest ingredients, intention, and love—is still hard to find. Between endless menus, discounts, and free delivery, speed and convenience often come before nourishment.
+              Food has become easy to get. But finding food that feels homemade with honest ingredients, intention, and love is still hard to find. Between endless menus, discounts, and free delivery, speed and convenience often come before nourishment.
             </p>
             <p>
               <strong>Food was meant to nourish your body and feed your soul energizing you to do the things you love with the people who matter most.</strong>

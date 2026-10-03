@@ -2056,14 +2056,16 @@ button.chef-service-icon:disabled small { color: inherit; }
   margin: 0 0 14px !important;
 }
 
-.fd-about .join-compact-btn {
+.fd-about .join-compact-btn,
+.fd-about .join-compact-btn:link,
+.fd-about .join-compact-btn:visited {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  background: var(--fd-cream, #f0eadb) !important;
-  color: var(--fd-ink, #24251d) !important;
+  background: var(--fd-ink, #24251d) !important;
+  color: var(--fd-paper, #fffdf5) !important;
   border: none !important;
   border-radius: 30px !important;
   min-height: 40px !important;
@@ -2082,7 +2084,8 @@ button.chef-service-icon:disabled small { color: inherit; }
 }
 
 .fd-about .join-compact-btn:hover {
-  background: #e5ded0 !important;
+  background: #38392f !important;
+  color: var(--fd-paper, #fffdf5) !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 3px 8px rgba(29, 36, 27, 0.1) !important;
 }
@@ -2103,17 +2106,14 @@ button.chef-service-icon:disabled small { color: inherit; }
   gap: 48px !important;
 }
 
-.fd-about .why-graphic {
-  max-width: 255px !important;
-  margin-bottom: 8px !important;
-}
-
-.fd-about .why-editorial-art {
-  max-width: 255px !important;
+.fd-about .why-note {
+  margin-top: 0 !important;
+  margin-bottom: 14px !important;
+  align-self: flex-start !important;
 }
 
 .fd-about .why-title-main {
-  margin-top: 10px !important;
+  margin-top: 0 !important;
 }
 
 .fd-about .locality {
@@ -2551,14 +2551,16 @@ button.chef-service-icon:disabled small { color: inherit; }
   margin: 10px 0 16px !important;
 }
 
-.fd-about .contributor-join-btn {
+.fd-about .contributor-join-btn,
+.fd-about .contributor-join-btn:link,
+.fd-about .contributor-join-btn:visited {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  background: var(--fd-cream, #f0eadb) !important;
-  color: var(--fd-ink, #24251d) !important;
+  background: var(--fd-ink, #24251d) !important;
+  color: var(--fd-paper, #fffdf5) !important;
   border: none !important;
   border-radius: 30px !important;
   min-height: 40px !important;
@@ -2577,7 +2579,8 @@ button.chef-service-icon:disabled small { color: inherit; }
 }
 
 .fd-about .contributor-join-btn:hover {
-  background: #e5ded0 !important;
+  background: #38392f !important;
+  color: var(--fd-paper, #fffdf5) !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 3px 8px rgba(29, 36, 27, 0.1) !important;
 }
@@ -2620,7 +2623,7 @@ button.chef-service-icon:disabled small { color: inherit; }
   justify-content: center !important;
   background: var(--fd-paper, #fffdf5) !important;
   color: var(--fd-ink, #24251d) !important;
-  border: 1px solid var(--fd-ink, #24251d) !important;
+  border: none !important;
   border-radius: 30px !important;
   min-height: 36px !important;
   padding: 8px 16px !important;
@@ -2647,6 +2650,11 @@ button.chef-service-icon:disabled small { color: inherit; }
   transform: translateY(0) !important;
 }
 
+.fd-story-link,
+.fd-topbar-cta {
+  border: none !important;
+}
+
 /* ─────────────────────────────────────────────────────────────
    MOBILE INTRO TOPBAR: Our story (left) & Early access (right) in one row
    ───────────────────────────────────────────────────────────── */
@@ -2663,6 +2671,7 @@ button.chef-service-icon:disabled small { color: inherit; }
 
   .fd-topbar-actions .fd-story-link {
     order: 1 !important;
+    border: none !important;
     font-size: clamp(10px, 2.8vw, 11px) !important;
     padding: 7px 13px !important;
     min-height: 34px !important;
@@ -2672,6 +2681,7 @@ button.chef-service-icon:disabled small { color: inherit; }
 
   .fd-topbar-actions .fd-topbar-cta {
     order: 2 !important;
+    border: none !important;
     font-size: clamp(10px, 2.8vw, 11px) !important;
     padding: 7px 13px !important;
     min-height: 34px !important;

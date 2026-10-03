@@ -342,7 +342,7 @@ export function FoodDropApp({ children }: { children: ReactNode }) {
                   <div className="fd-card-footer">
                     <div className="fd-card-price-block">
                       <p className="fd-price">₹{item.price}</p>
-                      <p className="fd-price-sub">per portion · serves one<br />{item.portions}</p>
+                      <p className="fd-price-sub">{item.portions}</p>
                     </div>
                     <button className="fd-order-button" onClick={() => open({ type: "order", index: i })}>Order dish</button>
                   </div>
