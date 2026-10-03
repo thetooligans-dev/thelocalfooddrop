@@ -2468,6 +2468,10 @@ button.chef-service-icon:disabled small { color: inherit; }
     gap: 12px !important;
     justify-content: center !important;
   }
+  .fd-about .contributor,
+  .fd-about .contributor-join-card {
+    min-height: auto !important;
+  }
 }
 
 @media (max-width: 520px) {
@@ -2481,6 +2485,7 @@ button.chef-service-icon:disabled small { color: inherit; }
     max-width: none !important;
     padding: 14px 10px !important;
     border-radius: 16px !important;
+    min-height: auto !important;
   }
   .fd-about .contributor-portrait {
     max-width: 105px !important;
@@ -2526,6 +2531,8 @@ button.chef-service-icon:disabled small { color: inherit; }
   text-align: left !important;
   max-width: 260px !important;
   width: 100% !important;
+  min-height: 296px !important;
+  height: 100% !important;
   margin: 0 auto !important;
   box-sizing: border-box !important;
   transition: transform .15s ease, box-shadow .15s ease !important;
@@ -2557,6 +2564,7 @@ button.chef-service-icon:disabled small { color: inherit; }
 .fd-about .contributor-role {
   font-size: 11px !important;
   font-weight: 500 !important;
+  line-height: 1.4 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
   color: var(--watermelon) !important;
@@ -2565,11 +2573,14 @@ button.chef-service-icon:disabled small { color: inherit; }
 
 .fd-about .contributor-handle {
   font-size: 12px !important;
+  line-height: 1.4 !important;
   color: var(--ink-soft) !important;
+  margin: 0 !important;
 }
 
 .fd-about .contributor-join-card {
   height: 100% !important;
+  min-height: 296px !important;
   box-sizing: border-box !important;
   border: none !important;
   background: var(--fd-paper, #fffdf5) !important;
